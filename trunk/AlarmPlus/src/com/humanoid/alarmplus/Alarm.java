@@ -73,7 +73,7 @@ public final class Alarm implements Parcelable {
          */
         public static final Uri CONTENT_URI =
             //Uri.parse("content://com.android.alarmclock/alarm");
-        	Uri.parse("content://com.android.walarm/alarm");
+        	Uri.parse("content://com.humanoid.alarmplus/alarm");
 
         /**
          * Hour in 24-hour localtime 0 - 23.
