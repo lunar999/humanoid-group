@@ -39,8 +39,12 @@ public class AlarmProvider extends ContentProvider {
             UriMatcher.NO_MATCH);
 
     static {
-        sURLMatcher.addURI("com.android.walarm", "alarm", ALARMS);
-        sURLMatcher.addURI("com.android.walarm", "alarm/#", ALARMS_ID);
+    	
+//    	Uri authorities 수정함 <김병우>
+        sURLMatcher.addURI("com.humanoid.alarmplus", "alarm", ALARMS);
+        sURLMatcher.addURI("com.humanoid.alarmplus", "alarm/#", ALARMS_ID);
+//        sURLMatcher.addURI("com.android.walarm", "alarm", ALARMS);
+//        sURLMatcher.addURI("com.android.walarm", "alarm/#", ALARMS_ID);
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
