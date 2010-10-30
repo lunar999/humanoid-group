@@ -16,6 +16,12 @@
                  android:icon="@drawable/ic_launcher_alarmclock">
 
         <provider android:name="com.humanoid.alarmplus.AlarmProvider" android:authorities="com.humanoid.alarmplus" />
+        
+        <activity android:name="com.humanoid.alarmplus.WordsToSpeakMainActivity" android:label="@string/set_alarm" />
+                
+        <activity android:name="com.humanoid.alarmplus.RecActivity" android:label="@string/set_alarm"/>
+        
+        <activity android:name="com.humanoid.alarmplus.GpsSampleActivity" android:label="@string/set_alarm"/>
 
         <activity android:name="com.humanoid.alarmplus.AlarmClock" android:label="@string/app_label"
                 android:configChanges="orientation|keyboardHidden|keyboard|navigation">
