@@ -52,7 +52,7 @@ import com.humanoid.alarmplus.R;
 public class AlarmClock extends Activity implements OnItemClickListener {
 
     //final static String PREFERENCES = "AlarmClock";
-	final static String PREFERENCES = "WAlarm";
+	final static String PREFERENCES = "AlarmPlus";
     final static int SET_ALARM = 1;
     final static String PREF_CLOCK_FACE = "face";
     final static String PREF_SHOW_CLOCK = "show_clock";
