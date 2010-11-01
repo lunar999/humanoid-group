@@ -18,7 +18,6 @@ package com.humanoid.alarmplus;
 
 import android.content.Context;
 import android.os.PowerManager;
-import com.humanoid.alarmplus.R;
 
 /**
  * Hold a wakelock that can be acquired in the AlarmReceiver and

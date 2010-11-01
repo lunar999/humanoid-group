@@ -17,7 +17,6 @@
 package com.humanoid.alarmplus;
 
 import android.os.Bundle;
-import com.humanoid.alarmplus.R;
 
 /**
  * Full screen alarm alert: pops visible indicator and plays alarm tone. This

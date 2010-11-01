@@ -21,7 +21,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
-import com.humanoid.alarmplus.R;
 
 /**
  * Simple widget to show analog clock.

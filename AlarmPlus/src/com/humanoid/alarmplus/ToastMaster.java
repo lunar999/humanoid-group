@@ -17,7 +17,6 @@
 package com.humanoid.alarmplus;
 
 import android.widget.Toast;
-import com.humanoid.alarmplus.R;
 
 public class ToastMaster {
 

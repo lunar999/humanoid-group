@@ -27,7 +27,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
-import com.humanoid.alarmplus.R;
 
 /**
  * Glue class: connects AlarmAlert IntentReceiver to AlarmAlert

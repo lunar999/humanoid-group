@@ -19,7 +19,6 @@ package com.humanoid.alarmplus;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.humanoid.alarmplus.R;
 
 public class AlarmInitReceiver extends BroadcastReceiver {
 

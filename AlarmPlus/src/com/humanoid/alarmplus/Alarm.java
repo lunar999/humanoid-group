@@ -16,7 +16,6 @@
 
 package com.humanoid.alarmplus;
 
-import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
-import com.humanoid.alarmplus.R;
 
 public final class Alarm implements Parcelable {
 
@@ -227,7 +225,8 @@ public final class Alarm implements Parcelable {
      * 0x40: Sunday
      */
     static final class DaysOfWeek {
-
+    // 2010-11-01 요일표시 오류(1~7 -> 월요일~일요일) 처리: shinshow
+/*
         private static int[] DAY_MAP = new int[] {
             Calendar.MONDAY,
             Calendar.TUESDAY,
@@ -237,7 +236,7 @@ public final class Alarm implements Parcelable {
             Calendar.SATURDAY,
             Calendar.SUNDAY,
         };
-
+*/
         // Bitmask of all repeating days
         private int mDays;
 
@@ -267,15 +266,19 @@ public final class Alarm implements Parcelable {
             }
 
             // short or long form?
+ /*          
             DateFormatSymbols dfs = new DateFormatSymbols();
             String[] dayList = (dayCount > 1) ?
                     dfs.getShortWeekdays() :
                     dfs.getWeekdays();
+*/
 
+            CharSequence[] strings =context.getResources().getTextArray((dayCount > 1) ? R.array.days_of_week_short : R.array.days_of_week);
             // selected days
             for (int i = 0; i < 7; i++) {
                 if ((mDays & (1 << i)) != 0) {
-                    ret.append(dayList[DAY_MAP[i]]);
+                    // ret.append(dayList[DAY_MAP[i]]);
+                    ret.append(strings[i]);
                     dayCount -= 1;
                     if (dayCount > 0) ret.append(
                             context.getText(R.string.day_concat));

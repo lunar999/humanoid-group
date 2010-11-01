@@ -21,7 +21,6 @@
 package com.humanoid.alarmplus;
 
 import android.util.Config;
-import com.humanoid.alarmplus.R;
 
 class Log {
     public final static String LOGTAG = "AlarmClock";

@@ -44,7 +44,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import com.humanoid.alarmplus.R;
 
 /**
  * AlarmClock application.

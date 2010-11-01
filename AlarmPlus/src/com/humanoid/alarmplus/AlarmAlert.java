@@ -37,7 +37,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.humanoid.alarmplus.R;
 
 /**
  * Alarm Clock alarm alert: pops visible indicator and plays alarm
