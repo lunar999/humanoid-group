@@ -63,7 +63,7 @@ public class AlarmKlaxon extends Service {
                         Log.v("*********** Alarm killer triggered ***********");
                     }
                     sendKillBroadcast((Alarm) msg.obj);
-                    //stopSelf();
+                    stopSelf();
                     break;
             }
         }
@@ -79,7 +79,7 @@ public class AlarmKlaxon extends Service {
             if (state != TelephonyManager.CALL_STATE_IDLE
                     && state != mInitialCallState) {
                 sendKillBroadcast(mCurrentAlarm);
-                //stopSelf();
+                stopSelf();
             }
         }
     };
@@ -87,9 +87,7 @@ public class AlarmKlaxon extends Service {
     @Override    
     public void onCreate() {
     	//mVibrator = new Vibrator();
-    	//Vibrator mVibrator = (Vibrator)mActivity.getSystemService(Context.VIBRATOR_SERVICE);
     	mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-    	//mVibrator = (Vibrator)getApplication().getSystemService(Context.VIBRATOR_SERVICE);
     	
         // Listen for incoming calls to kill the alarm.
         mTelephonyManager =(TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
