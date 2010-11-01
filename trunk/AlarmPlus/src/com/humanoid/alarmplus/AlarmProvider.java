@@ -28,7 +28,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
-import com.humanoid.alarmplus.R;
 
 public class AlarmProvider extends ContentProvider {
     private SQLiteOpenHelper mOpenHelper;
@@ -43,12 +42,10 @@ public class AlarmProvider extends ContentProvider {
 //    	Uri authorities 수정함 <김병우>
         sURLMatcher.addURI("com.humanoid.alarmplus", "alarm", ALARMS);
         sURLMatcher.addURI("com.humanoid.alarmplus", "alarm/#", ALARMS_ID);
-//        sURLMatcher.addURI("com.android.walarm", "alarm", ALARMS);
-//        sURLMatcher.addURI("com.android.walarm", "alarm/#", ALARMS_ID);
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
-        private static final String DATABASE_NAME = "walarms.db";
+        private static final String DATABASE_NAME = "alarmplus.db";
         private static final int DATABASE_VERSION = 5;
 
         public DatabaseHelper(Context context) {

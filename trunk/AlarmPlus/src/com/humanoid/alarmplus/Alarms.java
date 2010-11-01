@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.provider.Settings;
 import android.text.format.DateFormat;
-import com.humanoid.alarmplus.R;
 
 /**
  * The Alarms provider supplies info about Alarm Clock settings
@@ -43,7 +42,7 @@ public class Alarms {
     // from the alarm manager.
 	
 	//public static final String ALARM_ALERT_ACTION = "com.android.alarmclock.ALARM_ALERT";
-    public static final String ALARM_ALERT_ACTION = "com.android.walarm.ALARM_ALERT";
+    public static final String ALARM_ALERT_ACTION = "com.humanoid.alarmplus.ALARM_ALERT";
 
     // This is a private action used when the user clears all notifications.
     public static final String CLEAR_NOTIFICATION = "clear_notification";

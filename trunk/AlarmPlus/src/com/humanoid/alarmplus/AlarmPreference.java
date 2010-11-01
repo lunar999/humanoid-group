@@ -22,7 +22,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.RingtonePreference;
 import android.util.AttributeSet;
-import com.humanoid.alarmplus.R;
 
 /**
  * The RingtonePreference does not have a way to get/set the current ringtone so

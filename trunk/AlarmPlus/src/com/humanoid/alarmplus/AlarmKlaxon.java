@@ -33,7 +33,6 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import com.humanoid.alarmplus.R;
 /**
  * Manages alarms and vibe. Runs as a service so that it can continue to play
  * if another activity overrides the AlarmAlert dialog.
@@ -64,7 +63,7 @@ public class AlarmKlaxon extends Service {
                         Log.v("*********** Alarm killer triggered ***********");
                     }
                     sendKillBroadcast((Alarm) msg.obj);
-                    stopSelf();
+                    //stopSelf();
                     break;
             }
         }
@@ -80,16 +79,17 @@ public class AlarmKlaxon extends Service {
             if (state != TelephonyManager.CALL_STATE_IDLE
                     && state != mInitialCallState) {
                 sendKillBroadcast(mCurrentAlarm);
-                stopSelf();
+                //stopSelf();
             }
         }
     };
-
-    @Override
+    
+    @Override    
     public void onCreate() {
     	//mVibrator = new Vibrator();
     	//Vibrator mVibrator = (Vibrator)mActivity.getSystemService(Context.VIBRATOR_SERVICE);
-    	Vibrator mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+    	mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+    	//mVibrator = (Vibrator)getApplication().getSystemService(Context.VIBRATOR_SERVICE);
     	
         // Listen for incoming calls to kill the alarm.
         mTelephonyManager =(TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -111,6 +111,7 @@ public class AlarmKlaxon extends Service {
         return null;
     }
 
+    
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // No intent, tell the system not to restart us.
@@ -118,7 +119,6 @@ public class AlarmKlaxon extends Service {
             stopSelf();
             return START_NOT_STICKY;
         }
-
         final Alarm alarm = intent.getParcelableExtra(
                 Alarms.ALARM_INTENT_EXTRA);
 
@@ -132,6 +132,7 @@ public class AlarmKlaxon extends Service {
             sendKillBroadcast(mCurrentAlarm);
         }
 
+ 
         play(alarm);
         mCurrentAlarm = alarm;
         // Record the initial call state here so that the new alarm has the

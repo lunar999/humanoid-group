@@ -37,7 +37,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import com.humanoid.alarmplus.R;
 
 /**
  * Manages each alarm

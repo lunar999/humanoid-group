@@ -16,15 +16,11 @@
 
 package com.humanoid.alarmplus;
 
-import java.text.DateFormatSymbols;
-import java.util.Calendar;
-
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
-import com.humanoid.alarmplus.R;
 
 public class RepeatPreference extends ListPreference {
 
@@ -36,7 +32,8 @@ public class RepeatPreference extends ListPreference {
 
     public RepeatPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        // 2010-11-01 한글요일표시 오류 처리: shinshow
+/*
         String[] weekdays = new DateFormatSymbols().getWeekdays();
         String[] values = new String[] {
             weekdays[Calendar.MONDAY],
@@ -49,6 +46,9 @@ public class RepeatPreference extends ListPreference {
         };
         setEntries(values);
         setEntryValues(values);
+*/     
+        setEntries(context.getResources().getTextArray(R.array.days_of_week));
+        setEntryValues(context.getResources().getTextArray(R.array.days_of_week));
     }
 
     @Override
