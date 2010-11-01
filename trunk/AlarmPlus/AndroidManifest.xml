@@ -12,15 +12,15 @@
 	<application android:label="@string/app_label"
 		android:icon="@drawable/ic_launcher_alarmclock">
 
-		<provider android:name="AlarmProvider" android:authorities="com.humanoid.alarmplus" />
+		<provider android:name="com.humanoid.alarmplus.AlarmProvider" android:authorities="com.humanoid.alarmplus" />
 
-		<activity android:name="WordsToSpeakMainActivity" />
+		<activity android:name="com.humanoid.alarmplus.WordsToSpeakMainActivity" />
 
-		<activity android:name="RecActivity" />
+		<activity android:name="com.humanoid.alarmplus.RecActivity" />
 
-		<activity android:name="GpsSampleActivity" />
+		<activity android:name="com.humanoid.alarmplus.GpsSampleActivity" />
 
-		<activity android:name=".AlarmClock" android:label="@string/app_label"
+		<activity android:name="com.humanoid.alarmplus.AlarmClock" android:label="@string/app_label"
 			android:configChanges="orientation|keyboardHidden|keyboard|navigation">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -29,16 +29,16 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="SettingsActivity" android:label="@string/settings">
+		<activity android:name="com.humanoid.alarmplus.SettingsActivity" android:label="@string/settings">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="SetAlarm" android:label="@string/set_alarm"
+		<activity android:name="com.humanoid.alarmplus.SetAlarm" android:label="@string/set_alarm"
 			android:configChanges="orientation|keyboardHidden|keyboard|navigation" />
 
-		<activity android:name="AlarmAlert"
+		<activity android:name="com.humanoid.alarmplus.AlarmAlert"
 			android:excludeFromRecents="true" android:theme="@style/alarm_alert"
 			android:launchMode="singleInstance" android:taskAffinity=""
 			android:configChanges="orientation|keyboardHidden|keyboard|navigation" />
@@ -48,15 +48,15 @@
 			generic theme. It also shows as full screen (with status bar) but
 			with the wallpaper background.
 		-->
-		<activity android:name="AlarmAlertFullScreen"
+		<activity android:name="com.humanoid.alarmplus.AlarmAlertFullScreen"
 			android:excludeFromRecents="true"
 			android:theme="@android:style/Theme.Wallpaper.NoTitleBar"
 			android:launchMode="singleInstance" android:taskAffinity=""
 			android:configChanges="orientation|keyboardHidden|keyboard|navigation" />
 
-		<activity android:name="ClockPicker" />
+		<activity android:name="com.humanoid.alarmplus.ClockPicker" />
 
-		<receiver android:name="AlarmReceiver">
+		<receiver android:name="com.humanoid.alarmplus.AlarmReceiver">
 			<intent-filter>
 				<action android:name="com.humanoid.alarmplus.ALARM_ALERT" />
 				<action android:name="alarm_killed" />
@@ -73,13 +73,13 @@
 			AlarmAlert activity to pause.
 		-->
 
-		<service android:name="AlarmKlaxon">
+		<service android:name="com.humanoid.alarmplus.AlarmKlaxon">
 			<intent-filter>
 				<action android:name="com.humanoid.alarmplus.ALARM_ALERT" />
 			</intent-filter>
 		</service>
 
-		<receiver android:name="AlarmInitReceiver">
+		<receiver android:name="com.humanoid.alarmplus.AlarmInitReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 				<action android:name="android.intent.action.TIME_SET" />
@@ -88,7 +88,7 @@
 			</intent-filter>
 		</receiver>
 
-		<receiver android:name="AnalogAppWidgetProvider"
+		<receiver android:name="com.humanoid.alarmplus.AnalogAppWidgetProvider"
 			android:label="@string/analog_gadget" android:icon="@drawable/ic_widget_analog_clock">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
