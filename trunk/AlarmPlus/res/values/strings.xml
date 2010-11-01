@@ -218,6 +218,42 @@
       <item>1</item>
       <item>2</item>
     </string-array>
+    
+    <!-- Days of week -->
+    <string-array name="days_of_week">
+        <!-- Day of week: Monday -->
+        <item>Monday</item>
+        <!-- Day of week: Tuesday -->
+        <item>Tuesday</item>
+        <!-- Day of week: Wednesday -->
+        <item>Wednesday</item>
+        <!-- Day of week: Thursday -->
+        <item>Thursday</item>
+        <!-- Day of week: Friday  -->
+        <item>Friday</item>
+        <!-- Day of week: Saturday -->
+        <item>Saturday</item>
+        <!-- Day of week: Sunday -->
+        <item>Sunday</item>
+    </string-array>
+    
+    <!-- Short Day of week  -->
+    <string-array name="days_of_week_short">
+        <!-- Short Day of week: Mon -->
+        <item>Mon</item>
+        <!-- Short Day of week: Tue -->
+        <item>Tue</item>
+        <!-- Short Day of week: Wed -->
+        <item>Wed</item>
+        <!-- Short Day of week: Thu -->
+        <item>Thu</item>
+        <!-- Short Day of week: Fri  -->
+        <item>Fri</item>
+        <!-- Short Day of week: Sat -->
+        <item>Sat</item>
+        <!-- Short Day of week: Sun -->
+        <item>Sun</item>
+    </string-array>
 </resources>
 
 
