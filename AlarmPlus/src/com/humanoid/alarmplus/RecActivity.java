@@ -12,103 +12,108 @@ import android.view.View;
 import android.widget.Button;
 
 public class RecActivity extends Activity {
+
+	private static final String ALARM_REC_POSTFIX = ".mp4";
+	private static final String SD2 = "sd";
+	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
+	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
+	
+	private static final boolean DEBUG_MODE = true;
 	
 	private Button btnRec;
 	private Button btnStop;
 	private MediaRecorder recorder;
-	private final String SAMSUNG_GALAXYS = "SHW-M110S";
-	
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.rec_layout);
-        
-        //device id
-        
-//        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-//        String deviceId = telephonyManager.getDeviceId();
-//        
-//        Log.d("deviceId", deviceId);
-//        Log.d("getLine1Number", telephonyManager.getLine1Number()+"");
-//        Log.d("getDeviceSoftwareVersion", telephonyManager.getDeviceSoftwareVersion()+"");
-//        
-//        Log.d("Build.MODEL", Build.MODEL+"");
-        
-        
-        
-        
-        btnRec = (Button) findViewById(R.id.btnRec);
-    	btnStop = (Button) findViewById(R.id.btnStop);
-    	
-    	
-    	btnStop.setEnabled(false);
-    	
-    	btnRec.setOnClickListener(new View.OnClickListener() {
-			
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.rec_layout);
+
+		btnRec = (Button) findViewById(R.id.btnRec);
+		btnStop = (Button) findViewById(R.id.btnStop);
+
+
+		btnStop.setEnabled(false);
+
+		btnRec.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(View v) {
 				btnRec.setEnabled(false);
 				startRec();
 				btnStop.setEnabled(true);
-				
+
 			}
 		});
-    	
-    	btnStop.setOnClickListener(new View.OnClickListener() {
-    		
-    		public void onClick(View v) {
-    			btnStop.setEnabled(false);
-    			stopRec();
-    			btnRec.setEnabled(true);
-    		}
-    	});
-        
-        
-    }
 
-    private void startRec(){
-    	if(recorder == null){
-        	recorder = new MediaRecorder();
-        }
-    	
-    	Log.d("TEST", "START_REC");
-    	File recFile;
-    	String path = "";
-    	try {
-    		
-    		recFile = Environment.getExternalStorageDirectory();
-    		Log.d("PATH", recFile.getAbsolutePath());
-    		path = recFile.getAbsolutePath() + "/test_" + System.currentTimeMillis() + ".mp4";
-    		
-    		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
-    			File sd2 = new File(recFile.getAbsolutePath()+"/sd");
-    			if(sd2.exists()){
-    				path = recFile.getAbsolutePath() + "/sd/test_" + System.currentTimeMillis() + ".mp4";
-    			} else {
-    				path = recFile.getAbsolutePath() + "/test_" + System.currentTimeMillis() + ".mp4";
-    			}
-    		}
+		btnStop.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				btnStop.setEnabled(false);
+				stopRec();
+				btnRec.setEnabled(true);
+			}
+		});
+
+
+	}
+
+	private void startRec(){
+		if(recorder == null){
+			recorder = new MediaRecorder();
+		}
+		
+		if(DEBUG_MODE){
+			Log.d("TEST", "START_REC");
+			Log.d("Build.MODEL", Build.MODEL);
+			Log.d("getExternalStorageState", android.os.Environment.getExternalStorageState()+"");
+		}
+		
+		File recFile = Environment.getExternalStorageDirectory();
+		String path = "";
+		try {
+			
+			String state = android.os.Environment.getExternalStorageState();
+			if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
+				path = getFilesDir().getAbsolutePath() + File.separator + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
+			} else {
+				path = recFile.getAbsolutePath() + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
+				if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
+					File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2);
+					if(sd2.exists()){
+						path = recFile.getAbsolutePath() + File.separator + SD2  + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
+					} else {
+						path = recFile.getAbsolutePath() + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
+					}
+				}
+			}
+			if(DEBUG_MODE){
+				Log.d("PATH", path);
+			}
 			
 			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
 			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 			recorder.setOutputFile(path);
-			
+
 			recorder.prepare();
 			recorder.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    }
-    
-    private void stopRec(){
-    	if(recorder != null){
-    		recorder.stop();
-    		recorder.release();
-    		recorder = null;
-    		Log.d("TEST", "STOP_REC");
-    	}
-    }
-    
-    
+	}
+
+	private void stopRec(){
+		if(recorder != null){
+			recorder.stop();
+			recorder.release();
+			recorder = null;
+			
+			if(DEBUG_MODE){
+				Log.d("TEST", "STOP_REC");
+			}
+		}
+	}
+
+
 }
