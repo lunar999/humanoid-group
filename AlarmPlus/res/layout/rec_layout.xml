@@ -5,7 +5,14 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-
+	 <Chronometer android:id="@+id/chronometer"
+        android:format="@string/chronometer_initial_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip"
+        />
 
 	<Button
 		android:text="Rec"
