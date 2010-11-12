@@ -7,9 +7,12 @@ import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Chronometer;
 
 public class RecActivity extends Activity {
 
@@ -23,6 +26,7 @@ public class RecActivity extends Activity {
 	private Button btnRec;
 	private Button btnStop;
 	private MediaRecorder recorder;
+	Chronometer chronometer;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -32,7 +36,9 @@ public class RecActivity extends Activity {
 
 		btnRec = (Button) findViewById(R.id.btnRec);
 		btnStop = (Button) findViewById(R.id.btnStop);
-
+		
+		chronometer = (Chronometer) findViewById(R.id.chronometer);
+		
 
 		btnStop.setEnabled(false);
 
@@ -40,7 +46,24 @@ public class RecActivity extends Activity {
 
 			public void onClick(View v) {
 				btnRec.setEnabled(false);
-				startRec();
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						chronometer.setBase(SystemClock.elapsedRealtime());
+						chronometer.start();
+					}
+				});
+				
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						startRec();
+						
+					}
+				});
+				
 				btnStop.setEnabled(true);
 
 			}
@@ -50,6 +73,7 @@ public class RecActivity extends Activity {
 
 			public void onClick(View v) {
 				btnStop.setEnabled(false);
+				chronometer.stop();
 				stopRec();
 				btnRec.setEnabled(true);
 			}
@@ -57,6 +81,13 @@ public class RecActivity extends Activity {
 
 
 	}
+	
+	View.OnClickListener mResetListener = new OnClickListener() {
+        public void onClick(View v) {
+            chronometer.setBase(SystemClock.elapsedRealtime());
+        }
+    };
+
 
 	private void startRec(){
 		if(recorder == null){
