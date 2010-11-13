@@ -40,6 +40,9 @@
     <!-- Menu item on Alarm Clock screen: Hide clock -->
     <string name="hide_clock">Hide clock</string>
 
+    <!-- Menu item on Alarm Clock screen: Recording -->
+    <string name="Recording">Recording</string>
+    
     <!-- Setting label on Set alarm screen: Label -->
     <string name="label">Label</string>
 
@@ -235,6 +238,12 @@
         <item>Saturday</item>
         <!-- Day of week: Sunday -->
         <item>Sunday</item>
+    </string-array>
+    
+    <string-array name="sound_choice">
+        <item>default</item>
+        <item>weather sound</item>
+        <item>tts sound</item>
     </string-array>
     
     <!-- Short Day of week  -->
