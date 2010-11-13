@@ -19,6 +19,10 @@
     <Preference android:key="time" 
         android:persistent="false"
         android:title="@string/time"/>
+    <com.humanoid.alarmplus.SoundPreference
+        android:persistent="false"
+        android:key="sound" 
+        android:title="@string/alarm_sound" />
     <com.humanoid.alarmplus.AlarmPreference
         android:key="alarm" 
         android:title="@string/alert"
