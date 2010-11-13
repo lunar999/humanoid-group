@@ -131,4 +131,6 @@
         <!-- Short Day of week: Sun -->
         <item>일</item>
     </string-array>
+    
+   <string name="chronometer_initial_format">녹음시간: <xliff:g id="initial-format">%s</xliff:g></string>
 </resources>

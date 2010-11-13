@@ -16,7 +16,7 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application android:label="@string/app_label"
-		android:icon="@drawable/ic_launcher_alarmclock_new">
+		android:icon="@drawable/ic_launcher_alarmclock2">
 
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
