@@ -20,6 +20,7 @@
 
 package com.humanoid.alarmplus;
 
+
 import android.util.Config;
 
 class Log {

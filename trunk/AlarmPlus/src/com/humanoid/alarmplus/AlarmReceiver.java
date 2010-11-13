@@ -19,6 +19,8 @@ package com.humanoid.alarmplus;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.humanoid.alarmplus.weather.GpsSampleActivity;
+
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -107,6 +109,12 @@ public class AlarmReceiver extends BroadcastReceiver {
             c = AlarmAlertFullScreen.class;
         }
 
+        Intent alarmAlert2 = new Intent(context, GpsSampleActivity.class);
+        alarmAlert2.putExtra(Alarms.ALARM_INTENT_EXTRA, alarm);
+        alarmAlert2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+        context.startActivity(alarmAlert2);
+        
         /* launch UI, explicitly stating that this is not due to user action
          * so that the current app's notification management is not disturbed */
         Intent alarmAlert = new Intent(context, c);

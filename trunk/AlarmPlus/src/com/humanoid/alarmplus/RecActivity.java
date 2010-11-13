@@ -37,7 +37,7 @@ public class RecActivity extends Activity {
 		btnRec = (Button) findViewById(R.id.btnRec);
 		btnStop = (Button) findViewById(R.id.btnStop);
 		
-		chronometer = (Chronometer) findViewById(R.id.chronometer);
+//		chronometer = (Chronometer) findViewById(R.id.chronometer);
 		
 
 		btnStop.setEnabled(false);
