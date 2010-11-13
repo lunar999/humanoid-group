@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2007 The Android Open Source Project
 
@@ -254,8 +255,8 @@
         <!-- Short Day of week: Sun -->
         <item>Sun</item>
     </string-array>
-    
-     <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
+      <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
+    <string name="gpscheck">"Your GPS is disabled! Would you like to enable it?"</string>
+    <string name="gpscheckbtn1">Enable GPS</string>
+    <string name="gpscheckbtn2">Do nothing</string> 
 </resources>
-
-
