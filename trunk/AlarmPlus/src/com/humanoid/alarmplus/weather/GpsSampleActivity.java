@@ -254,7 +254,7 @@ public class GpsSampleActivity extends Activity implements LocationListener{
 			}
 		} catch( Exception e ) {
 			Log.d(WeatherView.TAG, "######## exception 3:"+e);
-			Toast.makeText(this, "######## exception 3:"+e, Toast.LENGTH_LONG).show();
+//			Toast.makeText(this, "######## exception 3:"+e, Toast.LENGTH_LONG).show();
 		}
 	}
 
