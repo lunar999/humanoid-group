@@ -8,24 +8,27 @@
 	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
 	<uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application android:label="@string/app_label"
 		android:icon="@drawable/ic_launcher_alarmclock_new">
 
-		<provider android:name="com.humanoid.alarmplus.AlarmProvider" android:authorities="com.humanoid.alarmplus" />
+		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
+			android:authorities="com.humanoid.alarmplus" />
 
 		<activity android:name="com.humanoid.alarmplus.WordsToSpeakMainActivity" />
 
 		<activity android:name="com.humanoid.alarmplus.RecActivity" />
 
-		<activity android:name="com.humanoid.alarmplus.GpsSampleActivity" />
+		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" />
 
-		<activity android:name="com.humanoid.alarmplus.AlarmClock" android:label="@string/app_label"
-			android:configChanges="orientation|keyboardHidden|keyboard|navigation">
+		<activity android:name="com.humanoid.alarmplus.AlarmClock"
+			android:label="@string/app_label" android:configChanges="orientation|keyboardHidden|keyboard|navigation">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -33,14 +36,15 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.humanoid.alarmplus.SettingsActivity" android:label="@string/settings">
+		<activity android:name="com.humanoid.alarmplus.SettingsActivity"
+			android:label="@string/settings">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.humanoid.alarmplus.SetAlarm" android:label="@string/set_alarm"
-			android:configChanges="orientation|keyboardHidden|keyboard|navigation" />
+		<activity android:name="com.humanoid.alarmplus.SetAlarm"
+			android:label="@string/set_alarm" android:configChanges="orientation|keyboardHidden|keyboard|navigation" />
 
 		<activity android:name="com.humanoid.alarmplus.AlarmAlert"
 			android:excludeFromRecents="true" android:theme="@style/alarm_alert"
@@ -101,6 +105,6 @@
 				android:resource="@xml/analog_appwidget" />
 		</receiver>
 	</application>
-<uses-sdk android:minSdkVersion="7"></uses-sdk>
+	<uses-sdk android:minSdkVersion="7"></uses-sdk>
 </manifest>
 
