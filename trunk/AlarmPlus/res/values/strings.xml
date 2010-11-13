@@ -254,6 +254,8 @@
         <!-- Short Day of week: Sun -->
         <item>Sun</item>
     </string-array>
+    
+     <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
 </resources>
 
 
