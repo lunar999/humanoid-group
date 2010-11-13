@@ -14,9 +14,10 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
-
+	
+	
 	<application android:label="@string/app_label"
-		android:icon="@drawable/ic_launcher_alarmclock2">
+		android:icon="@drawable/ic_launcher_alarmclock_new">
 
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
