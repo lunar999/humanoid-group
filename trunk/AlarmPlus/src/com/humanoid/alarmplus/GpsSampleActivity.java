@@ -30,7 +30,7 @@ public class GpsSampleActivity extends Activity implements LocationListener{
 	
 	private DongInfo dongInfo;
 	private String currAddress;
-	private String[] addressCodes;
+	private String[] addressCodes; 
 	
 	private final String URL_TEMPLATE = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=CODE1&gridy=CODE2"; 
 	private String currentWeatherUrl;
