@@ -19,7 +19,6 @@ package com.humanoid.alarmplus;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,6 +27,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -250,6 +250,39 @@ public class AlarmClock extends Activity implements OnItemClickListener {
             }
             inflateClock();
         }
+        
+        //천성민 gps 상태 체크 추가.
+        String context = Context.LOCATION_SERVICE;
+        LocationManager locationManager = (LocationManager)getSystemService(context);
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        	alertCheckGPS();
+        }
+    }
+    
+    private void alertCheckGPS() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.gpscheck)
+                .setCancelable(false)
+                .setPositiveButton(R.string.gpscheckbtn1,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveConfigGPS();
+                            }
+                    })
+                .setNegativeButton(R.string.gpscheckbtn2,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                    });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    // GPS 설정화면으로 이동
+    private void moveConfigGPS() {
+        Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(gpsOptionsIntent);
     }
 
     @Override
