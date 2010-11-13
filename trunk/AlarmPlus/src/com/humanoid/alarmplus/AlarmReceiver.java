@@ -109,6 +109,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             c = AlarmAlertFullScreen.class;
         }
 
+        //천성민 알람 울리기전에 weather activity 먼저 호출한다.
         Intent alarmAlert2 = new Intent(context, GpsSampleActivity.class);
         alarmAlert2.putExtra(Alarms.ALARM_INTENT_EXTRA, alarm);
         alarmAlert2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
