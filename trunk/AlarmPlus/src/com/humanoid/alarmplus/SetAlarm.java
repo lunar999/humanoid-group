@@ -17,6 +17,9 @@
 package com.humanoid.alarmplus;
 
 
+import java.io.File;
+import java.util.HashMap;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +30,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.speech.tts.TextToSpeech;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +64,19 @@ public class SetAlarm extends PreferenceActivity
     private int     mHour;
     private int     mMinutes;
 
+    // TTS
+    private Preference mTtsPref;
+    private Preference mTtsMessagePref;
+    private Preference mTtsTestPref;
+    private static final String TAG = "SetAlarm";
+    private static final int REQ_TTS_STATUS_CHECK = 0;
+    private int lastUtterance = -1;
+    private int uttCount = 0;
+    private HashMap<String, String>  params = new HashMap<String, String>();
+    private TextToSpeech mTts;
+    public static final String TTS_FILE_NAME = "/sdcard/alarm_tts.wav";
+
+    
     /**
      * Set an alarm.  Requires an Alarms.ALARM_ID to be passed in as an
      * extra. FIXME: Pass an Alarm object like every other Activity.
@@ -70,6 +87,64 @@ public class SetAlarm extends PreferenceActivity
 
         addPreferencesFromResource(R.xml.alarm_prefs);
 
+        // TTS 
+        mTtsPref = findPreference("tts_preference");
+        mTtsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getBaseContext(), "TTS Preference Checked!!", Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		});
+        
+        mTtsMessagePref = (EditTextPreference)findPreference("tts_message_preference");
+//        mTtsMessagePref.setDefaultValue(mTtsMessagePref.getSummary());
+        mTtsMessagePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				// TODO Auto-generated method stub
+
+//				String ttsMessage = mTtsMessagePref.getSummary().toString();
+//				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
+				
+				return false;
+			}
+		});
+        
+        mTtsMessagePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				// TODO Auto-generated method stub
+				preference.setSummary((String) newValue);
+				saveTtsSoundFile((String)newValue);
+				
+				Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+
+        mTtsTestPref = findPreference("tts_test_preference");
+        mTtsTestPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				// TODO Auto-generated method stub
+				String ttsMessage = mTtsMessagePref.getSummary().toString();
+				
+//				getSampleText();
+//				speakMessage(ttsMessage);
+				lanunchTTSActivity(ttsMessage);
+				
+//				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+        ////////////
+        
         // Get each preference so we can retrieve the value later.
         mLabel = (EditTextPreference) findPreference("label");
         mLabel.setOnPreferenceChangeListener(
@@ -318,6 +393,34 @@ public class SetAlarm extends PreferenceActivity
 
         saveAlarm(this, mId, true, hour, minutes, mRepeatPref.getDaysOfWeek(),
                 true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(), true); // 10.11.03 add redmars
+    }
+    
+    // TTS
+	public void saveTtsSoundFile(String message) {
+
+		File soundFile = new File(TTS_FILE_NAME);
+		if (soundFile.exists())
+			soundFile.delete();
+		
+		if(mTts.synthesizeToFile(message, null, TTS_FILE_NAME) == TextToSpeech.SUCCESS) {
+			Toast.makeText(this, "Sound file created", Toast.LENGTH_SHORT).show();
+		}
+		else {
+			Toast.makeText(this, "Oops! Sound file not created", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+    private void lanunchTTSActivity(String message) {
+    	/*
+    	    	Intent intent = new Intent();
+    	    	intent.setAction("com.humanoid.alarmplus.TTS");
+    	    	intent.putExtra("TTS_MESSAGE", mTtsMessagePref.getSummary().toString());
+    	    	startActivity(intent);	// ActivityNotFoundException
+    	*/
+    	Intent intent = new Intent(this, WordsToSpeakMainActivity.class);
+	   	intent.putExtra("TTS_MESSAGE", message);
+	   	startActivity(intent);
+    	    	
     }
 
 }
