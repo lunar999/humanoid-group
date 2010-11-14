@@ -59,6 +59,10 @@
     <string name="alarm_repeat">Repeat</string>
 
     <!-- Setting labels on Set alarm screen: Select alarm ringtone  -->
+    <!-- author : kim ju hyun  -->   
+        <string name="effect">Alarm Effect</string>
+        
+    <!-- Setting labels on Set alarm screen: Select alarm ringtone  -->
     <string name="alert">Sound</string>
 
     <!-- Setting labels on Set alarm screen: Set time  -->
@@ -267,4 +271,25 @@
     <string name="gpscheck">"Your GPS is disabled! Would you like to enable it?"</string>
     <string name="gpscheckbtn1">Enable GPS</string>
     <string name="gpscheckbtn2">Do nothing</string> 
+    
+    <!-- author : kim ju hyun  -->    
+    <!-- alarm_effect lists  -->
+    <string-array name="alarm_effect_lists">
+        <!-- alarm_effect : weather -->
+        <item>weather effect</item>
+        <!-- alarm_effect : voice -->
+        <item>voice effect</item>
+        <!-- alarm_effect : TTS -->
+        <item>TTS</item>
+    </string-array>
+        
+    <!-- alarm_effect values  -->
+    <string-array name="alarm_effect_values">
+        <!-- alarm_effect : weather -->
+        <item>01</item>
+        <!-- alarm_effect : voice -->
+        <item>02</item>
+        <!-- alarm_effect : TTS -->
+        <item>03</item>
+    </string-array>    
 </resources>
