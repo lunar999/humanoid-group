@@ -393,9 +393,9 @@ public class AlarmClock extends Activity implements OnItemClickListener {
                 saveClockVisibility();
                 return true;
                 
-            case R.id.menu_recording:
-                //녹음 처리.
-                return true;
+//            case R.id.menu_recording:
+//                //녹음 처리.
+//                return true;
 
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
