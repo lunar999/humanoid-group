@@ -46,7 +46,7 @@ public class AlarmProvider extends ContentProvider {
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
-        private static final String DATABASE_NAME = "alarmplus.db";
+        private static final String DATABASE_NAME = "alarms";
         private static final int DATABASE_VERSION = 5;
 
         public DatabaseHelper(Context context) {
@@ -64,15 +64,16 @@ public class AlarmProvider extends ContentProvider {
                        "enabled INTEGER, " +
                        "vibrate INTEGER, " +
                        "message TEXT, " +
-                       "alert TEXT);");
+                       "alert TEXT, " +                       
+            "effect TEXT);");  // 10.11.03 add redmars
 
             // insert default alarms
             String insertMe = "INSERT INTO alarms " +
-                    "(hour, minutes, daysofweek, alarmtime, enabled, vibrate, message, alert) " +
+            "(hour, minutes, daysofweek, alarmtime, enabled, vibrate, message, alert, effect) " +  // 10.11.03 add redmars
                     "VALUES ";
-            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '');");
-            db.execSQL(insertMe + "(8, 30, 31, 0, 0, 1, '', '');");
-            db.execSQL(insertMe + "(9, 00, 0, 0, 0, 1, '', '');");
+            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '','01');"); // 10.11.03 add redmars
+            db.execSQL(insertMe + "(8, 30, 31, 0, 0, 1, '', '','02');"); // 10.11.03 add redmars
+            db.execSQL(insertMe + "(9, 00, 0, 0, 0, 1, '', '','03');");  // 10.11.03 add redmars
         }
 
         @Override
@@ -200,6 +201,9 @@ public class AlarmProvider extends ContentProvider {
         if (!values.containsKey(Alarm.Columns.ALERT))
             values.put(Alarm.Columns.ALERT, "");
 
+        if (!values.containsKey(Alarm.Columns.EFFECT))   // 10.11.03 add redmars
+            values.put(Alarm.Columns.EFFECT, "");        
+        
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         long rowId = db.insert("alarms", Alarm.Columns.MESSAGE, values);
         if (rowId < 0) {
