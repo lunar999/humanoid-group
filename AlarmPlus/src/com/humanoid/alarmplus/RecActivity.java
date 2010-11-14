@@ -2,6 +2,8 @@ package com.humanoid.alarmplus;
 
 import java.io.File;
 
+import com.humanoid.alarmplus.util.UtilFile;
+
 import android.app.Activity;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -14,11 +16,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Chronometer;
 
-public class RecActivity extends Activity {
+public class RecActivity extends Activity implements AlarmConstantIf{
 
-	private static final String ALARM_REC_POSTFIX = ".mp4";
+//	private static final String ALARM_REC_POSTFIX = ".mp4";
 	private static final String SD2 = "sd";
-	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
+	private static final String ALARM_REC_PREFIX = "alarm_rec.mp4";
 	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
 	
 	private static final boolean DEBUG_MODE = true;
@@ -37,9 +39,8 @@ public class RecActivity extends Activity {
 		btnRec = (Button) findViewById(R.id.btnRec);
 		btnStop = (Button) findViewById(R.id.btnStop);
 		
-//		chronometer = (Chronometer) findViewById(R.id.chronometer);
+		chronometer = (Chronometer) findViewById(R.id.chronometer);
 		
-
 		btnStop.setEnabled(false);
 
 		btnRec.setOnClickListener(new View.OnClickListener() {
@@ -106,17 +107,9 @@ public class RecActivity extends Activity {
 			
 			String state = android.os.Environment.getExternalStorageState();
 			if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-				path = getFilesDir().getAbsolutePath() + File.separator + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
-			} else {
-				path = recFile.getAbsolutePath() + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
-				if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
-					File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2);
-					if(sd2.exists()){
-						path = recFile.getAbsolutePath() + File.separator + SD2  + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
-					} else {
-						path = recFile.getAbsolutePath() + ALARM_REC_PREFIX + System.currentTimeMillis() + ALARM_REC_POSTFIX;
-					}
-				}
+				path = getFilesDir().getAbsolutePath() + File.separator + ALARM_REC_PREFIX ;
+			} else {//sdcard
+				path = UtilFile.getSdCardAlarmPath(ALARM_REC_PREFIX);
 			}
 			if(DEBUG_MODE){
 				Log.d("PATH", path);

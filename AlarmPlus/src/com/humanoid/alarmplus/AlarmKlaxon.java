@@ -17,6 +17,10 @@
 package com.humanoid.alarmplus;
 
 
+import java.io.File;
+
+import com.humanoid.alarmplus.util.UtilFile;
+
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
@@ -34,6 +38,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 /**
  * Manages alarms and vibe. Runs as a service so that it can continue to play
  * if another activity overrides the AlarmAlert dialog.
@@ -56,6 +61,8 @@ public class AlarmKlaxon extends Service {
     private Activity mActivity;
     // Internal messages
     private static final int KILLER = 1000;
+    
+    
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -187,16 +194,47 @@ public class AlarmKlaxon extends Service {
             });
 
             try {
+            	
                 // Check if we are in a call. If we are, use the in-call alarm
                 // resource at a low volume to not disrupt the call.
                 if (mTelephonyManager.getCallState()
                         != TelephonyManager.CALL_STATE_IDLE) {
                     Log.v("Using the in-call alarm");
                     mMediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
-                    setDataSourceFromResource(getResources(), mMediaPlayer,
-                            R.raw.in_call_alarm);
+                    
+                    /* load alarm details from database */
+                    String soundMode = alarm.effect; // 10.11.03 add redmars     
+                    
+                    Toast.makeText(getBaseContext(), " soundMode1:"+soundMode, Toast.LENGTH_LONG).show();
+                    if("01".equals(soundMode)) {//날씨 효과음
+                    	
+                    }
+                    else if("02".equals(soundMode)) {//녹음
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+                    }
+                    else if("03".equals(soundMode)) {//TTS
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    }
+                    else {
+                    	setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
+                    }
+                    
                 } else {
                     mMediaPlayer.setDataSource(this, alert);
+                    String soundMode = alarm.effect; // 10.11.03 add redmars       
+                    Toast.makeText(getBaseContext(), " soundMode2:"+soundMode, Toast.LENGTH_LONG).show();
+                    if("01".equals(soundMode)) {//날씨 효과음
+                    	
+                    }
+                    else if("02".equals(soundMode)) {//녹음
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+                    }
+                    else if("03".equals(soundMode)) {//TTS
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    }
+                    else {
+                    	setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
+                    }
                 }
                 startAlarm(mMediaPlayer);
             } catch (Exception ex) {
@@ -245,13 +283,23 @@ public class AlarmKlaxon extends Service {
 
     private void setDataSourceFromResource(Resources resources,
             MediaPlayer player, int res) throws java.io.IOException {
-        AssetFileDescriptor afd = resources.openRawResourceFd(res);
+        
+    	AssetFileDescriptor afd = resources.openRawResourceFd(res);
+    	
         if (afd != null) {
             player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
                     afd.getLength());
             afd.close();
         }
     }
+    
+    private void setDataSourceFromFile(File file,
+            MediaPlayer player) throws java.io.IOException {
+        
+    	player.setDataSource(file.getAbsolutePath());
+    }
+    
+    
 
     /**
      * Stops alarm audio and disables alarm if it not snoozed and not

@@ -16,7 +16,11 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import com.humanoid.alarmplus.AlarmConstantIf;
+
 import android.content.Context;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 
 
@@ -403,6 +407,45 @@ public class UtilFile {
 		return lineList;
 		
 	}
+	
+	
+//	private static final String ALARM_REC_POSTFIX = ".mp4";
+	private static final String SD2 = "sd";
+//	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
+	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
+	
+	public static String getSdCardAlarmPath(String fileName) {
+		
+		File recFile = Environment.getExternalStorageDirectory();
+		String path = "";
+		
+		path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+		File tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
+		if(!tempFile.exists()) {
+			tempFile.mkdirs();
+		}
+		
+		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
+			File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2 );
+			if(sd2.exists()){
+				path = recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+				tempFile = new File(recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH);
+				if(!tempFile.exists()) {
+					tempFile.mkdirs();
+				}
+			} else {
+				path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+			
+				tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
+				if(!tempFile.exists()) {
+					tempFile.mkdirs();
+				}
+			}
+		}
+		
+		return path;
+	}
+	
 
 //	public static void main(String[] args) {
 //

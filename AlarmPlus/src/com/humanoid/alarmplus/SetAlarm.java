@@ -65,9 +65,10 @@ public class SetAlarm extends PreferenceActivity
     private int     mMinutes;
 
     // TTS
-    private Preference mTtsPref;
-    private Preference mTtsMessagePref;
-    private Preference mTtsTestPref;
+//    private Preference mTtsPref;
+//    private Preference mTtsMessagePref;
+//    private Preference mTtsTestPref;
+    
     private static final String TAG = "SetAlarm";
     private static final int REQ_TTS_STATUS_CHECK = 0;
     private int lastUtterance = -1;
@@ -88,61 +89,61 @@ public class SetAlarm extends PreferenceActivity
         addPreferencesFromResource(R.xml.alarm_prefs);
 
         // TTS 
-        mTtsPref = findPreference("tts_preference");
-        mTtsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getBaseContext(), "TTS Preference Checked!!", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		});
-        
-        mTtsMessagePref = (EditTextPreference)findPreference("tts_message_preference");
-//        mTtsMessagePref.setDefaultValue(mTtsMessagePref.getSummary());
-        mTtsMessagePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				// TODO Auto-generated method stub
-
+//        mTtsPref = findPreference("tts_preference");
+//        mTtsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//			
+//			@Override
+//			public boolean onPreferenceClick(Preference preference) {
+//				// TODO Auto-generated method stub
+//				Toast.makeText(getBaseContext(), "TTS Preference Checked!!", Toast.LENGTH_SHORT).show();
+//				return false;
+//			}
+//		});
+//        
+//        mTtsMessagePref = (EditTextPreference)findPreference("tts_message_preference");
+////        mTtsMessagePref.setDefaultValue(mTtsMessagePref.getSummary());
+//        mTtsMessagePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//			
+//			@Override
+//			public boolean onPreferenceClick(Preference preference) {
+//				// TODO Auto-generated method stub
+//
+////				String ttsMessage = mTtsMessagePref.getSummary().toString();
+////				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
+//				
+//				return false;
+//			}
+//		});
+//        
+//        mTtsMessagePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//			
+//			@Override
+//			public boolean onPreferenceChange(Preference preference, Object newValue) {
+//				// TODO Auto-generated method stub
+//				preference.setSummary((String) newValue);
+//				saveTtsSoundFile((String)newValue);
+//				
+//				Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+//				return true;
+//			}
+//		});
+//
+//        mTtsTestPref = findPreference("tts_test_preference");
+//        mTtsTestPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//			
+//			@Override
+//			public boolean onPreferenceClick(Preference preference) {
+//				// TODO Auto-generated method stub
 //				String ttsMessage = mTtsMessagePref.getSummary().toString();
-//				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
-				
-				return false;
-			}
-		});
-        
-        mTtsMessagePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				// TODO Auto-generated method stub
-				preference.setSummary((String) newValue);
-				saveTtsSoundFile((String)newValue);
-				
-				Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
-				return true;
-			}
-		});
-
-        mTtsTestPref = findPreference("tts_test_preference");
-        mTtsTestPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				// TODO Auto-generated method stub
-				String ttsMessage = mTtsMessagePref.getSummary().toString();
-				
-//				getSampleText();
-//				speakMessage(ttsMessage);
-				lanunchTTSActivity(ttsMessage);
-				
-//				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
-				return true;
-			}
-		});
+//				
+////				getSampleText();
+////				speakMessage(ttsMessage);
+//				lanunchTTSActivity(ttsMessage);
+//				
+////				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
+//				return true;
+//			}
+//		});
         ////////////
         
         // Get each preference so we can retrieve the value later.
@@ -160,7 +161,33 @@ public class SetAlarm extends PreferenceActivity
         mAlarmPref = (AlarmPreference) findPreference("alarm");
         mVibratePref = (CheckBoxPreference) findPreference("vibrate");
         mRepeatPref = (RepeatPreference) findPreference("setRepeat");
-        mEffectPref = (ListPreference)findPreference("effect");      // 10.11.03 add redmars             
+        mEffectPref = (ListPreference)findPreference("effect");      // 10.11.03 add redmars  
+        mEffectPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			
+        	@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+        		
+        		
+        		if("02".equals(newValue)) {//녹음
+        			Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
+        			
+        			final Intent intent =
+        				new Intent(SetAlarm.this, RecActivity.class);
+        			startActivity(intent);
+        		}
+        		else if("03".equals(newValue)) {//TTS
+        			final Intent intent =
+        				new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
+        			startActivity(intent);
+        		}
+        		Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+//				preference.setSummary((String) newValue);
+//				saveTtsSoundFile((String)newValue);
+//				
+//				Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
 
         Intent i = getIntent();
         mId = i.getIntExtra(Alarms.ALARM_ID, -1);

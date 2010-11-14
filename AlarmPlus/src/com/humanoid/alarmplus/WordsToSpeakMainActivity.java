@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.StringTokenizer;
+
+import com.humanoid.alarmplus.util.UtilFile;
 
 public class WordsToSpeakMainActivity extends Activity implements OnInitListener, OnUtteranceCompletedListener {
 	private EditText words = null;
@@ -32,7 +35,7 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 	private String soundFilename = null;
 	private File soundFile = null;
 
-	private static final String TTS_FILE_NAME = "/sdcard/alarm_tts.wav";
+	private static final String TTS_FILE_NAME = "alarm_tts.wav";
 	
 	/** 액티비티 최초 생성 시에 호출됨 */
 	@Override
@@ -53,7 +56,7 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 		saveBtn.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View view) {
-				soundFilename = TTS_FILE_NAME;
+				soundFilename = getFilePath();
 				soundFile = new File(soundFilename);
 				if (soundFile.exists())
 					soundFile.delete();
@@ -84,6 +87,18 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 	Intent checkIntent = new Intent();
 	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
 	startActivityForResult(checkIntent, REQ_TTS_STATUS_CHECK);
+	}
+	
+	private String getFilePath() {
+		String path = "";
+		String state = android.os.Environment.getExternalStorageState();
+		if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
+			path = getFilesDir().getAbsolutePath() + File.separator + TTS_FILE_NAME;
+		} else {//sdcard
+			path = UtilFile.getSdCardAlarmPath(TTS_FILE_NAME);
+		}
+		
+		return path;
 	}
 	
 	@Override
@@ -128,6 +143,7 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 	public void onInit(int status) {
 		// TTS 엔진을 완성했으니 이제 버튼을 가용화하자.
 		if( status == TextToSpeech.SUCCESS) {
+			mTts.setLanguage(Locale.US);
 			speakBtn.setEnabled(true);
 			saveBtn.setEnabled(true);
 			mTts.setOnUtteranceCompletedListener(this);
