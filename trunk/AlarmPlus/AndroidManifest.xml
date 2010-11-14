@@ -22,7 +22,11 @@
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
 
-		<activity android:name="com.humanoid.alarmplus.WordsToSpeakMainActivity" />
+		<activity android:name=".WordsToSpeakMainActivity" android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="com.humanoid.alarmplus.TTS" />
+            </intent-filter>
+        </activity>
 
 		<activity android:name="com.humanoid.alarmplus.RecActivity" />
 
