@@ -225,7 +225,7 @@ public class AlarmKlaxon extends Service {
                     	
                     }
                     else if("02".equals(soundMode)) {//녹음
-                    	setDataSourceFromFile(new File("/mnt/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
                     else if("03".equals(soundMode)) {//TTS
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
