@@ -167,5 +167,17 @@
         <!-- alarm_effect : TTS -->
         <item>03</item>
     </string-array>    
+    
+    <!-- TTS Setting -->
+    <string name="alarm_tts_title">Voice 알람 설정</string>
+    <string name="alarm_tts_summary">Voice 알람 설정 상태</string>
+    <string name="alarm_tts_check_title">Voice 알람 설정</string>
+    <string name="alarm_tts_check_summary">Voice 알람 설정 상태</string>
+    <string name="alarm_tts_message_title">메세지</string>
+    <string name="alarm_tts_message_summary">It\'s %t. The current temperature takes a value of %c degrees. During the day, it will reach a value of %max degrees.</string>
+    <string name="alarm_tts_dialog_message">Voice 메세지를 입력해 주세요.(%t 시간,%c 최저온도,%max 최고온도</string>
+    <string name="alarm_tts_voicetest_title">Voice 알람 테스트</string>
+    <string name="alarm_tts_voicetest_summary">현재 설정된 알람 메세지 테스트</string>
+    
        
 </resources>
