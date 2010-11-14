@@ -21,6 +21,7 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 	private EditText words = null;
 	private Button  speakBtn  = null;
 	private Button  saveBtn  = null;
+	private Button  closeBtn = null;
 	private static final int REQ_TTS_STATUS_CHECK = 0;
 	private static final String TAG = "TTS Demo";
 	private TextToSpeech mTts;
@@ -68,6 +69,14 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 							"Oops! Sound file not created",
 							Toast.LENGTH_SHORT).show();
 				}
+			}
+		});
+		
+		closeBtn  = (Button)findViewById(R.id.close);
+		closeBtn.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View view) {
+				finish();
 			}
 		});
 	
