@@ -6,19 +6,19 @@ android:layout_width="fill_parent"
 android:layout_height="fill_parent">
 
 	<EditText android:id="@+id/wordsToSpeak"
-	android:hint="It's raining"
+	android:hint="Voice Alarm Messages..."
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"/>
 	
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="horizontal"
-		android:layout_width="wrap_content" android:layout_height="wrap_content">
-	<Button android:id="@+id/speak" android:text="읽기"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:enabled="false" />
-	<Button android:id="@+id/save" android:text="저장"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:enabled="false" />
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<Button android:id="@+id/speak" android:text="읽기"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:enabled="false" />
+		<Button android:id="@+id/save" android:text="저장"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:enabled="false" />
 	</LinearLayout>
 
 </LinearLayout>
