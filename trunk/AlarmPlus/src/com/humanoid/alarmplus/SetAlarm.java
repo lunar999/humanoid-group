@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -52,6 +53,7 @@ public class SetAlarm extends PreferenceActivity
     private RepeatPreference mRepeatPref;
     private MenuItem mDeleteAlarmItem;
     private MenuItem mTestAlarmItem;
+    private ListPreference mEffectPref;    // 10.11.03 add redmars    
 
     private int     mId;
     private boolean mEnabled;
@@ -83,6 +85,7 @@ public class SetAlarm extends PreferenceActivity
         mAlarmPref = (AlarmPreference) findPreference("alarm");
         mVibratePref = (CheckBoxPreference) findPreference("vibrate");
         mRepeatPref = (RepeatPreference) findPreference("setRepeat");
+        mEffectPref = (ListPreference)findPreference("effect");      // 10.11.03 add redmars             
 
         Intent i = getIntent();
         mId = i.getIntExtra(Alarms.ALARM_ID, -1);
@@ -101,6 +104,7 @@ public class SetAlarm extends PreferenceActivity
         mVibratePref.setChecked(alarm.vibrate);
         // Give the alert uri to the preference.
         mAlarmPref.setAlert(alarm.alert);
+        mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars           
         updateTime();
 
         // We have to do this to get the save/cancel buttons to highlight on
@@ -187,7 +191,7 @@ public class SetAlarm extends PreferenceActivity
         final String alert = mAlarmPref.getAlertString();
         Alarms.setAlarm(this, mId, mEnabled, mHour, mMinutes,
                 mRepeatPref.getDaysOfWeek(), mVibratePref.isChecked(),
-                mLabel.getText(), alert);
+                mLabel.getText(), alert, mEffectPref.getValue());  // 10.11.03 add redmars
 
         if (mEnabled) {
             popAlarmSetToast(this, mHour, mMinutes,
@@ -202,13 +206,13 @@ public class SetAlarm extends PreferenceActivity
     private static void saveAlarm(
             Context context, int id, boolean enabled, int hour, int minute,
             Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String label,
-            String alert, boolean popToast) {
+            String alert, String effect, boolean popToast) {   // 10.11.03 add redmars
         if (Log.LOGV) Log.v("** saveAlarm " + id + " " + label + " " + enabled
-                + " " + hour + " " + minute + " vibe " + vibrate);
+                + " " + hour + " " + minute + " vibe " + "effect" + effect);
 
         // Fix alert string first
         Alarms.setAlarm(context, id, enabled, hour, minute, daysOfWeek, vibrate,
-                label, alert);
+                label, alert, effect);  // 10.11.03 add redmars
 
         if (enabled && popToast) {
             popAlarmSetToast(context, hour, minute, daysOfWeek);
@@ -313,7 +317,7 @@ public class SetAlarm extends PreferenceActivity
         int hour = nowHour + (nowMinute == 0 ? 1 : 0);
 
         saveAlarm(this, mId, true, hour, minutes, mRepeatPref.getDaysOfWeek(),
-                true, mLabel.getText(), mAlarmPref.getAlertString(), true);
+                true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(), true); // 10.11.03 add redmars
     }
 
 }
