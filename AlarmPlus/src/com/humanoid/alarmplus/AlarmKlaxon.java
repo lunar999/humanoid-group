@@ -168,6 +168,7 @@ public class AlarmKlaxon extends Service {
             Log.v("AlarmKlaxon.play() " + alarm.id + " alert " + alarm.alert);
         }
 
+        
         if (!alarm.silent) {
             Uri alert = alarm.alert;
             // Fall back on the default alarm if the database does not have an
@@ -179,7 +180,6 @@ public class AlarmKlaxon extends Service {
                     Log.v("Using default alarm: " + alert.toString());
                 }
             }
-
             // TODO: Reuse mMediaPlayer instead of creating a new one and/or use
             // RingtoneManager.
             mMediaPlayer = new MediaPlayer();
@@ -192,7 +192,6 @@ public class AlarmKlaxon extends Service {
                     return true;
                 }
             });
-
             try {
             	
                 // Check if we are in a call. If we are, use the in-call alarm
@@ -201,11 +200,9 @@ public class AlarmKlaxon extends Service {
                         != TelephonyManager.CALL_STATE_IDLE) {
                     Log.v("Using the in-call alarm");
                     mMediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
-                    
                     /* load alarm details from database */
                     String soundMode = alarm.effect; // 10.11.03 add redmars     
                     
-                    Toast.makeText(getBaseContext(), " soundMode1:"+soundMode, Toast.LENGTH_LONG).show();
                     if("01".equals(soundMode)) {//날씨 효과음
                     	
                     }
@@ -220,14 +217,15 @@ public class AlarmKlaxon extends Service {
                     }
                     
                 } else {
-                    mMediaPlayer.setDataSource(this, alert);
+                	Log.v("666");
+//                    mMediaPlayer.setDataSource(this, alert);
                     String soundMode = alarm.effect; // 10.11.03 add redmars       
-                    Toast.makeText(getBaseContext(), " soundMode2:"+soundMode, Toast.LENGTH_LONG).show();
+                    
                     if("01".equals(soundMode)) {//날씨 효과음
                     	
                     }
                     else if("02".equals(soundMode)) {//녹음
-                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+                    	setDataSourceFromFile(new File("/mnt/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
                     else if("03".equals(soundMode)) {//TTS
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
@@ -238,6 +236,7 @@ public class AlarmKlaxon extends Service {
                 }
                 startAlarm(mMediaPlayer);
             } catch (Exception ex) {
+            	Log.e("####### 에러발생:"+ex.toString());
                 Log.v("Using the fallback ringtone");
                 // The alert may be on the sd card which could be busy right
                 // now. Use the fallback ringtone.
