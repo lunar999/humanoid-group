@@ -31,6 +31,8 @@
     <string name="alarm_repeat" msgid="7242985466344233206">"반복"</string>
     <string name="alarm_sound" >"알람 음악 종류 선택"</string>
     <string name="alert" msgid="6539852766423700221">"알람 소리"</string>
+    <!-- author : kim ju hyun  -->    
+    <string name="effect" msgid="6539852766423700222">"알람 효과"</string>        
     <string name="time" msgid="8067216534232296518">"시간"</string>
     <string name="alarm_alert_dismiss_text" msgid="4942914605480888820">"해제"</string>
     <string name="alarm_alert_alert_silenced" msgid="7918075929961104202">"<xliff:g id="MINUTES">%d</xliff:g>분 후 알람이 중지됨"</string>
@@ -144,4 +146,26 @@
     <string name="gpscheckbtn2">취소</string>
     
    <string name="chronometer_initial_format">녹음시간: <xliff:g id="initial-format">%s</xliff:g></string>
+   
+    <!-- author : 김주현  -->    
+    <!-- alarm_effect lists  -->
+    <string-array name="alarm_effect_lists">
+        <!-- alarm_effect : weather -->
+        <item>날씨효과음</item>
+        <!-- alarm_effect : voice -->
+        <item>음성효과</item>
+        <!-- alarm_effect : TTS -->
+        <item>TEXT 변환</item>
+    </string-array>
+        
+    <!-- alarm_effect values  -->
+    <string-array name="alarm_effect_values">
+        <!-- alarm_effect : weather -->
+        <item>01</item>
+        <!-- alarm_effect : voice -->
+        <item>02</item>
+        <!-- alarm_effect : TTS -->
+        <item>03</item>
+    </string-array>    
+       
 </resources>
