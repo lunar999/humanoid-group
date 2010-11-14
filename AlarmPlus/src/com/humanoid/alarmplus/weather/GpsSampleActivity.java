@@ -197,7 +197,7 @@ public class GpsSampleActivity extends Activity implements LocationListener{
 						Log.d(WeatherView.TAG, "addressCodes[1] :"+addressCodes[1]);
 						Log.d(WeatherView.TAG, "currentWeatherUrl :"+currentWeatherUrl);
 						//								Toast.makeText(this, "URL :"+currentWeatherUrl, Toast.LENGTH_LONG).show();
-
+ 
 					}
 					else {
 						currentWeatherUrl = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=61&gridy=125";
