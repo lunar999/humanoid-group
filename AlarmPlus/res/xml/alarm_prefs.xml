@@ -48,4 +48,31 @@
         android:persistent="false"
         android:title="@string/label"
         android:dialogTitle="@string/label" />
+    <PreferenceScreen
+            android:key="tts_preference"
+            android:title="@string/alarm_tts_title"
+            android:summary="@string/alarm_tts_summary">
+        <CheckBoxPreference
+                android:key="tts_checkbox_preference"
+                android:dependency="tts_preference"
+                android:persistent="true"
+                android:title="@string/alarm_tts_check_title"
+                android:summary="@string/alarm_tts_check_summary" />
+        <EditTextPreference
+                android:key="tts_message_preference"
+                android:dependency="tts_checkbox_preference"
+                android:layout="?android:attr/preferenceLayoutChild"
+                android:persistent="false"
+                android:dialogMessage="@string/alarm_tts_dialog_message"
+                android:defaultValue="@string/alarm_tts_message_summary"
+                android:title="@string/alarm_tts_message_title"
+                android:summary="@string/alarm_tts_message_summary" />
+        <Preference
+                android:key="tts_test_preference"
+                android:dependency="tts_checkbox_preference"
+                android:layout="?android:attr/preferenceLayoutChild"
+                android:persistent="false"
+                android:title="@string/alarm_tts_voicetest_title"
+                android:summary="@string/alarm_tts_voicetest_summary" />                                
+    </PreferenceScreen>    
 </PreferenceScreen>
