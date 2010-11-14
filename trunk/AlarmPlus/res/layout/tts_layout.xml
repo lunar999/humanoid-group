@@ -19,6 +19,9 @@ android:layout_height="fill_parent">
 		<Button android:id="@+id/save" android:text="저장"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:enabled="false" />
+		<Button android:id="@+id/close" android:text="닫기"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:enabled="true" />
 	</LinearLayout>
 
 </LinearLayout>
