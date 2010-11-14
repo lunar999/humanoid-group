@@ -23,6 +23,13 @@
         android:persistent="false"
         android:key="sound" 
         android:title="@string/alarm_sound" />
+    <!-- author : redmars  -->          
+    <ListPreference
+        android:key="effect"
+        android:title="@string/effect"
+        android:entries="@array/alarm_effect_lists"     
+        android:entryValues="@array/alarm_effect_values"      
+        android:dialogTitle="@string/effect" />                   
     <com.humanoid.alarmplus.AlarmPreference
         android:key="alarm" 
         android:title="@string/alert"
