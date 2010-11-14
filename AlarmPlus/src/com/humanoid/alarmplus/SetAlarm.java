@@ -170,12 +170,15 @@ public class SetAlarm extends PreferenceActivity
         		
         		if("02".equals(newValue)) {//녹음
         			Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
-        			
+        			preference.setSummary((String) newValue);
+        			mEffectPref.setSummary("녹음 음성 효과");
         			final Intent intent =
         				new Intent(SetAlarm.this, RecActivity.class);
         			startActivity(intent);
         		}
         		else if("03".equals(newValue)) {//TTS
+        			
+        			mEffectPref.setSummary("텍스트 음성변환 효과");
         			final Intent intent =
         				new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
         			startActivity(intent);
@@ -426,6 +429,11 @@ public class SetAlarm extends PreferenceActivity
 	public void saveTtsSoundFile(String message) {
 
 		File soundFile = new File(TTS_FILE_NAME);
+//		File soundFile = new File("/sdcard/foo/bar");
+	    if(! soundFile.isDirectory()) {
+	    	soundFile.mkdirs();
+	    }
+
 		if (soundFile.exists())
 			soundFile.delete();
 		
