@@ -133,8 +133,10 @@ public final class Alarm implements Parcelable {
         
         /**
          * The default sort order for this table
+         * 10/11/15 shinshow: 정렬방법 변경(ID -> 시간설정)
          */
-        public static final String DEFAULT_SORT_ORDER = _ID + " ASC";
+        //public static final String DEFAULT_SORT_ORDER = _ID + " ASC";
+        public static final String DEFAULT_SORT_ORDER = HOUR + ", " + MINUTES + " ASC";
 
         // Used when filtering enabled alarms.
         public static final String WHERE_ENABLED = ENABLED + "=1";
