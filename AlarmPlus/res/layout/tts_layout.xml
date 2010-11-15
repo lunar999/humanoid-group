@@ -5,24 +5,31 @@ android:orientation="vertical"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent">
 
-	<EditText android:id="@+id/wordsToSpeak"
-	android:hint="Voice Alarm Messages..."
-	android:layout_width="fill_parent"
-	android:singleLine="false" android:layout_height="300dp"/>
+	<TextView android:text="@string/alarm_tts_noti_message" 
+        android:id="@+id/alarm_tts_noti_message"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+	<EditText android:id="@+id/wordsToSpeak" android:hint="Voice Alarm Messages..."
+		android:layout_width="fill_parent" android:singleLine="false"
+		android:layout_height="300dp" />
 	
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="horizontal"
 		android:layout_width="fill_parent" 
+		style="@android:style/ButtonBar"
 		android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal">
-		<Button android:id="@+id/speak" android:text="읽기"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/speak" android:text="@string/alarm_tts_btn_speak"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight="1"
 			android:enabled="false" />
-		<Button android:id="@+id/save" android:text="저장"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/save" android:text="@string/alarm_tts_btn_save"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight="1"
 			android:enabled="false" />
-		<Button android:id="@+id/close" android:text="닫기"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/close" android:text="@string/alarm_tts_btn_close"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight="1"
 			android:enabled="true" />
 	</LinearLayout>
+
 
 </LinearLayout>
