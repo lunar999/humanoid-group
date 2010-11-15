@@ -170,24 +170,19 @@ public class SetAlarm extends PreferenceActivity
         		
         		if("02".equals(newValue)) {//녹음
         			Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
-        			preference.setSummary((String) newValue);
         			mEffectPref.setSummary("녹음 음성 효과");
         			final Intent intent =
         				new Intent(SetAlarm.this, RecActivity.class);
         			startActivity(intent);
         		}
         		else if("03".equals(newValue)) {//TTS
-        			
         			mEffectPref.setSummary("텍스트 음성변환 효과");
         			final Intent intent =
         				new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
         			startActivity(intent);
         		}
+
         		Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
-//				preference.setSummary((String) newValue);
-//				saveTtsSoundFile((String)newValue);
-//				
-//				Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});
@@ -209,7 +204,8 @@ public class SetAlarm extends PreferenceActivity
         mVibratePref.setChecked(alarm.vibrate);
         // Give the alert uri to the preference.
         mAlarmPref.setAlert(alarm.alert);
-        mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars           
+        mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars      
+//        mEffectPref.setSummary(alarm.effect);	// 2010.11.15 Added by ahn
         updateTime();
 
         // We have to do this to get the save/cancel buttons to highlight on
