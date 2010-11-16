@@ -167,22 +167,25 @@ public class SetAlarm extends PreferenceActivity
         	@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
         		
-        		
-        		if("02".equals(newValue)) {//녹음
-        			Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
-        			mEffectPref.setSummary("녹음 음성 효과");
-        			final Intent intent =
-        				new Intent(SetAlarm.this, RecActivity.class);
+        		if("00".equals(newValue)) {//기본 벨소리
+        			mEffectPref.setSummary("기본 벨소리");
+        		}
+        		else if("01".equals(newValue)) {//날씨 효과음
+        			mEffectPref.setSummary("날씨 효과음");
+        		}
+        		else if("02".equals(newValue)) {//음성 녹음
+        			//Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
+        			mEffectPref.setSummary("음성 녹음");
+        			final Intent intent = new Intent(SetAlarm.this, RecActivity.class);
         			startActivity(intent);
         		}
         		else if("03".equals(newValue)) {//TTS
-        			mEffectPref.setSummary("텍스트 음성변환 효과");
-        			final Intent intent =
-        				new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
+        			mEffectPref.setSummary("TTS(Text-To-Speech)");
+        			final Intent intent = new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
         			startActivity(intent);
         		}
 
-        		Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+        		//Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});
@@ -204,8 +207,20 @@ public class SetAlarm extends PreferenceActivity
         mVibratePref.setChecked(alarm.vibrate);
         // Give the alert uri to the preference.
         mAlarmPref.setAlert(alarm.alert);
-        mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars      
-//        mEffectPref.setSummary(alarm.effect);	// 2010.11.15 Added by ahn
+        mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars   
+        String effectValue =  mEffectPref.getValue();
+        if (effectValue.equals("00")) {
+        	mEffectPref.setSummary("기본 벨소리");	
+        }
+        else if  (effectValue.equals("01")) {
+        	mEffectPref.setSummary("날씨 효과음");	
+        }
+        else if  (effectValue.equals("02")) {
+        	mEffectPref.setSummary("음성녹음");	
+        }
+        else {
+        	mEffectPref.setSummary("TTS(Text-To-Speech)");	
+        }
         updateTime();
 
         // We have to do this to get the save/cancel buttons to highlight on

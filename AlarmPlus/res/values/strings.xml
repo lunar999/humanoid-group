@@ -41,7 +41,7 @@
     <string name="hide_clock">Hide clock</string>
 
     <!-- Menu item on Alarm Clock screen: Recording -->
-    <string name="Recording">Recording</string>
+    <string name="recording">Recording</string>
     
     <!-- Setting label on Set alarm screen: Label -->
     <string name="label">Label</string>
@@ -212,6 +212,9 @@
     <!-- The summary of the side button setting. -->
     <string name="volume_button_setting_summary">Set the desired behavior of the side buttons when pressed during an alarm</string>
 
+	<!-- Title of the ringtone setting. -->
+    <string name="default_ringtone_setting_title">Set default ringtone</string>
+    
     <!-- Entries listed in the setting for the side-button action. -->
     <string-array name="volume_button_setting_entries">
       <item>None</item>
@@ -243,13 +246,7 @@
         <!-- Day of week: Sunday -->
         <item>Sunday</item>
     </string-array>
-    
-    <string-array name="sound_choice">
-        <item>default</item>
-        <item>weather sound</item>
-        <item>tts sound</item>
-    </string-array>
-    
+     
     <!-- Short Day of week  -->
     <string-array name="days_of_week_short">
         <!-- Short Day of week: Mon -->
@@ -267,7 +264,15 @@
         <!-- Short Day of week: Sun -->
         <item>Sun</item>
     </string-array>
-      <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
+    
+    <string-array name="sound_choice">
+        <item>Default</item>
+        <item>Weather Sound</item>
+        <item>TTS(Text-To-Speech)</item>
+    </string-array>
+    
+    <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
+    
     <string name="gpscheck">"Your GPS is disabled! Would you like to enable it?"</string>
     <string name="gpscheckbtn1">Enable GPS</string>
     <string name="gpscheckbtn2">Do nothing</string> 
@@ -275,21 +280,26 @@
     <!-- author : kim ju hyun  -->    
     <!-- alarm_effect lists  -->
     <string-array name="alarm_effect_lists">
+    	<!-- alarm_effect : default -->
+        <item>Default</item>
         <!-- alarm_effect : weather -->
-        <item>weather effect</item>
+        <item>Weather Effect</item>
         <!-- alarm_effect : voice -->
-        <item>voice effect</item>
+        <item>Voice Effect</item>
         <!-- alarm_effect : TTS -->
-        <item>TTS</item>
+        <item>TTS(Text-To-Speech)</item>
     </string-array>
         
     <!-- alarm_effect values  -->
     <string-array name="alarm_effect_values">
+    	<!-- alarm_effect : default -->
+        <item>00</item>
         <!-- alarm_effect : weather -->
         <item>01</item>
         <!-- alarm_effect : voice -->
         <item>02</item>
         <!-- alarm_effect : TTS -->
         <item>03</item>
-    </string-array>    
+    </string-array>  
+ 
 </resources>

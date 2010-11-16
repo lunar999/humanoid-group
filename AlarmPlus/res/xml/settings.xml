@@ -45,5 +45,13 @@
         android:entryValues="@array/volume_button_setting_values"
         android:summary="@string/volume_button_setting_summary"
         android:defaultValue="2" />
+        
+    <com.humanoid.alarmplus.AlarmPreference
+        android:key="default_ringtone"
+        android:title="@string/default_ringtone_setting_title"
+        android:ringtoneType="alarm"
+        android:showDefault="false"
+        android:persistent="false"
+        android:showSilent="true" />
 
 </PreferenceScreen>

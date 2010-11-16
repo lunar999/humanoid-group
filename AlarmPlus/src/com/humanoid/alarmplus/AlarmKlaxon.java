@@ -193,6 +193,8 @@ public class AlarmKlaxon extends Service {
                 }
             });
             try {
+            	/* load alarm details from database */
+            	String soundMode = alarm.effect; // 10.11.03 add redmars     
             	
                 // Check if we are in a call. If we are, use the in-call alarm
                 // resource at a low volume to not disrupt the call.
@@ -200,9 +202,8 @@ public class AlarmKlaxon extends Service {
                         != TelephonyManager.CALL_STATE_IDLE) {
                     Log.v("Using the in-call alarm");
                     mMediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
-                    /* load alarm details from database */
-                    String soundMode = alarm.effect; // 10.11.03 add redmars     
-                    
+                    setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
+/*                    
                     if("01".equals(soundMode)) {//날씨 효과음
                     	
                     }
@@ -215,14 +216,16 @@ public class AlarmKlaxon extends Service {
                     else {
                     	setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
                     }
-                    
+*/                 
                 } else {
                 	Log.v("666");
-//                    mMediaPlayer.setDataSource(this, alert);
-                    String soundMode = alarm.effect; // 10.11.03 add redmars       
-                    
-                    if("01".equals(soundMode)) {//날씨 효과음
-                    	
+//                    String soundMode = alarm.effect; // 10.11.03 add redmars
+                	if("00".equals(soundMode)) {//기본 벨소리                    	
+                    	mMediaPlayer.setDataSource(this, alert);
+                    }                    
+                	else if("01".equals(soundMode)) {//날씨 효과음
+                    	//임시-구현예정!!
+                    	mMediaPlayer.setDataSource(this, alert);
                     }
                     else if("02".equals(soundMode)) {//녹음
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
@@ -231,7 +234,8 @@ public class AlarmKlaxon extends Service {
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
                     else {
-                    	setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
+                    	//setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
+                    	mMediaPlayer.setDataSource(this, alert);
                     }
                 }
                 startAlarm(mMediaPlayer);
