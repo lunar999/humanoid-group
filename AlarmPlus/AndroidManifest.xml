@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.humanoid.alarmplus" android:versionCode="1" android:versionName="1.0">
+	package="com.humanoid.alarmplus" android:versionCode="2" android:versionName="1.0.5">
 
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -16,12 +16,12 @@
 	
 	
 	<application android:label="@string/app_label"
-		android:icon="@drawable/ic_launcher_alarmclock2">
+		android:icon="@drawable/ic_launcher_alarmclock2" android:debuggable="false">
 
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
 
-		<activity android:name=".WordsToSpeakMainActivity" android:theme="@android:style/Theme">
+		<activity android:name=".WordsToSpeakMainActivity" android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="com.humanoid.alarmplus.TTS" />
             </intent-filter>
