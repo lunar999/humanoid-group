@@ -1,6 +1,9 @@
 package com.humanoid.alarmplus;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -9,6 +12,7 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,6 +41,8 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 
 	private static final String TTS_FILE_NAME = "alarm_tts.wav";
 	
+	private static final int DIALOG_LIST = 1;
+	
 	/** 액티비티 최초 생성 시에 호출됨 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,18 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 		setContentView(R.layout.tts_layout);
 		
 		words = (EditText)findViewById(R.id.wordsToSpeak);
+		words.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				showDialog(DIALOG_LIST);
+				
+				return true;
+			}
+		});
+		
+		
 		speakBtn  = (Button)findViewById(R.id.speak);
 		speakBtn.setOnClickListener(new OnClickListener() {
 
@@ -101,6 +119,26 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 		return path;
 	}
 	
+	@Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+        case DIALOG_LIST:
+            return new AlertDialog.Builder(WordsToSpeakMainActivity.this)
+                .setTitle("음성 메세지 선택")
+                .setItems(R.array.alarm_tts_sample_message_values, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String[] items = getResources().getStringArray(R.array.alarm_tts_sample_message_values);
+                        if (which != 0) // 직접 입력이 아니면
+                        	words.setText(items[which]);
+                    }
+                })
+                .create();
+        }
+        
+        return null;
+    }
+    
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQ_TTS_STATUS_CHECK) {
