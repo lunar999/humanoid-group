@@ -17,6 +17,8 @@
 package com.humanoid.alarmplus;
 
 import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -40,11 +42,22 @@ public class SettingsActivity extends PreferenceActivity
             "snooze_duration";
     static final String KEY_VOLUME_BEHAVIOR =
             "volume_button_setting";
+    static final String KEY_DEFAULT_RINGTONE =
+            "default_ringtone";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+        
+       final AlarmPreference ringtone =
+                (AlarmPreference) findPreference(KEY_DEFAULT_RINGTONE);
+        Uri alert = RingtoneManager.getActualDefaultRingtoneUri(this,
+                RingtoneManager.TYPE_ALARM);
+        if (alert != null) {
+            ringtone.setAlert(alert);
+        }
+        ringtone.setChangeDefault();
     }
 
     @Override

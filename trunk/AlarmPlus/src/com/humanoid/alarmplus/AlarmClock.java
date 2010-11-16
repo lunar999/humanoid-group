@@ -30,6 +30,7 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -211,11 +212,19 @@ public class AlarmClock extends Activity implements OnItemClickListener {
         setClockVisibility(mPrefs.getBoolean(PREF_SHOW_CLOCK, true));
     }
 
+     private final Handler mHandler = new Handler();
+    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        updateLayout();
-        inflateClock();
+        // Send a message to avoid a possible ANR.
+        mHandler.post(new Runnable() {
+            public void run() {
+                updateLayout();
+                inflateClock();
+                setClockVisibility(mPrefs.getBoolean(PREF_SHOW_CLOCK, true));
+            }
+        });
     }
 
     private void updateLayout() {
@@ -240,8 +249,8 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-
-        int face = mPrefs.getInt(PREF_CLOCK_FACE, 0);
+        //처음 실행시 디지털시계 표시
+        int face = mPrefs.getInt(PREF_CLOCK_FACE, 4);
         if (mFace != face) {
             if (face < 0 || face >= AlarmClock.CLOCKS.length) {
                 mFace = 0;
@@ -392,11 +401,11 @@ public class AlarmClock extends Activity implements OnItemClickListener {
                 setClockVisibility(!getClockVisibility());
                 saveClockVisibility();
                 return true;
-                
-//            case R.id.menu_recording:
-//                //녹음 처리.
-//                return true;
-
+/*                
+            case R.id.menu_recording:
+                //녹음 처리.
+               return true;
+*/
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
