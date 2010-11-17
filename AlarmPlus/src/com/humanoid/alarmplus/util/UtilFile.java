@@ -425,23 +425,24 @@ public class UtilFile {
 			tempFile.mkdirs();
 		}
 		
-		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
-			File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2 );
-			if(sd2.exists()){
-				path = recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
-				tempFile = new File(recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH);
-				if(!tempFile.exists()) {
-					tempFile.mkdirs();
-				}
-			} else {
-				path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
-			
-				tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
-				if(!tempFile.exists()) {
-					tempFile.mkdirs();
-				}
-			}
-		}
+//		/sdcard 하위폴더로 교체
+//		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
+//			File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2 );
+//			if(sd2.exists()){
+//				path = recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+//				tempFile = new File(recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH);
+//				if(!tempFile.exists()) {
+//					tempFile.mkdirs();
+//				}
+//			} else {
+//				path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+//			
+//				tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
+//				if(!tempFile.exists()) {
+//					tempFile.mkdirs();
+//				}
+//			}
+//		}
 		
 		return path;
 	}
