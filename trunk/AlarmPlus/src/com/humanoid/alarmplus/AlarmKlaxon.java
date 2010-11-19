@@ -248,7 +248,7 @@ public class AlarmKlaxon extends Service {
                     // Must reset the media player to clear the error state.
                     mMediaPlayer.reset();
                     //setDataSourceFromResource(getResources(), mMediaPlayer, com.android.internal.R.raw.fallbackring);
-                    setDataSourceFromResource(getResources(), mMediaPlayer, R.raw.in_call_alarm);
+                    setDataSourceFromResource(getResources(), mMediaPlayer, R.raw.fallbackring);
                     startAlarm(mMediaPlayer);
                 } catch (Exception ex2) {
                     // At this point we just don't play anything.
