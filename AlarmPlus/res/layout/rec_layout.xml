@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="#ffa4c639"
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
+<!--
 	 <Chronometer android:id="@+id/chronometer"
         android:format="@string/chronometer_initial_format"
         android:layout_width="wrap_content"
@@ -25,3 +27,34 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"></Button>
 </LinearLayout>
+-->
+
+<LinearLayout android:gravity="center_horizontal"
+	android:orientation="vertical" 
+	android:background="#ffa4c639" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:layout_marginTop="12.0dip">
+	
+	<ImageView android:layout_gravity="center_horizontal"
+		android:id="@+id/mic_128" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="20.0dip" 
+		android:src="@drawable/mic_128" />
+
+	<Chronometer android:layout_gravity="center_horizontal"
+		android:id="@+id/chronometer" android:format="@string/chronometer_initial_format"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_weight="0" android:paddingBottom="30dip"
+		android:paddingTop="30dip" />
+	
+	<LinearLayout android:gravity="center_horizontal"
+		android:orientation="horizontal" android:background="#ffa4c639"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="12.0dip" android:layout_weight="0.25">
+		<Button android:id="@+id/btnRec" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Rec." />
+		<Button android:id="@+id/btnStop" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_marginLeft="26.0dip"
+			android:text="STOP" />
+	</LinearLayout>
+</LinearLayout>
+</LinearLayout>
+
