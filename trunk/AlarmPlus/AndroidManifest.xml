@@ -21,7 +21,7 @@
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
 
-		<activity android:name=".WordsToSpeakMainActivity" android:theme="@android:style/Theme">
+		<activity android:name=".VoiceAlarmMessage" android:theme="@android:style/Theme">
             <intent-filter>
                 <action android:name="com.humanoid.alarmplus.TTS" />
             </intent-filter>
