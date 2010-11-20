@@ -220,17 +220,17 @@ public class AlarmKlaxon extends Service {
                 } else {
                 	Log.v("666");
 //                    String soundMode = alarm.effect; // 10.11.03 add redmars
-                	if("00".equals(soundMode)) {//기본 벨소리                    	
+                	if("0".equals(soundMode)) {//기본 벨소리                    	
                     	mMediaPlayer.setDataSource(this, alert);
                     }                    
-                	else if("01".equals(soundMode)) {//날씨 효과음
+                	else if("1".equals(soundMode)) {//날씨 효과음
                     	//임시-구현예정!!
                     	mMediaPlayer.setDataSource(this, alert);
                     }
-                    else if("02".equals(soundMode)) {//녹음
+                    else if("2".equals(soundMode)) {//녹음
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
-                    else if("03".equals(soundMode)) {//TTS
+                    else if("3".equals(soundMode)) {//TTS
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
                     else {

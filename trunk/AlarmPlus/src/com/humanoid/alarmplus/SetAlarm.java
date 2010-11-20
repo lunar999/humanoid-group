@@ -30,6 +30,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -197,7 +198,10 @@ public class SetAlarm extends PreferenceActivity
     				
     			} else if (newValue.equals("2")) {
         			regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    				
-        			startActivity(new Intent(SetAlarm.this, RecActivity.class));    				
+        			startActivity(new Intent(SetAlarm.this, RecActivity.class));  
+        			
+//        			startVoiceRecognitionActivity();
+        			
     			} else if (newValue.equals("3")) {
         			ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    				
         			startActivity(new Intent(SetAlarm.this, VoiceAlarmMessage.class));    				
@@ -292,6 +296,18 @@ public class SetAlarm extends PreferenceActivity
 
         // Replace the old content view with our new one.
         setContentView(ll);
+    }
+    
+    /**
+     * Fire an intent to start the speech recognition activity.
+     */
+    private void startVoiceRecognitionActivity() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speech recognition demo");
+//        startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+        startActivity(intent);
     }
 
     @Override
