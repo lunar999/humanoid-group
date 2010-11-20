@@ -165,14 +165,17 @@ public class Alarms {
      * @param vibrate        corresponds to the VIBRATE column
      * @param message        corresponds to the MESSAGE column
      * @param alert          corresponds to the ALERT column
-     * @param effect         corresponds to the EFFECT column   // 10.11.03 add redmars     * 
+     * @param effect         corresponds to the EFFECT column   // 10.11.03 add redmars  
+     * @param recpath        corresponds to the RECPATH column   // 10.11.11 add redmars
+     * @param ttspath        corresponds to the TTSPATH column   // 10.11.11 add redmars     * 
+     *      
      */
     public static void setAlarm(
             Context context, int id, boolean enabled, int hour, int minutes,
             Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String message,
-            String alert, String effect) {  // 10.11.03 add redmars
+            String alert, String effect, String recpath, String ttspath) {  // 10.11.11 add redmars
 
-        ContentValues values = new ContentValues(9); // 10.11.03 add redmars
+        ContentValues values = new ContentValues(11); // 10.11.03 add redmars
         ContentResolver resolver = context.getContentResolver();
         // Set the alarm_time value if this alarm does not repeat. This will be
         // used later to disable expired alarms.
@@ -183,7 +186,8 @@ public class Alarms {
 
         if (Log.LOGV) Log.v(
                 "**  setAlarm * idx " + id + " hour " + hour + " minutes " +
-                minutes + " enabled " + enabled + " time " + time + "effect" + effect); // 10.11.03 add redmars
+                minutes + " enabled " + enabled + " time " + time + "effect" + effect + 
+                "recpath" + recpath + "ttspath" + ttspath); // 10.11.11 add redmars
 
         values.put(Alarm.Columns.ENABLED, enabled ? 1 : 0);
         values.put(Alarm.Columns.HOUR, hour);
@@ -194,6 +198,10 @@ public class Alarms {
         values.put(Alarm.Columns.MESSAGE, message);
         values.put(Alarm.Columns.ALERT, alert);
         values.put(Alarm.Columns.EFFECT, effect);        // 10.11.03 add redmars        
+        values.put(Alarm.Columns.RECPATH, recpath);      // 10.11.11 add redmars
+        values.put(Alarm.Columns.TTSPATH, ttspath);      // 10.11.11 add redmars 
+        //Log.v("@@@@@@@@@@@@@@ " + Alarm.recpath);
+
         resolver.update(ContentUris.withAppendedId(Alarm.Columns.CONTENT_URI, id),
                         values, null, null);
 
