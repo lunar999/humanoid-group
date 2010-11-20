@@ -188,6 +188,11 @@
     <string name="alarm_tts_btn_speak">듣기</string>
     <string name="alarm_tts_btn_save">저장</string>
     <string name="alarm_tts_btn_close">닫기</string>
+    
+    <string name="alarm_rec_btn_start">시작</string>
+    <string name="alarm_rec_btn_stop">종료</string>
+    <string name="alarm_rec_btn_listen">듣기</string>
+    <string name="alarm_rec_btn_close">닫기</string>
     <string-array name="alarm_tts_sample_message_values">
         <item>직접 입력</item>
         <item>Today\'s temperature will %t degrees Celsius.</item>
