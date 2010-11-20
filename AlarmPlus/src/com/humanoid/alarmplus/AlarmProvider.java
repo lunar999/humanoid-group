@@ -16,7 +16,7 @@
 
 package com.humanoid.alarmplus;
 
-
+ 
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -29,6 +29,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+import com.humanoid.alarmplus.AlarmConstantIf;
+import java.io.File;
 
 public class AlarmProvider extends ContentProvider {
     private SQLiteOpenHelper mOpenHelper;
@@ -47,7 +49,7 @@ public class AlarmProvider extends ContentProvider {
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "alarms";
-        private static final int DATABASE_VERSION = 5;
+        private static final int DATABASE_VERSION = 6;  // 10.11.17 column 추가로 5 에서 6으로 up redmars
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -64,26 +66,37 @@ public class AlarmProvider extends ContentProvider {
                        "enabled INTEGER, " +
                        "vibrate INTEGER, " +
                        "message TEXT, " +
-                       "alert TEXT, " +                       
-            "effect TEXT);");  // 10.11.03 add redmars
+                       "alert TEXT, " +                         
+            		   "effect TEXT, " +  // 10.11.03 add redmars            
+                       "recpath TEXT, " +                       
+                       "ttspath TEXT);");  // 10.11.15 add redmars 
 
             // insert default alarms
             String insertMe = "INSERT INTO alarms " +
-            "(hour, minutes, daysofweek, alarmtime, enabled, vibrate, message, alert, effect) " +  // 10.11.03 add redmars
+            "(hour, minutes, daysofweek, alarmtime, enabled, vibrate, message, alert, effect, recpath, ttspath) " +  // 10.11.03 add redmars          
                     "VALUES ";
-            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '','00');"); // 10.11.03 add redmars
+            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '','00', 'humanoid/alarm/alarm_rec.mp4', 'humanoid/alarm/alarm_tts.wav');"); // 10.11.03 add redmars
             //db.execSQL(insertMe + "(8, 30, 31, 0, 0, 1, '', '','02');"); // 10.11.03 add redmars
             //db.execSQL(insertMe + "(9, 00, 0, 0, 0, 1, '', '','03');");  // 10.11.03 add redmars
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {        	        	
             if (Log.LOGV) Log.v(
                     "Upgrading alarms database from version " +
                     oldVersion + " to " + currentVersion +
-                    ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS alarms");
-            onCreate(db);
+                    ", which will add colum");
+            //db.execSQL("DROP TABLE IF EXISTS alarms");
+            //onCreate(db);            
+            
+            /* 기존 data 를  남기기 위해 table 을  drop 하지 않고 column 만 추가 10.11.17 redmars
+             * 추가 컬럼에 기존 파일 경로 update
+             */
+            db.execSQL("ALTER TABLE alarms ADD COLUMN recpath TEXT");
+            db.execSQL("ALTER TABLE alarms ADD COLUMN ttspath TEXT");
+            db.execSQL("UPDATE alarms SET recpath = " + 
+            		   "\"humanoid/alarm/alarm_rec.mp4\"" + ", ttspath = " +
+            		   "\"humanoid/alarm/alarm_tts.wav\"");
         }
     }
 
@@ -203,6 +216,12 @@ public class AlarmProvider extends ContentProvider {
 
         if (!values.containsKey(Alarm.Columns.EFFECT))   // 10.11.03 add redmars
             values.put(Alarm.Columns.EFFECT, "");        
+        
+        if (!values.containsKey(Alarm.Columns.RECPATH))   // 10.11.11 add redmars
+            values.put(Alarm.Columns.RECPATH, "");        
+        
+        if (!values.containsKey(Alarm.Columns.TTSPATH))   // 10.11.11 add redmars
+            values.put(Alarm.Columns.TTSPATH, "");        
         
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         long rowId = db.insert("alarms", Alarm.Columns.MESSAGE, values);
