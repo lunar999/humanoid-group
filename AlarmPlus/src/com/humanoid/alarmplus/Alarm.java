@@ -58,7 +58,9 @@ public final class Alarm implements Parcelable {
         p.writeString(label);
         p.writeParcelable(alert, flags);
         p.writeInt(silent ? 1 : 0);
-        p.writeString(effect);        // 10.11.03 add redmars        
+        p.writeString(effect);        // 10.11.03 add redmars       
+        p.writeString(recpath);        // 10.11.17 add redmars
+        p.writeString(ttspath);        // 10.11.18 add redmars        
     }
     //////////////////////////////
     // end Parcelable apis
@@ -132,6 +134,20 @@ public final class Alarm implements Parcelable {
         public static final String EFFECT = "effect";        
         
         /**
+         * 음성 파일 패스
+         * 10.11.03 add redmars
+         * <P>Type: STRING</P>
+         */
+        public static final String RECPATH = "recpath";        
+        
+        /**
+         * TTS 파일 패스
+         * 10.11.03 add redmars
+         * <P>Type: STRING</P>
+         */
+        public static final String TTSPATH = "ttspath";        
+        
+        /**
          * The default sort order for this table
          * 10/11/15 shinshow: 정렬방법 변경(ID -> 시간설정)
          */
@@ -143,7 +159,7 @@ public final class Alarm implements Parcelable {
 
         static final String[] ALARM_QUERY_COLUMNS = {
             _ID, HOUR, MINUTES, DAYS_OF_WEEK, ALARM_TIME,
-            ENABLED, VIBRATE, MESSAGE, ALERT, EFFECT }; // 10.11.03 EFFECT add redmars
+            ENABLED, VIBRATE, MESSAGE, ALERT, EFFECT, RECPATH, TTSPATH}; // 10.11.03 EFFECT add , 10.11.03 RECPATH .  TTSPATH add redmars
 
         /**
          * These save calls to cursor.getColumnIndexOrThrow()
@@ -159,6 +175,8 @@ public final class Alarm implements Parcelable {
         public static final int ALARM_MESSAGE_INDEX = 7;
         public static final int ALARM_ALERT_INDEX = 8;
         public static final int ALARM_EFFECT_INDEX = 9;   // 10.11.03 add redmars             
+        public static final int ALARM_RECPATH_INDEX = 10;   // 10.11.11 add redmars
+        public static final int ALARM_TTSPATH_INDEX = 11;   // 10.11.11 add redmars        
     }
     //////////////////////////////
     // End column definitions
@@ -175,7 +193,9 @@ public final class Alarm implements Parcelable {
     public String     label;
     public Uri        alert;
     public boolean    silent;
-    public String     effect;    // 10.11.03 add redmars    
+    public String     effect;    // 10.11.03 add redmars
+    public String     recpath;    // 10.11.03 add redmars
+    public String     ttspath;    // 10.11.03 add redmars    
 
     public Alarm(Cursor c) {
         id = c.getInt(Columns.ALARM_ID_INDEX);
@@ -206,6 +226,8 @@ public final class Alarm implements Parcelable {
         }
         
         effect = c.getString(Columns.ALARM_EFFECT_INDEX);        // 10.11.03 add redmars        
+        recpath = c.getString(Columns.ALARM_RECPATH_INDEX);        // 10.11.03 add redmars
+        ttspath = c.getString(Columns.ALARM_TTSPATH_INDEX);        // 10.11.03 add redmars        
     }
 
     public Alarm(Parcel p) {
@@ -219,7 +241,9 @@ public final class Alarm implements Parcelable {
         label = p.readString();
         alert = (Uri) p.readParcelable(null);
         silent = p.readInt() == 1;
-        effect = p.readString();       // 10.11.03 add redmars        
+        effect = p.readString();       // 10.11.03 add redmars
+        recpath = p.readString();       // 10.11.03 add redmars 
+        ttspath = p.readString();       // 10.11.03 add redmars         
     }
 
     public String getLabelOrDefault(Context context) {
