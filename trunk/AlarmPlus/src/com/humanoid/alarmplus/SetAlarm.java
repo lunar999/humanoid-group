@@ -16,7 +16,7 @@
 
 package com.humanoid.alarmplus;
 
-
+ 
 import java.io.File;
 import java.util.HashMap;
 
@@ -196,8 +196,10 @@ public class SetAlarm extends PreferenceActivity
     			} else if (newValue.equals("1")) {
     				
     			} else if (newValue.equals("2")) {
+        			regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    				
         			startActivity(new Intent(SetAlarm.this, RecActivity.class));    				
     			} else if (newValue.equals("3")) {
+        			ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    				
         			startActivity(new Intent(SetAlarm.this, VoiceAlarmMessage.class));    				
     			} 
     			mEffectPref.setSummary(alarm_effect_lists[Integer.parseInt(newValue.toString())]);
@@ -329,7 +331,7 @@ public class SetAlarm extends PreferenceActivity
         final String alert = mAlarmPref.getAlertString();
         Alarms.setAlarm(this, mId, mEnabled, mHour, mMinutes,
                 mRepeatPref.getDaysOfWeek(), mVibratePref.isChecked(),
-                mLabel.getText(), alert, mEffectPref.getValue());  // 10.11.03 add redmars
+                mLabel.getText(), alert, mEffectPref.getValue(), regpath, ttspath);  // 10.11.19 add redmars
 
         if (mEnabled) {
             popAlarmSetToast(this, mHour, mMinutes,
@@ -344,13 +346,14 @@ public class SetAlarm extends PreferenceActivity
     private static void saveAlarm(
             Context context, int id, boolean enabled, int hour, int minute,
             Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String label,
-            String alert, String effect, boolean popToast) {   // 10.11.03 add redmars
+            String alert, String effect, String regpath, String ttspath, boolean popToast) {   // 10.11.03 add redmars
         if (Log.LOGV) Log.v("** saveAlarm " + id + " " + label + " " + enabled
-                + " " + hour + " " + minute + " vibe " + "effect" + effect);
-
+                + " " + hour + " " + minute + " vibe " + "effect" + effect +
+                "regpath" + regpath + "ttspath" + ttspath);
+        
         // Fix alert string first
         Alarms.setAlarm(context, id, enabled, hour, minute, daysOfWeek, vibrate,
-                label, alert, effect);  // 10.11.03 add redmars
+                label, alert, effect, regpath, ttspath);  // 10.11.19 add redmars
 
         if (enabled && popToast) {
             popAlarmSetToast(context, hour, minute, daysOfWeek);
@@ -407,7 +410,7 @@ public class SetAlarm extends PreferenceActivity
         String[] formats = context.getResources().getStringArray(R.array.alarm_set);
         return String.format(formats[index], daySeq, hourSeq, minSeq);
     }
-
+ 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
@@ -455,9 +458,9 @@ public class SetAlarm extends PreferenceActivity
         int hour = nowHour + (nowMinute == 0 ? 1 : 0);
 
         saveAlarm(this, mId, true, hour, minutes, mRepeatPref.getDaysOfWeek(),
-                true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(), true); // 10.11.03 add redmars
+                true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(), regpath, ttspath, true); // 10.11.16 add redmars
     }
-    
+     
     // TTS
 	public void saveTtsSoundFile(String message) {
 
