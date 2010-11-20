@@ -168,35 +168,43 @@ public class SetAlarm extends PreferenceActivity
         mEffectPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 			
         	@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {        		
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
 
-        		if("00".equals(newValue)) {//기본 벨소리
-        			mEffectPref.setSummary("기본 벨소리");
-        		}
-        		else if("01".equals(newValue)) {//날씨 효과음
-        			mEffectPref.setSummary("날씨 효과음");
-        		}
-        		else if("02".equals(newValue)) {//음성 녹음
-        			//Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
-        			mEffectPref.setSummary("음성 녹음");
-        			regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars  
-            		Log.v("regpath : "+ regpath);        			
-        			
-        			final Intent intent = new Intent(SetAlarm.this, RecActivity.class);
-        			startActivity(intent);
-        			
-        		}
-        		else if("03".equals(newValue)) {//TTS
-        			mEffectPref.setSummary("TTS(Text-To-Speech)");
-        			ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars  
-            		Log.v("ttspath : "+ ttspath);    
-            		
-        			final Intent intent = new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
-        			startActivity(intent);
-        		}
+    			String[] alarm_effect_lists = getResources().getStringArray(R.array.alarm_effect_lists);
+        		        		
+//        		if("00".equals(newValue)) {//기본 벨소리
+//        			mEffectPref.setSummary("기본 벨소리");
+//        		}
+//        		else if("01".equals(newValue)) {//날씨 효과음
+//        			mEffectPref.setSummary("날씨 효과음");
+//        		}
+//        		else if("02".equals(newValue)) {//음성 녹음
+//        			//Toast.makeText(getBaseContext(), "녹음을 수행 합니다.", Toast.LENGTH_LONG).show();
+//        			mEffectPref.setSummary("음성 녹음");
+//        			final Intent intent = new Intent(SetAlarm.this, RecActivity.class);
+//        			startActivity(intent);
+//        		}
+//        		else if("03".equals(newValue)) {//TTS
+//        			mEffectPref.setSummary("TTS(Text-To-Speech)");
+//        			final Intent intent = new Intent(SetAlarm.this, WordsToSpeakMainActivity.class);
+//        			startActivity(intent);
+//        		}
 
-        		//Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
-				return true;
+    			// 2010.11.20 updated by ahn, 리소스의 리스트에서 summary 설정
+    			if (newValue.equals("0")) {
+    				
+    			} else if (newValue.equals("1")) {
+    				
+    			} else if (newValue.equals("2")) {
+        			startActivity(new Intent(SetAlarm.this, RecActivity.class));    				
+    			} else if (newValue.equals("3")) {
+        			startActivity(new Intent(SetAlarm.this, VoiceAlarmMessage.class));    				
+    			} 
+    			mEffectPref.setSummary(alarm_effect_lists[Integer.parseInt(newValue.toString())]);
+//        		Toast.makeText(getBaseContext(), newValue.toString(), Toast.LENGTH_LONG).show();
+        		Toast.makeText(getBaseContext(), alarm_effect_lists[Integer.parseInt(newValue.toString())], Toast.LENGTH_LONG).show();
+
+        		return true;
 			}
 		});
 
@@ -219,18 +227,22 @@ public class SetAlarm extends PreferenceActivity
         mAlarmPref.setAlert(alarm.alert);
         mEffectPref.setValue(alarm.effect); // 10.11.03 add redmars   
         String effectValue =  mEffectPref.getValue();
-        if (effectValue.equals("00")) {
-        	mEffectPref.setSummary("기본 벨소리");	
-        }
-        else if  (effectValue.equals("01")) {
-        	mEffectPref.setSummary("날씨 효과음");	
-        }
-        else if  (effectValue.equals("02")) {
-        	mEffectPref.setSummary("음성녹음");	
-        }
-        else {
-        	mEffectPref.setSummary("TTS(Text-To-Speech)");	
-        }
+//        if (effectValue.equals("00")) {
+//        	mEffectPref.setSummary("기본 벨소리");	
+//        }
+//        else if  (effectValue.equals("01")) {
+//        	mEffectPref.setSummary("날씨 효과음");	
+//        }
+//        else if  (effectValue.equals("02")) {
+//        	mEffectPref.setSummary("음성녹음");	
+//        }
+//        else {
+//        	mEffectPref.setSummary("TTS(Text-To-Speech)");	
+//        }
+		// 2010.11.20 updated by ahn, 리소스의 리스트에서 summary 설정
+		String[] alarm_effect_lists = getResources().getStringArray(R.array.alarm_effect_lists);
+		mEffectPref.setSummary(alarm_effect_lists[Integer.parseInt(effectValue)]);
+
         updateTime();
 
         // We have to do this to get the save/cancel buttons to highlight on
@@ -317,8 +329,7 @@ public class SetAlarm extends PreferenceActivity
         final String alert = mAlarmPref.getAlertString();
         Alarms.setAlarm(this, mId, mEnabled, mHour, mMinutes,
                 mRepeatPref.getDaysOfWeek(), mVibratePref.isChecked(),
-                mLabel.getText(), alert, mEffectPref.getValue(),
-                regpath, ttspath);  // 10.11.19 add redmars
+                mLabel.getText(), alert, mEffectPref.getValue());  // 10.11.03 add redmars
 
         if (mEnabled) {
             popAlarmSetToast(this, mHour, mMinutes,
@@ -333,14 +344,13 @@ public class SetAlarm extends PreferenceActivity
     private static void saveAlarm(
             Context context, int id, boolean enabled, int hour, int minute,
             Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String label,
-            String alert, String effect, String regpath, String ttspath, boolean popToast) {   // 10.11.03 add redmars
+            String alert, String effect, boolean popToast) {   // 10.11.03 add redmars
         if (Log.LOGV) Log.v("** saveAlarm " + id + " " + label + " " + enabled
-                + " " + hour + " " + minute + " vibe " + "effect" + effect +
-                "regpath" + regpath + "ttspath" + ttspath);
+                + " " + hour + " " + minute + " vibe " + "effect" + effect);
 
         // Fix alert string first
         Alarms.setAlarm(context, id, enabled, hour, minute, daysOfWeek, vibrate,
-                label, alert, effect, regpath, ttspath);  // 10.11.19 add redmars
+                label, alert, effect);  // 10.11.03 add redmars
 
         if (enabled && popToast) {
             popAlarmSetToast(context, hour, minute, daysOfWeek);
@@ -445,8 +455,7 @@ public class SetAlarm extends PreferenceActivity
         int hour = nowHour + (nowMinute == 0 ? 1 : 0);
 
         saveAlarm(this, mId, true, hour, minutes, mRepeatPref.getDaysOfWeek(),
-                true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(),
-                regpath, ttspath, true); // 10.11.16 add redmars
+                true, mLabel.getText(), mAlarmPref.getAlertString(), mEffectPref.getValue(), true); // 10.11.03 add redmars
     }
     
     // TTS
@@ -476,7 +485,7 @@ public class SetAlarm extends PreferenceActivity
     	    	intent.putExtra("TTS_MESSAGE", mTtsMessagePref.getSummary().toString());
     	    	startActivity(intent);	// ActivityNotFoundException
     	*/
-    	Intent intent = new Intent(this, WordsToSpeakMainActivity.class);
+    	Intent intent = new Intent(this, VoiceAlarmMessage.class);
 	   	intent.putExtra("TTS_MESSAGE", message);
 	   	startActivity(intent);
     	    	

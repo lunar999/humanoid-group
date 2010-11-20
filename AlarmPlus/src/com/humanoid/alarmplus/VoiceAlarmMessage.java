@@ -18,13 +18,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
 import com.humanoid.alarmplus.util.UtilFile;
+import com.humanoid.alarmplus.weather.WeatherData;
 
-public class WordsToSpeakMainActivity extends Activity implements OnInitListener, OnUtteranceCompletedListener {
+public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtteranceCompletedListener {
 	private EditText words = null;
 	private Button  speakBtn  = null;
 	private Button  saveBtn  = null;
@@ -118,19 +120,59 @@ public class WordsToSpeakMainActivity extends Activity implements OnInitListener
 		
 		return path;
 	}
+/*	
+	// 2010.11.20 added by ahn, 오늘의 온도 조회
+	private String getWeatherData() {
+		WeatherData weatherInfo = new WeatherData();
+		
+		return weatherInfo.getTemp();
+	}
 	
+	// 2010.11.20 added by ahn, 오늘의 온도로 음성 알람 메세지 구성
+	private String getWeatherMessage(String message) {
+		String temperature = getWeatherData();
+//		if (temperature.equals(null))
+			temperature = "5";
+		
+		return message.replace("%t", temperature); // Today\'s temperature will %t degrees Celsius.
+
+	}
+	
+	// 2010.11.20 added by ahn, 알람시 현재 시간 조회
+	private String getCurrentTime() {
+		Calendar cal = Calendar.getInstance( );
+		
+		return cal.get(Calendar.HOUR_OF_DAY) + " " + cal.get(Calendar.MINUTE);
+	}
+	
+	// 2010.11.20 added by ahn, 알람 메세지를 현재 시간으로 구성
+	private String getCurrentTimeMessage(String message) {
+		String currTime = getCurrentTime();
+				
+		return message.replace("%time", message); // It's 6 30.
+	}
+*/	
 	@Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_LIST:
-            return new AlertDialog.Builder(WordsToSpeakMainActivity.this)
+            return new AlertDialog.Builder(VoiceAlarmMessage.this)
                 .setTitle("음성 메세지 선택")
                 .setItems(R.array.alarm_tts_sample_message_values, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String[] items = getResources().getStringArray(R.array.alarm_tts_sample_message_values);
-                        if (which != 0) // 직접 입력이 아니면
+                        if (which != 0) { // 직접 입력이 아니면
                         	words.setText(items[which]);
+                        	/*
+                        	if (which == 1)	// 2010.11.20 added by ahn, 알람 메세지를 오늘의 온도로 입력
+                        		words.setText(getWeatherMessage(items[which]));
+                        	else if (which == 2)	// // 2010.11.20 added by ahn, 현재 시간으로 입력
+                        		words.setText(getCurrentTimeMessage(items[which]));
+                        	else
+                            	words.setText(items[which]);
+                            */	
+                        }
                     }
                 })
                 .create();
