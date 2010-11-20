@@ -301,5 +301,28 @@
         <!-- alarm_effect : TTS -->
         <item>03</item>
     </string-array>  
- 
+     <!-- TTS Setting -->
+    <string name="alarm_tts_title">Voice 알람 설정</string>
+    <string name="alarm_tts_summary">Voice 알람 설정 상태</string>
+    <string name="alarm_tts_check_title">Voice 알람 설정</string>
+    <string name="alarm_tts_check_summary">Voice 알람 설정 상태</string>
+    <string name="alarm_tts_message_title">메세지</string>
+    <string name="alarm_tts_message_summary">It\'s %t. The current temperature takes a value of %c degrees. During the day, it will reach a value of %max degrees.</string>
+    <string name="alarm_tts_dialog_message">Voice 메세지를 입력해 주세요.(%t 시간,%c 최저온도,%max 최고온도</string>
+    <string name="alarm_tts_voicetest_title">Voice 알람 테스트</string>
+    <string name="alarm_tts_voicetest_summary">현재 설정된 알람 메세지 테스트</string>
+    <string name="alarm_tts_noti_message">음성 알람 메세지를 반드시 영문으로 입력해 주세요.\n(한글 추후 지원 예정)</string>
+    <string name="alarm_tts_btn_speak">Listen</string>
+    <string name="alarm_tts_btn_save">Save</string>
+    <string name="alarm_tts_btn_close">Closed</string>
+    
+    <string name="alarm_rec_btn_start">Start</string>
+    <string name="alarm_rec_btn_stop">Stop</string>
+    <string name="alarm_rec_btn_listen">Listen</string>
+    <string name="alarm_rec_btn_close">Closed</string>
+    <string-array name="alarm_tts_sample_message_values">
+        <item>직접 입력</item>
+        <item>Today\'s temperature will %t degrees Celsius.</item>
+        <item>It\'s %time</item>
+    </string-array>      
 </resources>
