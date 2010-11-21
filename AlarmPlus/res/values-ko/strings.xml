@@ -188,15 +188,29 @@
     <string name="alarm_tts_btn_speak">듣기</string>
     <string name="alarm_tts_btn_save">저장</string>
     <string name="alarm_tts_btn_close">닫기</string>
-    
-    <string name="alarm_rec_btn_start">시작</string>
-    <string name="alarm_rec_btn_stop">종료</string>
-    <string name="alarm_rec_btn_listen">듣기</string>
-    <string name="alarm_rec_btn_close">닫기</string>
+    <!-- 
     <string-array name="alarm_tts_sample_message_values">
         <item>직접 입력</item>
         <item>Today\'s temperature will %t degrees Celsius.</item>
         <item>It\'s %time</item>
     </string-array>  
+     -->
+    <string-array name="alarm_tts_sample_message_values">
+        <item>직접 입력</item>
+        <item>Good morning</item>
+        <item>Wake up</item>
+        <item>It\'s time to get up.</item>
+        <item>I can take my time when I get up early.</item>
+        <item>I will be an early bird.</item>
+        <item>The early bird catches the worm.</item>
+    </string-array>  
+
+    <!-- Recoder -->    
+    <string name="alarm_rec_btn_start">시작</string>
+    <string name="alarm_rec_btn_stop">종료</string>
+    <string name="alarm_rec_btn_listen">듣기</string>
+    <string name="alarm_rec_btn_close">닫기</string>
+
+	<!-- Weather -->
     <string name="alarm_weather_none">네트워크(3G/Wi-fi) \\n연결상태를 확인하세요.!</string>        
 </resources>
