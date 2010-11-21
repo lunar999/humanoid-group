@@ -47,6 +47,8 @@ import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.humanoid.alarmplus.weather.GpsService;
+
 /**
  * AlarmClock application.
  */
@@ -200,6 +202,11 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        android.util.Log.d("WeatherView", "AlarmPlus onCreate !!!");
+        
+		Intent intent = new Intent(this, GpsService.class);
+		startService(intent);
+        
         String[] ampm = new DateFormatSymbols().getAmPmStrings();
         mAm = ampm[0];
         mPm = ampm[1];
