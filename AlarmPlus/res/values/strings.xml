@@ -325,4 +325,5 @@
         <item>Today\'s temperature will %t degrees Celsius.</item>
         <item>It\'s %time</item>
     </string-array>      
+    <string name="alarm_weather_none">Please check your network connection(3G/Wi-fi) and GPS</string>
 </resources>
