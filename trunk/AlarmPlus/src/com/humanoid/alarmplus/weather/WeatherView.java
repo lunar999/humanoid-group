@@ -3,16 +3,15 @@
  */
 package com.humanoid.alarmplus.weather;
 
-import com.humanoid.alarmplus.R;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
+
+import com.humanoid.alarmplus.R;
 
 /**
  * <pre>
@@ -184,11 +183,20 @@ public class WeatherView extends View {
 				}
 			}
 		}
+		else {
+			paint.setStyle(Paint.Style.FILL);  
+			paint.setStrokeWidth(1);  
+			paint.setAntiAlias(true);
+//			paint.setColor(Color.WHITE);  
+			paint.setColor(0xff808080);  
+			paint.setTextSize(33);
+			canvas.drawText(this.getContext().getString(R.string.alarm_weather_none), WIDTH/2-100, HEIGHT/2-100, paint);
+		}
 	}
 	
 	private void drawBackGround(Canvas canvas) {
 		
-		if(gameRect != null) {
+		if(gameRect != null ) {
 			
 			Paint paint = new Paint();
 //			paint.setColor(color.background_light);
