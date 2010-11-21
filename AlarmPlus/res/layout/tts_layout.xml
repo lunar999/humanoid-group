@@ -10,8 +10,7 @@
 		android:layout_height="wrap_content" 
 		android:textStyle="bold"/>
 	<EditText android:id="@+id/wordsToSpeak" android:hint="Voice Alarm Messages..."
-		android:layout_width="fill_parent" android:singleLine="false"
-		android:layout_height="300dp" />
+		android:layout_width="fill_parent" android:singleLine="false" android:layout_height="180dp"/>
 
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="horizontal" android:layout_width="fill_parent"
