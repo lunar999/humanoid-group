@@ -64,6 +64,10 @@ public class GpsService extends Service implements LocationListener{
 			c.setAccuracy(Criteria.ACCURACY_FINE);
 
 			locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			
+			c.setAccuracy(Criteria.NO_REQUIREMENT);
+			c.setPowerRequirement(Criteria.NO_REQUIREMENT);
+			
 			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,10, this);
 //			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,1, this);
 
@@ -366,14 +370,20 @@ public class GpsService extends Service implements LocationListener{
 	
 	@Override
 	public void onLocationChanged(Location location) {
+		
+		Log.d(WeatherView.TAG, "onLocationChanged 111");
 		try {
 			//			killOnError();
 			if (LocationManager.GPS_PROVIDER.equals(location.getProvider())) {
+				Log.d(WeatherView.TAG, "onLocationChanged 222");
 				synchronized (curLoc) {
 					curLoc = location;
 				}
 				isGpsEnabled = true;
 				reverseGeoCoder();
+			}
+			else {
+				Log.d(WeatherView.TAG, "onLocationChanged 333");
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
