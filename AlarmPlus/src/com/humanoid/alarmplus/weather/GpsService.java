@@ -3,8 +3,13 @@
  */
 package com.humanoid.alarmplus.weather;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Service;
 import android.content.Context;
@@ -41,12 +46,14 @@ public class GpsService extends Service implements LocationListener{
 	
 	private String prevUrl;
 	
+	public static WeatherInfo wInfo;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		
-		Log.d(WeatherView.TAG, "######## Service onCreate:"+isGpsEnabled);
+//		Log.d(WeatherView.TAG, "######## Service onCreate:"+isGpsEnabled);
 		try {
 			
 			dongInfo = new DongInfo(this);
@@ -121,7 +128,7 @@ public class GpsService extends Service implements LocationListener{
 //				if(address.getMaxAddressLineIndex()>0) {
 //					for( int i = 0; i < address.getMaxAddressLineIndex(); i++ ) {
 						Toast.makeText(this, "주소 "+0+" :"+address.getAddressLine(0), Toast.LENGTH_LONG).show();
-						Log.d(WeatherView.TAG, "주소 "+0+" :"+address.getCountryName() + address.getPostalCode());
+//						Log.d(WeatherView.TAG, "주소 "+0+" :"+address.getCountryName() + address.getPostalCode());
 						
 						currAddress = address.getAddressLine(0);
 						String[] splitData = currAddress.split(" ");
@@ -150,10 +157,9 @@ public class GpsService extends Service implements LocationListener{
 							Log.d(WeatherView.TAG, "prevUrl          :"+prevUrl);
 							if(!currentWeatherUrl.equals(prevUrl)) {
 								prevUrl = currentWeatherUrl;
+								
+								weatherSearch();
 								Intent intent = new Intent(WEATHER_INFORMATION_RECEIVER);
-//								intent.putExtra(AREA, area);
-//								intent.putExtra(RESOURCE_IDS, resourceIds);
-//								intent.putExtra(DATES, dates);
 								sendBroadcast(intent);
 							}
 						}
@@ -178,6 +184,176 @@ public class GpsService extends Service implements LocationListener{
 		} catch( Exception e ) {
 			Log.e(WeatherView.TAG, "######## exception 3:"+e,e);
 //			Toast.makeText(this, "######## exception 3:"+e, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	private void weatherSearch() {
+
+		Log.d(WeatherView.TAG, "######## weatherSearch start  GpsService.currentWeatherUrl:"+GpsService.currentWeatherUrl);
+		
+		if(GpsService.currentWeatherUrl == null) {
+			return;
+		}
+
+		prevUrl = GpsService.currentWeatherUrl;
+		
+		try {
+			URL m_UrlRecWeather = new URL(GpsService.currentWeatherUrl);
+			InputStream is = m_UrlRecWeather.openStream();
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance(); 
+			factory.setNamespaceAware(true); 
+			XmlPullParser xpp = factory.newPullParser();
+			xpp.setInput(is, "utf-8");
+			ReceiveParsing(xpp);
+		} catch (Exception e) {
+			Log.e(WeatherView.TAG, "error?", e);
+			e.printStackTrace();
+		}
+		
+//		view.invalidate();
+	}
+	
+	private void ReceiveParsing(XmlPullParser ReceiveStream)
+	{
+		Log.d(WeatherView.TAG, "@@@@@@@@@@ ReceiveParsing");
+		boolean isHeader = false;
+		boolean isData = false;
+		boolean isSubData = false;
+
+		try	{			
+			wInfo = new WeatherInfo();
+			wInfo.setAddress(GpsService.currAddress);
+			WeatherData wData = new WeatherData();
+
+			String sTag = "";
+			String sValue = "";
+
+			int eventType = ReceiveStream.getEventType(); 
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+
+				//Wait(10);
+				switch (eventType)
+				{
+				case XmlPullParser.START_DOCUMENT:
+					break;
+				case XmlPullParser.END_DOCUMENT:
+					break;
+				case XmlPullParser.START_TAG:
+					//items.add(xpp.getAttributeValue(0));
+					sTag = ReceiveStream.getName();
+
+//					Log.d(WeatherView.TAG, "============= sTag:"+sTag);
+					
+					if ( sTag.equals("header") ){
+						isHeader = true;
+					}
+					else if ( sTag.equals("data") ){
+						isData = true;
+						wData = new WeatherData();
+					}
+
+					if( isHeader == true )
+					{
+//						if ( sTag.equals("city") ){
+//							String sValue = ReceiveStream.getAttributeValue(0);
+//						}
+//						else if ( sTag.equals("current_date_time") ){
+//							String sValue = ReceiveStream.getAttributeValue(0);
+//						}
+					}
+					else if( isData == true ) {
+						
+						sValue = ReceiveStream.getName();
+//						Log.d(WeatherView.TAG, "@@@@@@@@@@ sValue:"+sValue);
+						isSubData = true;
+					}
+
+					break;
+
+				case XmlPullParser.END_TAG:
+					sTag = ReceiveStream.getName();
+
+					if ( sTag.equals("header") ){
+						isHeader = false;
+					}       	
+					else if ( sTag.equals("data") ){
+						isData = false;
+						
+						wInfo.addWeatherData(wData);
+						wData = null;
+					}
+					
+					break;		            	
+
+				case XmlPullParser.TEXT:
+					
+//					Log.d(WeatherView.TAG, "@@@@@@@@@@ sValue222222222:"+ReceiveStream.getText()+",isSubData:"+isSubData+" , sValue:"+sValue);
+					
+					if(isSubData) {
+						String sValue2 = ReceiveStream.getText();
+						
+						if ( sValue.equals("hour") ){
+							wData.setHour(sValue2);
+						}
+						else if ( sValue.equals("day") ){
+							wData.setDay(sValue2);
+						}
+						else if ( sValue.equals("temp") ){
+							wData.setTemp(sValue2);
+						}
+						else if ( sValue.equals("tmx") ){
+							wData.setTmx(sValue2);
+						}
+						else if ( sValue.equals("tmn") ){
+							wData.setTmn(sValue2);
+						}
+						else if ( sValue.equals("sky") ){
+							wData.setSky(sValue2);
+						}
+						else if ( sValue.equals("pty") ){
+							wData.setPty(sValue2);
+						}
+						else if ( sValue.equals("wfKor") ){
+							wData.setWfKor(sValue2);
+						}
+						else if ( sValue.equals("wfEn") ){
+							wData.setWfEn(sValue2);
+						}
+						else if ( sValue.equals("pop") ){
+							wData.setPop(sValue2);
+						}
+						else if ( sValue.equals("r12") ){
+							wData.setR12(sValue2);
+						}
+						else if ( sValue.equals("s12") ){
+							wData.setS12(sValue2);
+						}
+						else if ( sValue.equals("ws") ){
+							wData.setWs(sValue2);
+						}
+						else if ( sValue.equals("wdKor") ){
+							wData.setWdKor(sValue2);
+						}
+						else if ( sValue.equals("wdEn") ){
+							wData.setWdEn(sValue2);
+						}
+						else if ( sValue.equals("reh") ){
+							wData.setReh(sValue2);
+						}
+						isSubData = false;
+					}
+					
+					break;
+				}
+
+				eventType = ReceiveStream.next(); 
+			}
+			
+//			view.setWeatherInfo(wInfo);
+		}
+		catch(Exception e)
+		{
+			Log.e(WeatherView.TAG, "뭔 에러냐?",e);
 		}
 	}
 	
