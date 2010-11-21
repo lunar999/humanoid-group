@@ -202,8 +202,8 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-		Intent intent = new Intent(this, GpsService.class);
-		startService(intent);
+//		Intent intent = new Intent(this, GpsService.class);
+//		startService(intent);
         
         String[] ampm = new DateFormatSymbols().getAmPmStrings();
         mAm = ampm[0];
@@ -271,6 +271,9 @@ public class AlarmClock extends Activity implements OnItemClickListener {
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
         	alertCheckGPS();
         }
+        
+		Intent intent = new Intent(this, GpsService.class);
+		startService(intent);
     }
     
     private void alertCheckGPS() {
