@@ -125,7 +125,7 @@ public class WeatherView extends View {
 		
 		Paint paint = new Paint();
 		
-		Log.d(TAG, "############# weatherInfo:"+weatherInfo);
+//		Log.d(TAG, "############# weatherInfo:"+weatherInfo);
 		if(weatherInfo != null) {
 //			paint.setStyle(Paint.Style.STROKE);  
 //			paint.setStrokeWidth(1);
@@ -216,7 +216,7 @@ public class WeatherView extends View {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		Log.d(TAG, "onSizeChanged ### w:"+w+" , h:"+h);
+//		Log.d(TAG, "onSizeChanged ### w:"+w+" , h:"+h);
 		gameRect = new Rect(0,0,w,h);
 		WIDTH = w;
 		HEIGHT = h;
