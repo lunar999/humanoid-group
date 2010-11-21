@@ -202,8 +202,6 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        android.util.Log.d("WeatherView", "AlarmPlus onCreate !!!");
-        
 		Intent intent = new Intent(this, GpsService.class);
 		startService(intent);
         

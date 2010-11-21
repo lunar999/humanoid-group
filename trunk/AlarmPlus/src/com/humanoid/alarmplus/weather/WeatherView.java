@@ -4,7 +4,6 @@
 package com.humanoid.alarmplus.weather;
 
 import com.humanoid.alarmplus.R;
-import com.humanoid.alarmplus.R.drawable;
 
 import android.content.Context;
 import android.graphics.Bitmap;
