@@ -75,7 +75,7 @@ public class AlarmProvider extends ContentProvider {
             String insertMe = "INSERT INTO alarms " +
             "(hour, minutes, daysofweek, alarmtime, enabled, vibrate, message, alert, effect, recpath, ttspath) " +  // 10.11.03 add redmars          
                     "VALUES ";
-            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '','00', 'humanoid/alarm/alarm_rec.mp4', 'humanoid/alarm/alarm_tts.wav');"); // 10.11.03 add redmars
+            db.execSQL(insertMe + "(7, 0, 127, 0, 0, 1, '', '','0', 'humanoid/alarm/alarm_rec.mp4', 'humanoid/alarm/alarm_tts.wav');"); // 10.11.03 add redmars
             //db.execSQL(insertMe + "(8, 30, 31, 0, 0, 1, '', '','02');"); // 10.11.03 add redmars
             //db.execSQL(insertMe + "(9, 00, 0, 0, 0, 1, '', '','03');");  // 10.11.03 add redmars
         }
