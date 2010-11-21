@@ -18,6 +18,7 @@ package com.humanoid.alarmplus;
 
 
 import java.io.File;
+import java.util.Locale;
 
 import com.humanoid.alarmplus.util.UtilFile;
 
@@ -36,6 +37,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Vibrator;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
@@ -43,7 +46,7 @@ import android.widget.Toast;
  * Manages alarms and vibe. Runs as a service so that it can continue to play
  * if another activity overrides the AlarmAlert dialog.
  */
-public class AlarmKlaxon extends Service {
+public class AlarmKlaxon extends Service implements OnInitListener {
 
     /** Play alarm up to 10 minutes before silencing */
     private static final int ALARM_TIMEOUT_SECONDS = 10 * 60;
@@ -231,6 +234,7 @@ public class AlarmKlaxon extends Service {
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
                     else if("3".equals(soundMode)) {//TTS
+                    	saveVoiceAlarmMessage ();	// test
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
                     else {
@@ -342,5 +346,26 @@ public class AlarmKlaxon extends Service {
         mHandler.removeMessages(KILLER);
     }
 
+    // 2010.11.22 Added by ahn, 알람시 TTS변환 테스트 중...  
+    private void saveVoiceAlarmMessage() {
+    	Log.v(">>>>> ahn saveVoiceAlarmMessage start");
+    	String message = "Hello";
+    	
+    	TextToSpeech tts;
+    	tts = new TextToSpeech(this, this);
+    	
+    	tts.setLanguage(Locale.US);
+		tts.synthesizeToFile(message, null, "/sdcard/humanoid/alarm/alarm_tts.wav");
+		if( tts != null)
+			tts.stop();
+		tts.shutdown();
+		Log.v(">>>>> ahn saveVoiceAlarmMessage OK");
+    }
+
+	@Override
+	public void onInit(int status) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
