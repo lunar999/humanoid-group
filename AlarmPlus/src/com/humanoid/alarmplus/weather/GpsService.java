@@ -37,6 +37,7 @@ public class GpsService extends Service implements LocationListener{
 	
 	private DongInfo dongInfo;
 	public static String currAddress;
+	public static String currFullAddress;
 	private String[] addressCodes;
 	
 	private final String URL_TEMPLATE = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=CODE1&gridy=CODE2"; 
@@ -131,6 +132,7 @@ public class GpsService extends Service implements LocationListener{
 //						Log.d(WeatherView.TAG, "주소 "+0+" :"+address.getCountryName() + address.getPostalCode());
 						
 						currAddress = address.getAddressLine(0);
+						currFullAddress = currAddress;
 						String[] splitData = currAddress.split(" ");
 //						Log.d(WeatherView.TAG, "splitData size :"+splitData.length);
 						

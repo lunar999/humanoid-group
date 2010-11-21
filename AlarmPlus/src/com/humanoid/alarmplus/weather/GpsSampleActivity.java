@@ -3,6 +3,7 @@ package com.humanoid.alarmplus.weather;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class GpsSampleActivity extends Activity {
 
@@ -48,6 +49,8 @@ public class GpsSampleActivity extends Activity {
 		super.onResume();
 		
 		if(GpsService.wInfo != null) {
+			
+			Toast.makeText(this, "전체주소:"+GpsService.currFullAddress, Toast.LENGTH_LONG).show();
 			view.setWeatherInfo(GpsService.wInfo);
 			view.invalidate();
 		}
