@@ -198,5 +198,5 @@
         <item>Today\'s temperature will %t degrees Celsius.</item>
         <item>It\'s %time</item>
     </string-array>  
-    <string name="alarm_weather_none">네트워크(3G/Wi-fi) 연결상태를 확인하세요.!</string>        
+    <string name="alarm_weather_none">네트워크(3G/Wi-fi) \\n연결상태를 확인하세요.!</string>        
 </resources>
