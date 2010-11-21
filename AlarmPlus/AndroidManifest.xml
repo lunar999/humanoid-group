@@ -30,7 +30,7 @@
 		<activity android:name="com.humanoid.alarmplus.RecActivity" />
 
 		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" />
-
+		<service android:name="com.humanoid.alarmplus.weather.GpsService"></service>
 		<activity android:name="com.humanoid.alarmplus.AlarmClock"
 			android:label="@string/app_label" android:configChanges="orientation|keyboardHidden|keyboard|navigation">
 			<intent-filter>
