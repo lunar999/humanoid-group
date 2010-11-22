@@ -191,18 +191,20 @@ public class SetAlarm extends PreferenceActivity
 //        			startActivity(intent);
 //        		}
 
-    			// 2010.11.20 updated by ahn, 리소스의 리스트에서 summary 설정
-    			if (newValue.equals("0")) {
+    			// 2010.11.22 updated by redmars, 리소스의 리스트에서 summary 설정
+    			String[] alarm_effect_code= getResources().getStringArray(R.array.alarm_effect_values);    	
+    			
+    			if (newValue.equals(alarm_effect_code[0])) {
     				
-    			} else if (newValue.equals("1")) {
+    			} else if (newValue.equals(alarm_effect_code[1])) {
     				
-    			} else if (newValue.equals("2")) {
+    			} else if (newValue.equals(alarm_effect_code[2])) {
         			regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    				
         			startActivity(new Intent(SetAlarm.this, RecActivity.class));  
         			
 //        			startVoiceRecognitionActivity();
         			
-    			} else if (newValue.equals("3")) {
+    			} else if (newValue.equals(alarm_effect_code[3])) {
         			ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    				
         			startActivity(new Intent(SetAlarm.this, VoiceAlarmMessage.class));    				
     			} 
