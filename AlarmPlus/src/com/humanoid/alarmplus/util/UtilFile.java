@@ -413,12 +413,13 @@ public class UtilFile {
 	private static final String SD2 = "sd";
 //	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
 	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
+	public static String recpath;  // 10.11.22 update redmars
 	
 	public static String getSdCardAlarmPath(String fileName) {
 		
 		File recFile = Environment.getExternalStorageDirectory();
 		String path = "";
-		
+		recpath = fileName;        // 10.11.22 update redmars fime name 공유
 		path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
 		File tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
 		if(!tempFile.exists()) {
