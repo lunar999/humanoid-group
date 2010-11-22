@@ -23,6 +23,9 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 
 import com.humanoid.alarmplus.util.UtilFile;
+import com.humanoid.alarmplus.SetAlarm;
+import com.humanoid.alarmplus.Alarms;
+
 
 public class RecActivity extends Activity implements AlarmConstantIf{
 
@@ -71,7 +74,6 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 		
 		btnStop.setEnabled(false);
 
-		
 		mMediaPlayer = new MediaPlayer();
 		mMediaPlayer.setOnErrorListener(new OnErrorListener() {
 	         public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -202,9 +204,13 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 			
 			String state = android.os.Environment.getExternalStorageState();
 			if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-				path = getFilesDir().getAbsolutePath() + File.separator + ALARM_REC_PREFIX ;
+				//path = getFilesDir().getAbsolutePath() + File.separator + ALARM_REC_PREFIX ;
+				path = getFilesDir().getAbsolutePath() + File.separator + UtilFile.recpath ;	 // 10.11.22 update redmars				
 			} else {//sdcard
-				path = UtilFile.getSdCardAlarmPath(ALARM_REC_PREFIX);
+				
+				//path = UtilFile.getSdCardAlarmPath(ALARM_REC_PREFIX);
+				path = UtilFile.getSdCardAlarmPath(UtilFile.recpath);		 // 10.11.22 update redmars
+
 			}
 			if(DEBUG_MODE){
 				Log.d("PATH", path);
