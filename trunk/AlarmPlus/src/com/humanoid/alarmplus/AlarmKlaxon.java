@@ -222,18 +222,21 @@ public class AlarmKlaxon extends Service implements OnInitListener {
 */                 
                 } else {
                 	Log.v("666");
+        			// 2010.11.22 updated by redmars, 리소스의 리스트에서 summary 설정                	
+        			String[] alarm_effect_code= getResources().getStringArray(R.array.alarm_effect_values);    	        			
+        				
 //                    String soundMode = alarm.effect; // 10.11.03 add redmars
-                	if("0".equals(soundMode)) {//기본 벨소리                    	
+                	if(alarm_effect_code[0].equals(soundMode)) {//기본 벨소리                    	
                     	mMediaPlayer.setDataSource(this, alert);
                     }                    
-                	else if("1".equals(soundMode)) {//날씨 효과음
+                	else if(alarm_effect_code[1].equals(soundMode)) {//날씨 효과음
                     	//임시-구현예정!!
                     	mMediaPlayer.setDataSource(this, alert);
                     }
-                    else if("2".equals(soundMode)) {//녹음
+                    else if(alarm_effect_code[2].equals(soundMode)) {//녹음
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
-                    else if("3".equals(soundMode)) {//TTS
+                    else if(alarm_effect_code[3].equals(soundMode)) {//TTS
                     	saveVoiceAlarmMessage ();	// test
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
