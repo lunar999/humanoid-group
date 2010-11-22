@@ -76,22 +76,8 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 		saveBtn.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View view) {
-				soundFilename = getFilePath();
-				soundFile = new File(soundFilename);
-				if (soundFile.exists())
-					soundFile.delete();
 				
-				if(mTts.synthesizeToFile(words.getText().toString(), null, soundFilename)
-						== TextToSpeech.SUCCESS) {
-					Toast.makeText(getBaseContext(),
-							"Sound file created",
-							Toast.LENGTH_SHORT).show();
-				}
-				else {
-					Toast.makeText(getBaseContext(),
-							"Oops! Sound file not created",
-							Toast.LENGTH_SHORT).show();
-				}
+				saveVoiceAlarmMessage(words.getText().toString());
 			}
 		});
 		
@@ -103,12 +89,12 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 			}
 		});
 	
-	// TTS가 존재하는지와 사용 가능한지 검사
-	Intent checkIntent = new Intent();
-	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-	startActivityForResult(checkIntent, REQ_TTS_STATUS_CHECK);
+		// TTS가 존재하는지와 사용 가능한지 검사
+		Intent checkIntent = new Intent();
+		checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+		startActivityForResult(checkIntent, REQ_TTS_STATUS_CHECK);
 	}
-	
+		
 	private String getFilePath() {
 		String path = "";
 		String state = android.os.Environment.getExternalStorageState();
@@ -120,6 +106,28 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 		
 		return path;
 	}
+	
+	public void saveVoiceAlarmMessage(String text) {
+		soundFilename = getFilePath();
+		soundFile = new File(soundFilename);
+		if (soundFile.exists())
+			soundFile.delete();
+		
+		if(mTts.synthesizeToFile(text, null, soundFilename)
+				== TextToSpeech.SUCCESS) {
+			Toast.makeText(getBaseContext(),
+					"Sound file created",
+					Toast.LENGTH_SHORT).show();
+			Log.v(TAG, ">>>>> Sound file created : " + text);
+		}
+		else {
+			Toast.makeText(getBaseContext(),
+					"Oops! Sound file not created",
+					Toast.LENGTH_SHORT).show();
+			Log.v(TAG, ">>>>> Sound file not created : " + text);
+		}
+	}
+	
 /*	
 	// 2010.11.20 added by ahn, 오늘의 온도 조회
 	private String getWeatherData() {
