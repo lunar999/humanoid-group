@@ -264,16 +264,17 @@ public class AlarmClock extends Activity implements OnItemClickListener {
             }
             inflateClock();
         }
-        
+/*        
         //천성민 gps 상태 체크 추가.
         String context = Context.LOCATION_SERVICE;
         LocationManager locationManager = (LocationManager)getSystemService(context);
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
         	alertCheckGPS();
         }
-        
-		Intent intent = new Intent(this, GpsService.class);
-		startService(intent);
+*/        
+		//Intent intent = new Intent(this, GpsService.class);
+        //Intent intent = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+		//startService(intent);
     }
     
     private void alertCheckGPS() {

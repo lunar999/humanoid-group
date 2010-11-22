@@ -12,6 +12,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	
 	
@@ -30,7 +31,12 @@
 		<activity android:name="com.humanoid.alarmplus.RecActivity" />
 
 		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" />
-		<service android:name="com.humanoid.alarmplus.weather.GpsService"></service>
+		<service android:enabled = "true"
+			android:name="com.humanoid.alarmplus.weather.GpsService">
+			<intent-filter>
+				<action android:name="com.humanoid.alarmplus.weather.GPS_SERVICE" />
+			</intent-filter>
+		</service>
 		<activity android:name="com.humanoid.alarmplus.AlarmClock"
 			android:label="@string/app_label" android:configChanges="orientation|keyboardHidden|keyboard|navigation">
 			<intent-filter>
