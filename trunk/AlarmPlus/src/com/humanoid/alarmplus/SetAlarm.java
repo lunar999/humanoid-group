@@ -45,6 +45,8 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.humanoid.alarmplus.util.UtilFile;
+
 /**
  * Manages each alarm
  */
@@ -77,9 +79,9 @@ public class SetAlarm extends PreferenceActivity
     private HashMap<String, String>  params = new HashMap<String, String>();
     private TextToSpeech mTts;
     public static final String TTS_FILE_NAME = "/sdcard/alarm_tts.wav";
-    private String allpath = "humanoid/alarm/";    // 10.11.16 add redmars    
-    private String regpath;    // 10.11.16 add redmars 
-    private String ttspath;    // 10.11.16 add redmars 
+    private String allpath = "/sdcard/humanoid/alarm/";    // 10.11.16 add redmars    
+    private static String regpath;    // 10.11.16 add redmars 
+    private static String ttspath;    // 10.11.16 add redmars 
 
     
     /**
@@ -199,13 +201,19 @@ public class SetAlarm extends PreferenceActivity
     			} else if (newValue.equals(alarm_effect_code[1])) {
     				
     			} else if (newValue.equals(alarm_effect_code[2])) {
-        			regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    				
+    				//regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    	
+    				regpath = "alarm_rec_id_" + mId + "_" + newValue + ".mp4";       // 10.11.22 update redmars
+    				regpath = UtilFile.getSdCardAlarmPath(regpath);
+    				
         			startActivity(new Intent(SetAlarm.this, RecActivity.class));  
         			
 //        			startVoiceRecognitionActivity();
         			
     			} else if (newValue.equals(alarm_effect_code[3])) {
-        			ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    				
+        			//ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    
+    				ttspath = "alarm_tts_id_" + mId + "_" + newValue + ".wav";       // 10.11.22 update redmars
+    				ttspath = UtilFile.getSdCardAlarmPath(ttspath);
+    				
         			startActivity(new Intent(SetAlarm.this, VoiceAlarmMessage.class));    				
     			} 
     			mEffectPref.setSummary(alarm_effect_lists[Integer.parseInt(newValue.toString())]);
