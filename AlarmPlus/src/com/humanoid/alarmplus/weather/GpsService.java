@@ -26,7 +26,10 @@ import android.widget.Toast;
  */
 public class GpsService extends Service implements LocationListener{
 	
+	public static final String GPS_SERVICE = "com.humanoid.alarmplus.weather.GpsService";
+	
 	private LocationManager locationMgr;
+	private Criteria criteria;
 	Location curLoc = null;
 	private boolean isGpsEnabled;
 	
@@ -48,7 +51,12 @@ public class GpsService extends Service implements LocationListener{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+		locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		criteria = new Criteria();
+		criteria.setAccuracy(Criteria.NO_REQUIREMENT);
+		criteria.setPowerRequirement(Criteria.POWER_LOW);
+		dongInfo = new DongInfo(this);		
+/*		
 //		Log.d(WeatherView.TAG, "######## Service onCreate:"+isGpsEnabled);
 		try {
 			
@@ -56,17 +64,18 @@ public class GpsService extends Service implements LocationListener{
 			
 			Criteria c = new Criteria();
 
-			c.setAccuracy(Criteria.ACCURACY_FINE);
+			c.setAccuracy(Criteria.NO_REQUIREMENT);
+			c.setPowerRequirement(Criteria.POWER_LOW);
 
 			locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			
-			c.setAccuracy(Criteria.NO_REQUIREMENT);
-			c.setPowerRequirement(Criteria.NO_REQUIREMENT);
+			//String bestP = locationMgr.getBestProvider(c, false);
+			String bestP = locationMgr.getBestProvider(c, true);
 			
-			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,10, this);
+//			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,10, this);
+			locationMgr.requestLocationUpdates(bestP, 60000,100, this);
 //			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,1, this);
 
-			String bestP = locationMgr.getBestProvider(c, false);
 			isGpsEnabled = locationMgr.isProviderEnabled(bestP);
 
 			Log.d(WeatherView.TAG, "######## onResume isGpsEnabled:"+isGpsEnabled);
@@ -77,6 +86,50 @@ public class GpsService extends Service implements LocationListener{
 			
 			if(tempLocation == null) {
 				Toast.makeText(this, "onResume tempLocation null !!!", Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			try {
+				curLoc = new Location(tempLocation);
+				//reverseGeoCoder();
+			} catch (Exception e) {
+				
+				Log.e(WeatherView.TAG, "######## exception 1:"+e,e);
+//				Toast.makeText(this, "######## exception 1:"+e, Toast.LENGTH_LONG).show();
+				defaulting to our place
+				curLoc = new Location("reverseGeocoded");
+				curLoc.setLatitude(46.480302);
+				curLoc.setLongitude(11.296005);
+
+				curLoc.setAltitude(300);
+			}
+		} catch (Exception e) {
+//			e.printStackTrace();
+			Log.e(WeatherView.TAG, "######## exception 2:"+e,e);
+//			Toast.makeText(this, "######## exception 2:"+e, Toast.LENGTH_LONG).show();
+		}
+		
+*/		
+	}
+	
+	@Override
+	public void onStart(Intent intent, int startId) {
+		super.onStart(intent, startId);		
+		try {	
+			String bestP = locationMgr.getBestProvider(criteria, true);			
+			locationMgr.requestLocationUpdates(bestP, 30000,100, this);
+//			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,1, this);
+
+			isGpsEnabled = locationMgr.isProviderEnabled(bestP);
+
+			Log.d(WeatherView.TAG, "######## onResume isGpsEnabled:"+isGpsEnabled);
+			Log.d(WeatherView.TAG, "######## onResume locationMgr:"+locationMgr);
+			
+			Location tempLocation = locationMgr.getLastKnownLocation(bestP);
+			Log.d(WeatherView.TAG, "######## onResume tempLocation:"+tempLocation);
+			
+			if(tempLocation == null) {
+				Toast.makeText(this, "Can not find your current location !!!", Toast.LENGTH_LONG).show();
 				return;
 			}
 			
@@ -100,6 +153,16 @@ public class GpsService extends Service implements LocationListener{
 			Log.e(WeatherView.TAG, "######## exception 2:"+e,e);
 //			Toast.makeText(this, "######## exception 2:"+e, Toast.LENGTH_LONG).show();
 		}
+		
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (locationMgr != null) {
+			locationMgr.removeUpdates(this);
+		}
+		locationMgr = null;
 	}
 	
 	private void reverseGeoCoder() {

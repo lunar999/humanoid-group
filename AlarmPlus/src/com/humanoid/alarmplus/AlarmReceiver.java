@@ -19,8 +19,6 @@ package com.humanoid.alarmplus;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.humanoid.alarmplus.weather.GpsSampleActivity;
-
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -30,6 +28,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 
+import com.humanoid.alarmplus.weather.GpsSampleActivity;
+
 /**
  * Glue class: connects AlarmAlert IntentReceiver to AlarmAlert
  * activity.  Passes through Alarm ID.
@@ -38,10 +38,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     /** If the alarm is older than STALE_WINDOW seconds, ignore.  It
         is probably the result of a time or timezone change */
-    private final static int STALE_WINDOW = 60 * 30;
+    private final static int STALE_WINDOW = 60 * 30;   
 
     @Override
     public void onReceive(Context context, Intent intent) {
+    	Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+    	context.startService(service);
         // Take care of the easy intents first.
         if (Alarms.CLEAR_NOTIFICATION.equals(intent.getAction())) {
             // If this is the "Clear All Notifications" intent, stop the alarm
