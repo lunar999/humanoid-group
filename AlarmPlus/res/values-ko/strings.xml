@@ -212,5 +212,6 @@
     <string name="alarm_rec_btn_close">닫기</string>
 
 	<!-- Weather -->
-    <string name="alarm_weather_none">네트워크(3G/Wi-fi) \\n연결상태를 확인하세요.!</string>        
+    <string name="alarm_weather_none1">네트워크(3G/Wi-Fi)와 GPS</string>
+    <string name="alarm_weather_none2">연결상태를 확인하세요.!</string>                
 </resources>

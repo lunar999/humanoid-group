@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.Toast;
 
 import com.humanoid.alarmplus.R;
 
@@ -36,6 +37,7 @@ public class WeatherView extends View {
 	private int HEIGHT;
 	private final int SMALL_HEIGHT = 150;
 	
+	private Bitmap w_00; 
 	private Bitmap w_01_1;
 	private Bitmap w_01_2;
 	private Bitmap w_02_1;
@@ -80,7 +82,7 @@ public class WeatherView extends View {
 	}
 	
 	private void loadImage(Context context) {
-		
+		w_00 = BitmapFactory.decodeResource(context.getResources(), R.drawable.w_00);
 		w_01_1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.w_01_1);
 		w_01_2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.w_01_2);
 		w_02_1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.w_02_1);
@@ -100,19 +102,61 @@ public class WeatherView extends View {
 		w_sr = BitmapFactory.decodeResource(context.getResources(), R.drawable.w_sr);
 	}
 	
-	public Bitmap getCurrWeatherImage(String weather) {
-		
+	public Bitmap getCurrWeatherImage(String weather, String hour) {
+		String tempHour = hour;		
 		if("맑음".equals(weather)) {
+			if (tempHour.equals("18") || tempHour.equals("21") || tempHour.equals("24") || tempHour.equals("3")) {
+				return w_01_2;
+			}
 			return w_01_1;
 		}
 		else if("구름조금".equals(weather)) {
+			if (tempHour.equals("18") || tempHour.equals("21") || tempHour.equals("24") || tempHour.equals("3")) {
+				return w_02_2;
+			}
 			return w_02_1;
 		}
 		else if("구름많음".equals(weather)) {
+			if (tempHour.equals("18") || tempHour.equals("21") || tempHour.equals("24") || tempHour.equals("03")) {
+				return w_03_2;
+			}
 			return w_03_1;
 		}
+		else if("흐림".equals(weather)) {
+			return w_04;
+		}
+		else if("추후매핑예정1".equals(weather)) {
+			return w_05;
+		}
+		else if("추후매핑예정2".equals(weather)) {
+			return w_07;
+		}
+		else if("비".equals(weather)) {
+			return w_08;
+		}
+		else if("눈".equals(weather)) {
+			return w_11;
+		}
+		else if("추후매핑예정3".equals(weather)) {
+			return w_14;
+		}
+		else if("추후매핑예정4".equals(weather)) {
+			return w_15;
+		}
+		else if("추후매핑예정5".equals(weather)) {
+			return w_16;
+		}
+		else if("추후매핑예정6".equals(weather)) {
+			return w_17;
+		}
+		else if("추후매핑예정7".equals(weather)) {
+			return w_rs;
+		}
+		else if("추후매핑예정8".equals(weather)) {
+			return w_sr;
+		}
 		else {
-			return w_01_1;
+			return w_00;
 		}
 	}
 	
@@ -132,30 +176,25 @@ public class WeatherView extends View {
 			paint.setStrokeWidth(1);  
 			paint.setAntiAlias(true);
 //			paint.setColor(Color.WHITE);  
-			paint.setColor(0xff808080);  
-			paint.setTextSize(33);
-			canvas.drawText(weatherInfo.getAddress(), 30, HEIGHT-SMALL_HEIGHT-120, paint);
+			paint.setColor(0xff808080);  		
 			
 			WeatherData wData = weatherInfo.getWeatherList().get(0);
 			
-			mainImage = getCurrWeatherImage(wData.getWfKor());
-			canvas.drawBitmap(mainImage, (WIDTH-mainImage.getWidth())/2, (HEIGHT-SMALL_HEIGHT-mainImage.getHeight())/2, paint);
-			
 			paint.setTextSize(40);
-			canvas.drawText(wData.getTemp(), 20, 50, paint);
+			canvas.drawText(wData.getTemp(), 30, 50, paint);
 			
 			paint.setTextSize(25);
-			canvas.drawText("o", 102, 35, paint);
+			canvas.drawText("o", 120, 35, paint);
 			
 			paint.setTextSize(25);
 			canvas.drawText(wData.getWs(), WIDTH-100, 35, paint);
 			canvas.drawText("m/s", WIDTH-60, 35, paint);
 			
-			canvas.drawText(wData.getWdKor(), WIDTH-100, 60, paint);
+			canvas.drawText(wData.getWdKor(), WIDTH-100, 60, paint);			
 			
-			paint.setTextSize(25);
-			canvas.drawText(wData.getWfKor(), WIDTH/2-50, HEIGHT-SMALL_HEIGHT-90, paint);
-			
+			mainImage = getCurrWeatherImage(wData.getWfKor(), wData.getHour());
+			canvas.drawBitmap(mainImage, (WIDTH-mainImage.getWidth())/2, (HEIGHT-SMALL_HEIGHT-mainImage.getHeight())/2, paint);
+		
 			Bitmap tempImage = null;
 //			for (int i = 0; i < weatherInfo.getWeatherList().size(); i++) {
 			for (int i = 0; i < 4; i++) {
@@ -163,7 +202,7 @@ public class WeatherView extends View {
 				canvas.drawText(weatherInfo.getWeatherList().get(i).getHour(), WIDTH/4*i+35, HEIGHT-SMALL_HEIGHT+30, paint);
 				canvas.drawText("시", WIDTH/4*i+62, HEIGHT-SMALL_HEIGHT+30, paint);
 
-				tempImage = getCurrWeatherImage(weatherInfo.getWeatherList().get(i).getWfKor());
+				tempImage = getCurrWeatherImage(weatherInfo.getWeatherList().get(i).getWfKor(), weatherInfo.getWeatherList().get(i).getHour());
 				int w = tempImage.getWidth();  
 				int h = tempImage.getHeight();  
 				Rect src = new Rect(0, 0, w, h);
@@ -174,23 +213,44 @@ public class WeatherView extends View {
 			
 				paint.setTextSize(20);
 				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmn()) && !"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmx())) {
-					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+20, HEIGHT-20, paint);
+					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+10, HEIGHT-20, paint);
 					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
 					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmx(), WIDTH/4*i+62, HEIGHT-20, paint);
-					paint.setTextSize(13);
+					paint.setTextSize(12);
 					canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);
-					canvas.drawText("o", WIDTH/4*i+100, HEIGHT-27, paint);
+					canvas.drawText("o", WIDTH/4*i+110, HEIGHT-27, paint);
+				}
+				else {
+				canvas.drawText("  -", WIDTH/4*i+20, HEIGHT-20, paint);
+				canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
+				canvas.drawText("  -", WIDTH/4*i+62, HEIGHT-20, paint);
+				paint.setTextSize(12);
+				canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);
+				canvas.drawText("o", WIDTH/4*i+100, HEIGHT-27, paint);
 				}
 			}
+			
+			paint.setTextSize(33);
+			paint.setTextAlign(Paint.Align.CENTER);
+			//canvas.drawText(weatherInfo.getAddress(), 30, HEIGHT-SMALL_HEIGHT-120, paint);
+			canvas.drawText(weatherInfo.getAddress(), getWidth()/2, HEIGHT-SMALL_HEIGHT-120, paint);
+			
+			paint.setTextSize(25);
+			//canvas.drawText(wData.getWfKor(), WIDTH/2-50, HEIGHT-SMALL_HEIGHT-90, paint);
+			canvas.drawText(wData.getWfKor(), getWidth()/2, HEIGHT-SMALL_HEIGHT-90, paint);
 		}
-		else {
+		else {			
+			String displayText1 = this.getContext().getString(R.string.alarm_weather_none1);
+			String displayText2 = this.getContext().getString(R.string.alarm_weather_none2);
+			
 			paint.setStyle(Paint.Style.FILL);  
 			paint.setStrokeWidth(1);  
 			paint.setAntiAlias(true);
-//			paint.setColor(Color.WHITE);  
 			paint.setColor(0xff808080);  
-			paint.setTextSize(33);
-			canvas.drawText(this.getContext().getString(R.string.alarm_weather_none), WIDTH/2-100, HEIGHT/2-100, paint);
+			paint.setTextSize(30);
+			paint.setTextAlign(Paint.Align.CENTER);
+			canvas.drawText(displayText1, getWidth()/2, getHeight()/2-100, paint);
+			canvas.drawText(displayText2, getWidth()/2, getHeight()/2-50, paint);
 		}
 	}
 	

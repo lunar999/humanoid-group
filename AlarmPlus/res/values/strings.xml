@@ -324,6 +324,9 @@
         <item>직접 입력</item>
         <item>Today\'s temperature will %t degrees Celsius.</item>
         <item>It\'s %time</item>
-    </string-array>      
-    <string name="alarm_weather_none">Please check your network connection(3G/Wi-fi) and GPS</string>
+    </string-array>
+    
+    <!-- Weather -->      
+    <string name="alarm_weather_none1">Please check your network</string>
+    <string name="alarm_weather_none2">connection(3G/Wi-Fi) and GPS</string>
 </resources>
