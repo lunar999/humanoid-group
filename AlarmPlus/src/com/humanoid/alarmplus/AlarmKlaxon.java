@@ -37,7 +37,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Vibrator;
-import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -164,6 +163,8 @@ public class AlarmKlaxon extends Service implements OnInitListener {
     private static final float IN_CALL_VOLUME = 0.125f;
 
     private void play(Alarm alarm) {
+    	android.os.Debug.waitForDebugger();
+    	
         // stop() checks to see if we are already playing.
         stop();
 
@@ -237,8 +238,13 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
                     else if(alarm_effect_code[3].equals(soundMode)) {//TTS
-                    	saveVoiceAlarmMessage ();	// test
-                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    	// 2010.11.23 ahn, TTS 설정에서 시간으로 음성알람메세지를 생성 후 저장 테스트...
+                    	TTS tts = new TTS(this);
+                    	String currTime = tts.getCurrentTimeMessage();
+                    	String filePath = tts.saveVoiceAlarmMessage(currTime);	// 여기서 NullPointerException, 모르겠다
+                    	setDataSourceFromFile(new File(filePath), mMediaPlayer);	// test
+
+//                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
                     else {
                     	//setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
@@ -349,26 +355,10 @@ public class AlarmKlaxon extends Service implements OnInitListener {
         mHandler.removeMessages(KILLER);
     }
 
-    // 2010.11.22 Added by ahn, 알람시 TTS변환 테스트 중...  
-    private void saveVoiceAlarmMessage() {
-    	Log.v(">>>>> ahn saveVoiceAlarmMessage start");
-    	String message = "Hello";
-    	
-    	TextToSpeech tts;
-    	tts = new TextToSpeech(this, this);
-    	
-    	tts.setLanguage(Locale.US);
-		tts.synthesizeToFile(message, null, "/sdcard/humanoid/alarm/alarm_tts.wav");
-		if( tts != null)
-			tts.stop();
-		tts.shutdown();
-		Log.v(">>>>> ahn saveVoiceAlarmMessage OK");
-    }
-
 	@Override
 	public void onInit(int status) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
