@@ -144,6 +144,7 @@
     </string-array>
     
    <string name="chronometer_initial_format">녹음시간: <xliff:g id="initial-format">%s</xliff:g></string>
+   <string name="chronometer_initial_format2">재생시간: <xliff:g id="initial-format">%s</xliff:g></string>
     
     <string name="gpscheck">날씨 정보를 수신할려면 GPS정보가 필요 합니다. GPS정보를 켜시겠습니까?</string>
     <string name="gpscheckbtn1">설정</string>

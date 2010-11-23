@@ -272,6 +272,7 @@
     </string-array>
     
     <string name="chronometer_initial_format">Rec Time: <xliff:g id="initial-format">%s</xliff:g></string>
+    <string name="chronometer_initial_format2">Play Time: <xliff:g id="initial-format">%s</xliff:g></string>
     
     <string name="gpscheck">"Your GPS is disabled! Would you like to enable it?"</string>
     <string name="gpscheckbtn1">Enable GPS</string>
