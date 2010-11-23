@@ -238,13 +238,15 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
                     }
                     else if(alarm_effect_code[3].equals(soundMode)) {//TTS
-                    	// 2010.11.23 ahn, TTS 설정에서 시간으로 음성알람메세지를 생성 후 저장 테스트...
+/*
+ 						2010.11.23 ahn, 문제가 있어서 일단 주석처리... 같이 해결 해 봅시다.
+                     	// 2010.11.23 ahn, TTS 설정에서 시간으로 음성알람메세지를 생성 후 저장 테스트...
                     	TTS tts = new TTS(this);
                     	String currTime = tts.getCurrentTimeMessage();
                     	String filePath = tts.saveVoiceAlarmMessage(currTime);	// 여기서 NullPointerException, 모르겠다
                     	setDataSourceFromFile(new File(filePath), mMediaPlayer);	// test
-
-//                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+*/
+                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
                     }
                     else {
                     	//setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
