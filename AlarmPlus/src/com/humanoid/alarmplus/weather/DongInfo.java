@@ -25,7 +25,7 @@ import android.util.Log;
  * @see 
  * @since JDK v1.4
  */
-public class DongInfo {
+public class DongInfo { 
 
 	private HashMap<String, String> dongMap = null;	
 	
