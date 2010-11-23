@@ -132,7 +132,9 @@ public class WeatherData {
 		return ws;
 	}
 	public void setWs(String ws) {
-		this.ws = ws;
+		int dot = ws.indexOf(".");
+		String conv = ws.substring(0, dot+2);
+		this.ws = conv;
 	}
 	public String getWdKor() {
 		return wdKor;

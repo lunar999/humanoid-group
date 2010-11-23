@@ -187,7 +187,7 @@ public class WeatherView extends View {
 			canvas.drawText("o", 120, 35, paint);
 			
 			paint.setTextSize(25);
-			canvas.drawText(wData.getWs().replaceAll("000000000000001", ""), WIDTH-100, 35, paint);
+			canvas.drawText(wData.getWs(), WIDTH-100, 35, paint);
 			canvas.drawText("m/s", WIDTH-60, 35, paint);
 			
 			canvas.drawText(wData.getWdKor(), WIDTH-100, 60, paint);			
