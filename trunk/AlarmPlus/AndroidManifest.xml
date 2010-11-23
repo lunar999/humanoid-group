@@ -28,7 +28,9 @@
             </intent-filter>
         </activity>
 
-		<activity android:name="com.humanoid.alarmplus.RecActivity" />
+		<activity
+			android:name="com.humanoid.alarmplus.RecActivity"
+			android:screenOrientation="portrait" />
 
 		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" />
 		<service android:enabled = "true"
