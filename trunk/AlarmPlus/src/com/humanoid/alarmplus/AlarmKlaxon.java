@@ -163,7 +163,8 @@ public class AlarmKlaxon extends Service implements OnInitListener {
     private static final float IN_CALL_VOLUME = 0.125f;
 
     private void play(Alarm alarm) {
-    	android.os.Debug.waitForDebugger();
+    	//11-23 문제를 일으켰던 코드: shinshow    	
+    	//android.os.Debug.waitForDebugger();
     	
         // stop() checks to see if we are already playing.
         stop();
