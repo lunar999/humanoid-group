@@ -55,14 +55,14 @@ public class UtilFile {
 		unZipFilePath.replace('\\', FS);
 		unZipFilePath.replace('/', FS);
 
-//		String foutputPath = unZipFilePath.substring(0, unZipFilePath.lastIndexOf(".ZIP"));
+		//		String foutputPath = unZipFilePath.substring(0, unZipFilePath.lastIndexOf(".ZIP"));
 		long beginTime = System.currentTimeMillis();
 		byte[] buffer = new byte[BUFFER_SIZE];
 
 		File file = new File(unZipFilePath);
 
 		try {
-			
+
 			FileInputStream finput = new FileInputStream(file);
 			ZipInputStream zinput = new ZipInputStream((InputStream)finput);
 			ZipEntry entry;
@@ -90,7 +90,7 @@ public class UtilFile {
 				File entryFile = new File(foutputPath + FS + outputFileNm);
 
 				if(entry.isDirectory()) {
-					
+
 					if (!entryFile.exists()) {
 						entryFile.mkdirs();
 					}
@@ -126,40 +126,40 @@ public class UtilFile {
 		Log.d(TAG,"Unzipe Time Check :: >> " + msec/1000 + "."	+ (msec % 1000) + " sec. elapsed...");
 	}
 
-	
-    public static void delete(String filename) {
-        File f = new File(filename);
-        f.delete();
-    }
-    
-    
-    public static boolean isExistFile(String filename) {
-    	File f = new File(filename);
-    	boolean isExists = f.exists();
-    	
-    	return isExists;
-    }
-	
-    /**
-     * 
-     * <pre>
-     * 1.기능 : . <br>
-     * 2.처리 개요
-     *     - 
-     *     - 
-     * 3.주의사항 
-     *     -
-     *</pre>
-     * @param f
-     */
-    public static boolean mkDir(File f) {
+
+	public static void delete(String filename) {
+		File f = new File(filename);
+		f.delete();
+	}
+
+
+	public static boolean isExistFile(String filename) {
+		File f = new File(filename);
+		boolean isExists = f.exists();
+
+		return isExists;
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 1.기능 : . <br>
+	 * 2.처리 개요
+	 *     - 
+	 *     - 
+	 * 3.주의사항 
+	 *     -
+	 *</pre>
+	 * @param f
+	 */
+	public static boolean mkDir(File f) {
 		if (!f.exists()) {
 			return f.mkdirs();
 		}
-		
+
 		return true;
-    }
-    
+	}
+
 	/**
 	 * 
 	 * <pre>
@@ -174,38 +174,38 @@ public class UtilFile {
 	 * @param data
 	 * @throws Exception
 	 */
-    public static void write(File f,byte[] data) throws Exception{
-		
-        BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(f));
-        output.write(data);
-        output.close();
-		output = null;
-    }
-    
+	public static void write(File f,byte[] data) throws Exception{
 
-    /**
-     * 
-     * <pre>
-     * 1.기능 : 파일명에 데이터를 기록한다. <br>
-     * 2.처리 개요
-     *     - 
-     *     - 
-     * 3.주의사항 
-     *     -
-     *</pre>
-     * @param filename
-     * @param data
-     * @throws Exception
-     */
-    public static void write(String filename,byte[] data , boolean append) throws Exception{
-        File f = new File(filename);
-
-        BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(f,append));
-        output.write(data);
-        output.close();
+		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(f));
+		output.write(data);
+		output.close();
 		output = null;
-    }
-    
+	}
+
+
+	/**
+	 * 
+	 * <pre>
+	 * 1.기능 : 파일명에 데이터를 기록한다. <br>
+	 * 2.처리 개요
+	 *     - 
+	 *     - 
+	 * 3.주의사항 
+	 *     -
+	 *</pre>
+	 * @param filename
+	 * @param data
+	 * @throws Exception
+	 */
+	public static void write(String filename,byte[] data , boolean append) throws Exception{
+		File f = new File(filename);
+
+		BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(f,append));
+		output.write(data);
+		output.close();
+		output = null;
+	}
+
 	/**
 	 * <pre>
 	 * 1.기능 : 특정 파일을 읽어 그 내용을 반환하는 메소드. <BR>
@@ -222,7 +222,7 @@ public class UtilFile {
 	public static byte[] readFile(String fileName) {
 		byte[] contents = null;
 		FileInputStream fis = null;
-		
+
 		try {
 			File f = new File(fileName);
 			fis = new FileInputStream(f);
@@ -241,11 +241,11 @@ public class UtilFile {
 			} catch (Exception n) {
 			}
 		}
-		
+
 		return contents;
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * <pre>
@@ -260,13 +260,13 @@ public class UtilFile {
 	 * @return
 	 */
 	public static ArrayList<String> readFileLine(String fileName) {
-		
-		
+
+
 		BufferedReader buffer = null; 
 		File f = null;
-		
+
 		ArrayList<String> lineList = new ArrayList<String>();
-		
+
 		try
 		{
 			f = new File(fileName);
@@ -279,20 +279,20 @@ public class UtilFile {
 				line = buffer.readLine();
 				if(line == null)
 					break;
-				
+
 				if(line.trim().length()<= 0)
 					continue;
-				
+
 				if(line.substring(0, 2).equals("//"))
 					continue;
-				
+
 				lineList.add(line);
-//				
+				//				
 			}
 		} catch(FileNotFoundException fe) {
 			return null;
 		} catch (Exception e) {
-		   e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 		finally 
@@ -307,20 +307,20 @@ public class UtilFile {
 				buffer = null;
 			}
 		}
-		
+
 		return lineList;
-		
+
 	}
-	
+
 	public static byte[] readAssetsFile(String fileName , Context context , int fileSize) {
 		byte[] contents = null;
-//		FileInputStream fis = null;
+		//		FileInputStream fis = null;
 		InputStream is = null;
-		
+
 		try {
-//			File f = new File(fileName);
+			//			File f = new File(fileName);
 			is = context.getAssets().open(fileName);
-//			fis = new FileInputStream(f);
+			//			fis = new FileInputStream(f);
 			contents = new byte[fileSize];
 			is.read( contents , 0 , contents.length );
 		} catch (FileNotFoundException e) {
@@ -336,10 +336,10 @@ public class UtilFile {
 			} catch (Exception n) {
 			}
 		}
-		
+
 		return contents;
 	}
-	
+
 	/**
 	 * 
 	 * <pre>
@@ -354,18 +354,18 @@ public class UtilFile {
 	 * @return
 	 */
 	public static ArrayList<String> readAssetsFileLine(String fileName , Context context) {
-		
+
 		InputStream is = null;
 		BufferedReader buffer = null; 
-//		File f = null;
-		
+		//		File f = null;
+
 		ArrayList<String> lineList = new ArrayList<String>();
-		
+
 		try
 		{
 			is = context.getAssets().open(fileName);
-			
-//			f = new File(fileName);
+
+			//			f = new File(fileName);
 			if (is == null)
 				return null;
 			buffer = new BufferedReader(new InputStreamReader(is));
@@ -375,20 +375,20 @@ public class UtilFile {
 				line = buffer.readLine();
 				if(line == null)
 					break;
-				
+
 				if(line.trim().length()<= 0)
 					continue;
-				
+
 				if(line.substring(0, 2).equals("//"))
 					continue;
-				
+
 				lineList.add(line);
-//				
+				//				
 			}
 		} catch(FileNotFoundException fe) {
 			return null;
 		} catch (Exception e) {
-		   e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 		finally 
@@ -403,20 +403,20 @@ public class UtilFile {
 				buffer = null;
 			}
 		}
-		
+
 		return lineList;
-		
+
 	}
-	
-	
-//	private static final String ALARM_REC_POSTFIX = ".mp4";
-	private static final String SD2 = "sd";
-//	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
-	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
+
+
+	//	private static final String ALARM_REC_POSTFIX = ".mp4";
+	//	private static final String SD2 = "sd";
+	//	private static final String ALARM_REC_PREFIX = "/alarm_rec_";
+	//	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
 	public static String recpath;  // 10.11.22 update redmars
-	
+
 	public static String getSdCardAlarmPath(String fileName) {
-		
+
 		File recFile = Environment.getExternalStorageDirectory();
 		String path = "";
 		recpath = fileName;        // 10.11.22 update redmars fime name 공유
@@ -425,35 +425,51 @@ public class UtilFile {
 		if(!tempFile.exists()) {
 			tempFile.mkdirs();
 		}
-		
-//		/sdcard 하위폴더로 교체
-//		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
-//			File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2 );
-//			if(sd2.exists()){
-//				path = recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
-//				tempFile = new File(recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH);
-//				if(!tempFile.exists()) {
-//					tempFile.mkdirs();
-//				}
-//			} else {
-//				path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
-//			
-//				tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
-//				if(!tempFile.exists()) {
-//					tempFile.mkdirs();
-//				}
-//			}
-//		}
-		
+
+		//		/sdcard 하위폴더로 교체
+		//		if(SAMSUNG_GALAXYS.equals(Build.MODEL)){
+		//			File sd2 = new File(recFile.getAbsolutePath()+ File.separator + SD2 );
+		//			if(sd2.exists()){
+		//				path = recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+		//				tempFile = new File(recFile.getAbsolutePath() + File.separator + SD2  + AlarmConstantIf.ALARM_FILE_PATH);
+		//				if(!tempFile.exists()) {
+		//					tempFile.mkdirs();
+		//				}
+		//			} else {
+		//				path = recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH + File.separator + fileName;
+		//			
+		//				tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
+		//				if(!tempFile.exists()) {
+		//					tempFile.mkdirs();
+		//				}
+		//			}
+		//		}
+
 		return path;
 	}
 	
+	/**
+	 * 저장 디렉토리 만들기
+	 */
+	public static void makeAlarmDir(){
+		String state = android.os.Environment.getExternalStorageState();
+		if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
 
-//	public static void main(String[] args) {
-//
-//		String unZipFilePath = "C:\\100617.zip";
-//		unZip(unZipFilePath , "C:\\daily\\");
-//	}
+			File recFile = Environment.getExternalStorageDirectory();
+
+			File tempFile = new File(recFile.getAbsolutePath() + AlarmConstantIf.ALARM_FILE_PATH);
+			if(!tempFile.exists()) {
+				tempFile.mkdirs();
+			}
+		}
+	}
+
+
+	//	public static void main(String[] args) {
+	//
+	//		String unZipFilePath = "C:\\100617.zip";
+	//		unZip(unZipFilePath , "C:\\daily\\");
+	//	}
 
 
 }
