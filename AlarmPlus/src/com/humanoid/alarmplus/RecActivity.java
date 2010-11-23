@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 	private static final String SAMSUNG_GALAXYS = "SHW-M110S";
 	private static final float IN_CALL_VOLUME = 0.125f;
 
-	private String path = "";
+	private String recFilePath = AlarmConstantIf.ALARM_REC_FILE_FULL_PATH;
 	private static final boolean DEBUG_MODE = true;
 
 	private Button btnRec;
@@ -39,15 +40,22 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 	private Button btnListen;
 	private Button btnClosed;
 	private MediaRecorder recorder;
-	private Bitmap micImage_green;
-	private Bitmap micImage_red;
+	private Bitmap img_green;
+	private Bitmap img_red;
 	private ImageView imageView;
-	private MediaPlayer mMediaPlayer;
-	private Chronometer chronometer;
+	private MediaPlayer mediaPlayer;
+	private Chronometer recChronometer;
+	private Chronometer playChronometer;
 
 	View.OnClickListener mResetListener = new OnClickListener() {
 		public void onClick(View v) {
-			chronometer.setBase(SystemClock.elapsedRealtime());
+			recChronometer.setBase(SystemClock.elapsedRealtime());
+		}
+	};
+	
+	View.OnClickListener mResetListener2 = new OnClickListener() {
+		public void onClick(View v) {
+			playChronometer.setBase(SystemClock.elapsedRealtime());
 		}
 	};
 
@@ -59,15 +67,18 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 
 		UtilFile.makeAlarmDir();
 
-		micImage_green = BitmapFactory.decodeResource(getResources(), R.drawable.mic_128);
-		micImage_red = BitmapFactory.decodeResource(getResources(), R.drawable.mic_red_128);
+		img_green = BitmapFactory.decodeResource(getResources(), R.drawable.mic_128);
+		img_red = BitmapFactory.decodeResource(getResources(), R.drawable.mic_red_128);
 
 		btnRec = (Button) findViewById(R.id.btnRec);
 		btnStop = (Button) findViewById(R.id.btnStop);
 		btnListen = (Button) findViewById(R.id.btnListen);
 		btnClosed = (Button) findViewById(R.id.btnClosed);
 		imageView = (ImageView)findViewById(R.id.mic_128);
-		chronometer = (Chronometer) findViewById(R.id.chronometer);
+		recChronometer = (Chronometer) findViewById(R.id.recChronometer);
+		playChronometer = (Chronometer) findViewById(R.id.playChronometer);
+		
+		playChronometer.setVisibility(View.INVISIBLE);
 
 		setBtnListener();
 	}
@@ -85,8 +96,8 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 
 					@Override
 					public void run() {
-						chronometer.setBase(SystemClock.elapsedRealtime());
-						chronometer.start();
+						recChronometer.setBase(SystemClock.elapsedRealtime());
+						recChronometer.start();
 					}
 				});
 
@@ -109,7 +120,7 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 
 			public void onClick(View v) {
 				btnStop.setEnabled(false);
-				chronometer.stop();
+				recChronometer.stop();
 				stopRec();
 				btnRec.setEnabled(true);
 
@@ -122,6 +133,18 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 			public void onClick(View v) {
 				//play
 				try {
+					playChronometer.setVisibility(View.VISIBLE);
+					btnListen.setEnabled(false);
+					
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							playChronometer.setBase(SystemClock.elapsedRealtime());
+							playChronometer.start();
+						}
+					});
+					
 					playRecFile();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -141,22 +164,29 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 	protected void onResume() {
 		super.onResume();
 
-
-
-		mMediaPlayer = new MediaPlayer();
-		mMediaPlayer.setOnErrorListener(new OnErrorListener() {
+		mediaPlayer = new MediaPlayer();
+		mediaPlayer.setOnErrorListener(new OnErrorListener() {
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				Log.d("","Error occurred while playing audio.");
 				mp.stop();
 				mp.release();
-				mMediaPlayer = null;
+				mediaPlayer = null;
 				return true;
 			}
 		});
+		
+		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mediaplayer) {
+				mediaplayer.stop();
+				mediaplayer.release();
+				btnListen.setEnabled(true);
+				playChronometer.setVisibility(View.INVISIBLE);
+			}
+		});
 
-		mMediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
-		//			mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
-
+		mediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
 
 	}
 
@@ -169,96 +199,93 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 
 		try {
 			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
-				mMediaPlayer.setDataSource(AlarmConstantIf.ALARM_REC_FILE_FULL_PATH);
-				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-				mMediaPlayer.setLooping(false);
-				mMediaPlayer.prepare();
-				mMediaPlayer.start();
-
-				mMediaPlayer.stop();
-				mMediaPlayer.release();
+				mediaPlayer.setDataSource(recFilePath);
+				mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+				mediaPlayer.setLooping(false);
+				mediaPlayer.prepare();
+				mediaPlayer.start();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-/**
- * 
- * @param isStart
- */
-private void imageChange(boolean isStart) {
-	if(isStart) {
-		imageView.setImageBitmap(micImage_red);
-	}
-	else {
-		imageView.setImageBitmap(micImage_green);
-	}
-}
-
-/**
- * 녹음시작
- */
-private void startRec(){
-	if(recorder == null){
-		recorder = new MediaRecorder();
-	}
-
-	if(DEBUG_MODE){
-		Log.d("TEST", "START_REC");
-		Log.d("Build.MODEL", Build.MODEL);
-		Log.d("getExternalStorageState", android.os.Environment.getExternalStorageState()+"");
-	}
-
-	//		File recFile = Environment.getExternalStorageDirectory();
-
-	try {
-		if(DEBUG_MODE){
-			Log.d("PATH", path);
+	/**
+	 * 
+	 * @param isStart
+	 */
+	private void imageChange(boolean isStart) {
+		if(isStart) {
+			imageView.setImageBitmap(img_red);
 		}
-		path = getFilePath();
-
-		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-		recorder.setOutputFile(path);
-
-		recorder.prepare();
-		recorder.start();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-}
-
-private void stopRec(){
-	if(recorder != null){
-		recorder.stop();
-		recorder.release();
-		recorder = null;
-
-		if(DEBUG_MODE){
-			Log.d("TEST", "STOP_REC");
+		else {
+			imageView.setImageBitmap(img_green);
 		}
 	}
-}
 
-/**
- * 녹음파일 저장장소를 리턴함
- * @author lunar999
- */
-private String getFilePath(){
-	String filePath = "";
-	String state = android.os.Environment.getExternalStorageState();
-	if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-		filePath = getFilesDir().getAbsolutePath() + File.separator + UtilFile.recpath ;				
-	} else {
-		//sdcard
-		filePath = UtilFile.getSdCardAlarmPath(UtilFile.recpath);
+	/**
+	 * 녹음시작
+	 */
+	private void startRec(){
+		if(recorder == null){
+			recorder = new MediaRecorder();
+		}
 
+		if(DEBUG_MODE){
+			Log.d("TEST", "START_REC");
+			Log.d("Build.MODEL", Build.MODEL);
+			Log.d("getExternalStorageState", android.os.Environment.getExternalStorageState()+"");
+		}
+
+		//		File recFile = Environment.getExternalStorageDirectory();
+
+		try {
+			if(DEBUG_MODE){
+				Log.d("PATH", recFilePath);
+			}
+			recFilePath = getFilePath();
+
+			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+			recorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+			recorder.setOutputFile(recFilePath);
+
+			recorder.prepare();
+			recorder.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	return filePath;
-}
+	private void stopRec(){
+		if(recorder != null){
+			recorder.stop();
+			recorder.release();
+			recorder = null;
+
+			if(DEBUG_MODE){
+				Log.d("TEST", "STOP_REC");
+			}
+		}
+	}
+
+	/**
+	 * 녹음파일 저장장소를 리턴함
+	 * @author lunar999
+	 */
+	private String getFilePath(){
+		String filePath = "";
+		String state = android.os.Environment.getExternalStorageState();
+		if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
+			filePath = getFilesDir().getAbsolutePath() + File.separator + AlarmConstantIf.ALARM_REC_FILE_NAME ;				
+		} else {
+			//sdcard
+			filePath = UtilFile.getSdCardAlarmPath(AlarmConstantIf.ALARM_REC_FILE_NAME);
+
+		}
+
+		return filePath;
+	}
 
 
 }

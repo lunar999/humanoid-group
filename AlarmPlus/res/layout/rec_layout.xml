@@ -6,61 +6,85 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-<!--
-	 <Chronometer android:id="@+id/chronometer"
-        android:format="@string/chronometer_initial_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="30dip"
-        android:paddingTop="30dip"
-        />
-
-	<Button
-		android:text="Rec"
-		android:id="@+id/btnRec"
+	<!--
+		<Chronometer android:id="@+id/chronometer"
+		android:format="@string/chronometer_initial_format"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></Button>
-	<Button
-		android:text="Stop"
-		android:id="@+id/btnStop"
+		android:layout_height="wrap_content" android:layout_weight="0"
+		android:paddingBottom="30dip" android:paddingTop="30dip" /> <Button
+		android:text="Rec" android:id="@+id/btnRec"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></Button>
-</LinearLayout>
--->
+		android:layout_height="wrap_content"></Button> <Button
+		android:text="Stop" android:id="@+id/btnStop"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></Button> </LinearLayout>
+	-->
 
-<LinearLayout android:gravity="center_horizontal"
-	android:orientation="vertical" 
-	android:background="#ffa4c639" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:layout_marginTop="12.0dip">
-	
-	<ImageView android:layout_gravity="center_horizontal"
-		android:id="@+id/mic_128" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_marginTop="20.0dip" 
-		android:src="@drawable/mic_128" />
+	<LinearLayout
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:background="#ffa4c639"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_marginTop="12.0dip">
 
-	<Chronometer android:layout_gravity="center_horizontal"
-		android:id="@+id/chronometer" android:format="@string/chronometer_initial_format"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_weight="0" android:paddingBottom="30dip"
-		android:paddingTop="30dip" />
-	
-	<LinearLayout android:gravity="center_horizontal"
-		android:orientation="horizontal" android:background="#ffa4c639"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="12.0dip" android:layout_weight="0.25">
-		<Button android:id="@+id/btnRec" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="@string/alarm_rec_btn_start" />
-		<Button android:id="@+id/btnStop" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginLeft="26.0dip"
-			android:text="@string/alarm_rec_btn_stop" />
-		<Button android:id="@+id/btnListen" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginLeft="26.0dip"
-			android:text="@string/alarm_rec_btn_listen" />
-		<Button android:id="@+id/btnClosed" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:layout_marginLeft="26.0dip"
-			android:text="@string/alarm_rec_btn_close" />
+		<ImageView
+			android:layout_gravity="center_horizontal"
+			android:id="@+id/mic_128"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20.0dip"
+			android:src="@drawable/mic_128" />
+
+		<Chronometer
+			android:layout_gravity="center_horizontal"
+			android:id="@+id/recChronometer"
+			android:format="@string/chronometer_initial_format"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="0"
+			android:paddingTop="30dip" />
+
+		<Chronometer
+			android:layout_gravity="center_horizontal"
+			android:id="@+id/playChronometer"
+			android:format="@string/chronometer_initial_format2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingBottom="30dip" />
+
+		<LinearLayout
+			android:gravity="center_horizontal"
+			android:orientation="horizontal"
+			android:background="#ffa4c639"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12.0dip"
+			android:layout_weight="0.25">
+			<Button
+				android:id="@+id/btnRec"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/alarm_rec_btn_start" />
+			<Button
+				android:id="@+id/btnStop"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="26.0dip"
+				android:text="@string/alarm_rec_btn_stop" />
+			<Button
+				android:id="@+id/btnListen"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="26.0dip"
+				android:text="@string/alarm_rec_btn_listen" />
+			<Button
+				android:id="@+id/btnClosed"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="26.0dip"
+				android:text="@string/alarm_rec_btn_close" />
+		</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
 </LinearLayout>
 
