@@ -93,7 +93,7 @@ public class Alarms {
     public static Uri addAlarm(ContentResolver contentResolver) {
         ContentValues values = new ContentValues();
         values.put(Alarm.Columns.HOUR, 8);
-        values.put(Alarm.Columns.EFFECT, "00");
+        values.put(Alarm.Columns.EFFECT, "0");
         return contentResolver.insert(Alarm.Columns.CONTENT_URI, values);
     }
 
