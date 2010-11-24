@@ -117,7 +117,7 @@ public class WeatherView extends View {
 			return w_02_1;
 		}
 		else if("구름많음".equals(weather)) {
-			if (tempHour.equals("18") || tempHour.equals("21") || tempHour.equals("24") || tempHour.equals("03")) {
+			if (tempHour.equals("18") || tempHour.equals("21") || tempHour.equals("24") || tempHour.equals("3")) {
 				return w_03_2;
 			}
 			return w_03_1;
@@ -128,7 +128,7 @@ public class WeatherView extends View {
 		else if("추후매핑예정1".equals(weather)) {
 			return w_05;
 		}
-		else if("추후매핑예정2".equals(weather)) {
+		else if("소나기".equals(weather)) {
 			return w_07;
 		}
 		else if("비".equals(weather)) {
@@ -137,22 +137,22 @@ public class WeatherView extends View {
 		else if("눈".equals(weather)) {
 			return w_11;
 		}
-		else if("추후매핑예정3".equals(weather)) {
+		else if("추후매핑예정2".equals(weather)) {
 			return w_14;
 		}
-		else if("추후매핑예정4".equals(weather)) {
+		else if("안개".equals(weather)) {
 			return w_15;
 		}
-		else if("추후매핑예정5".equals(weather)) {
+		else if("추후매핑예정3".equals(weather)) {
 			return w_16;
 		}
-		else if("추후매핑예정6".equals(weather)) {
+		else if("추후매핑예정4".equals(weather)) {
 			return w_17;
 		}
-		else if("추후매핑예정7".equals(weather)) {
+		else if("구름많고 비 또는 눈".equals(weather)) {
 			return w_rs;
 		}
-		else if("추후매핑예정8".equals(weather)) {
+		else if("구름많고 눈 또는 비".equals(weather)) {
 			return w_sr;
 		}
 		else {
