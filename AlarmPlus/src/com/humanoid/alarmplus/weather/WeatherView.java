@@ -180,17 +180,16 @@ public class WeatherView extends View {
 			
 			WeatherData wData = weatherInfo.getWeatherList().get(0);
 			
-			paint.setTextSize(40);
-			canvas.drawText(wData.getTemp(), 30, 50, paint);
+			paint.setTextSize(60);
+			canvas.drawText(wData.getTemp()+"º", 30, 70, paint);			
+			//paint.setTextSize(30);
+			//canvas.drawText(""℃", 160, 40, paint);
 			
-			paint.setTextSize(25);
-			canvas.drawText("o", 120, 35, paint);
+			paint.setTextSize(30);
+			canvas.drawText(wData.getWs()+"㎧", WIDTH-120, 50, paint);
+			//canvas.drawText("m/s", WIDTH-80, 50, paint);
 			
-			paint.setTextSize(25);
-			canvas.drawText(wData.getWs(), WIDTH-100, 35, paint);
-			canvas.drawText("m/s", WIDTH-60, 35, paint);
-			
-			canvas.drawText(wData.getWdKor(), WIDTH-100, 60, paint);			
+			canvas.drawText(wData.getWdKor(), WIDTH-120, 90, paint);			
 			
 			mainImage = getCurrWeatherImage(wData.getWfKor(), wData.getHour());
 			canvas.drawBitmap(mainImage, (WIDTH-mainImage.getWidth())/2, (HEIGHT-SMALL_HEIGHT-mainImage.getHeight())/2, paint);
@@ -211,7 +210,6 @@ public class WeatherView extends View {
 				Rect dst = new Rect(nx, ny , nx+w/5, ny + h/5);  
 				canvas.drawBitmap(tempImage, src, dst, paint);
 			
-				paint.setTextSize(20);
 /*				
 				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmn()) && !"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmx())) {
 					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+10, HEIGHT-20, paint);
@@ -231,26 +229,24 @@ public class WeatherView extends View {
 				}
 */	
 				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmn())) {
-					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+10, HEIGHT-20, paint);
-					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
-					paint.setTextSize(12);
-					canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);
+					paint.setTextSize(20);
+					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn()+"º", WIDTH/4*i+5, HEIGHT-20, paint);
+					canvas.drawText("/", WIDTH/4*i+58, HEIGHT-20, paint);
+					//paint.setTextSize(12);
+					//canvas.drawText("o", WIDTH/4*i+50, HEIGHT-27, paint);
 				} else {
-					canvas.drawText("  -", WIDTH/4*i+20, HEIGHT-20, paint);
-					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
-					paint.setTextSize(12);
-					canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);					
+					paint.setTextSize(25);
+					canvas.drawText("--", WIDTH/4*i+22, HEIGHT-20, paint);
+					canvas.drawText("/", WIDTH/4*i+58, HEIGHT-20, paint);
 				}
 				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmx())) {
 					paint.setTextSize(20);
-					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmx(), WIDTH/4*i+62, HEIGHT-20, paint);
-					paint.setTextSize(12);
-					canvas.drawText("o", WIDTH/4*i+100, HEIGHT-27, paint);
+					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmx()+"º", WIDTH/4*i+68, HEIGHT-20, paint);
+					//paint.setTextSize(12);
+					//canvas.drawText("o", WIDTH/4*i+110, HEIGHT-27, paint);
 				} else {
-					paint.setTextSize(20);
-					canvas.drawText("  -", WIDTH/4*i+62, HEIGHT-20, paint);
-					paint.setTextSize(12);
-					canvas.drawText("o", WIDTH/4*i+110, HEIGHT-27, paint);						
+					paint.setTextSize(25);
+					canvas.drawText("--", WIDTH/4*i+85, HEIGHT-20, paint);
 				}
 			}
 			
