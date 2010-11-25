@@ -206,8 +206,8 @@ public class WeatherView extends View {
 				int w = tempImage.getWidth();  
 				int h = tempImage.getHeight();  
 				Rect src = new Rect(0, 0, w, h);
-				int nx = WIDTH/4*i+20;
-				int ny = HEIGHT-120;
+				int nx = WIDTH/4*i+25;
+				int ny = HEIGHT-115;
 				Rect dst = new Rect(nx, ny , nx+w/5, ny + h/5);  
 				canvas.drawBitmap(tempImage, src, dst, paint);
 			
