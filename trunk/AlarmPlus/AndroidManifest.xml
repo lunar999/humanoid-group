@@ -32,7 +32,9 @@
 			android:name="com.humanoid.alarmplus.RecActivity"
 			android:screenOrientation="portrait" />
 
-		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" />
+		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" 
+		android:screenOrientation="portrait" />
+		
 		<service android:enabled = "true"
 			android:name="com.humanoid.alarmplus.weather.GpsService">
 			<intent-filter>
