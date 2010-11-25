@@ -149,10 +149,10 @@ public class WeatherView extends View {
 		else if("추후매핑예정4".equals(weather)) {
 			return w_17;
 		}
-		else if("구름많고 비 또는 눈".equals(weather)) {
+		else if("눈/비".equals(weather)) {
 			return w_rs;
 		}
-		else if("구름많고 눈 또는 비".equals(weather)) {
+		else if("비/눈".equals(weather)) {
 			return w_sr;
 		}
 		else {
@@ -212,6 +212,7 @@ public class WeatherView extends View {
 				canvas.drawBitmap(tempImage, src, dst, paint);
 			
 				paint.setTextSize(20);
+/*				
 				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmn()) && !"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmx())) {
 					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+10, HEIGHT-20, paint);
 					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
@@ -227,6 +228,29 @@ public class WeatherView extends View {
 				paint.setTextSize(12);
 				canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);
 				canvas.drawText("o", WIDTH/4*i+100, HEIGHT-27, paint);
+				}
+*/	
+				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmn())) {
+					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmn(), WIDTH/4*i+10, HEIGHT-20, paint);
+					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
+					paint.setTextSize(12);
+					canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);
+				} else {
+					canvas.drawText("  -", WIDTH/4*i+20, HEIGHT-20, paint);
+					canvas.drawText("/", WIDTH/4*i+55, HEIGHT-20, paint);
+					paint.setTextSize(12);
+					canvas.drawText("o", WIDTH/4*i+47, HEIGHT-27, paint);					
+				}
+				if(!"-999.0".equals(weatherInfo.getWeatherList().get(i).getTmx())) {
+					paint.setTextSize(20);
+					canvas.drawText(weatherInfo.getWeatherList().get(i).getTmx(), WIDTH/4*i+62, HEIGHT-20, paint);
+					paint.setTextSize(12);
+					canvas.drawText("o", WIDTH/4*i+100, HEIGHT-27, paint);
+				} else {
+					paint.setTextSize(20);
+					canvas.drawText("  -", WIDTH/4*i+62, HEIGHT-20, paint);
+					paint.setTextSize(12);
+					canvas.drawText("o", WIDTH/4*i+110, HEIGHT-27, paint);						
 				}
 			}
 			
