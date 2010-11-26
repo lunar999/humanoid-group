@@ -155,6 +155,10 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 		btnClosed.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				if(mediaPlayer.isPlaying()){
+					mediaPlayer.stop();
+					mediaPlayer.release();
+				}
 				finish();
 			}
 		});
