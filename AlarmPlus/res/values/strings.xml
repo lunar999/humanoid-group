@@ -144,7 +144,7 @@
     <string name="clock_instructions">Select a clock to display.</string>
 
     <!-- Label for analog clock gadget, shown in list of all gadgets -->
-    <string name="analog_gadget">Analog clock</string>
+    <string name="analog_gadget">Alarm+ clock</string>
 
     <!-- Menu item title for general Alarm Clock Settings -->
     <string name="settings">Settings</string>

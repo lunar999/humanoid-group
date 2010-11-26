@@ -16,6 +16,7 @@
 
 package com.humanoid.alarmplus;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,6 +35,11 @@ public class AnalogAppWidgetProvider extends BroadcastReceiver {
         if (AppWidgetManager.ACTION_APPWIDGET_UPDATE.equals(action)) {
             RemoteViews views = new RemoteViews(context.getPackageName(),
                     R.layout.analog_appwidget);
+            //아나로그 시계 위젯 터치시 AlarmClock Call
+            views.setOnClickPendingIntent(R.id.analog_appwidget,
+                    PendingIntent.getActivity(context, 0,
+                        new Intent(context, AlarmClock.class),
+                        PendingIntent.FLAG_CANCEL_CURRENT));
             
             int[] appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
             
