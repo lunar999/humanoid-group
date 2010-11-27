@@ -86,7 +86,7 @@ public class GpsService extends Service implements LocationListener{
 				reverseGeoCoder();
 			} catch (Exception e) {
 				
-				Log.e(WeatherView.TAG, "######## exception 1:"+e,e);
+//				Log.e(WeatherView.TAG, "######## exception 1:"+e,e);
 //				Toast.makeText(this, "######## exception 1:"+e, Toast.LENGTH_LONG).show();
 				/*defaulting to our place*/
 				curLoc = new Location("reverseGeocoded");
@@ -98,7 +98,7 @@ public class GpsService extends Service implements LocationListener{
 
 		} catch (Exception e) {
 //			e.printStackTrace();
-			Log.e(WeatherView.TAG, "######## exception 2:"+e,e);
+//			Log.e(WeatherView.TAG, "######## exception 2:"+e,e);
 //			Toast.makeText(this, "######## exception 2:"+e, Toast.LENGTH_LONG).show();
 		}
 		
@@ -194,7 +194,7 @@ public class GpsService extends Service implements LocationListener{
 //				});
 			}
 		} catch( Exception e ) {
-			Log.e(WeatherView.TAG, "######## exception 3:"+e,e);
+//			Log.e(WeatherView.TAG, "######## exception 3:"+e,e);
 //			Toast.makeText(this, "######## exception 3:"+e, Toast.LENGTH_LONG).show();
 		}
 	}
