@@ -321,7 +321,7 @@
     <string name="alarm_tts_dialog_message">Voice 메세지를 입력해 주세요.(%t 시간,%c 최저온도,%max 최고온도</string>
     <string name="alarm_tts_voicetest_title">Voice 알람 테스트</string>
     <string name="alarm_tts_voicetest_summary">현재 설정된 알람 메세지 테스트</string>
-    <string name="alarm_tts_noti_message">음성 알람 메세지를 반드시 영문으로 입력해 주세요.\n(한글 추후 지원 예정)</string>
+    <string name="alarm_tts_noti_message">Please enter must be in English.</string>
     <string name="alarm_tts_btn_speak">Listen</string>
     <string name="alarm_tts_btn_save">Save</string>
     <string name="alarm_tts_btn_close">Closed</string>
