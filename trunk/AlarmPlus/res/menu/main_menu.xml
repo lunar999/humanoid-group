@@ -23,6 +23,9 @@
 	-->
 	<item android:id="@+id/menu_settings" android:title="@string/settings"
 		android:icon="@android:drawable/ic_menu_preferences" />
+		
+	<item android:id="@+id/menu_info"
+		android:title="@string/info" android:icon="@drawable/ic_menu_info" />
 </menu>
 
 

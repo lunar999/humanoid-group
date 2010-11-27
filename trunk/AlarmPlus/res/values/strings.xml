@@ -18,7 +18,16 @@
     <!-- -->
     <!-- Label shown on launcher icon -->
     <string name="app_label">Alarm+</string>
-
+	<string name="version">\t v1.1.0</string>
+	<string name="app_description">Alarm+ for Android by Humanoid Group</string>
+    <string name="email">E-mail: humanoid.group@gmail.com</string>
+    <string name="website">Home : coming soon~</string>
+    <string name="contact">Contect: coming soon~</string>
+	<string name="close">Close</string>
+    <string name="ok">Ok</string>
+    <string name="error">Error</string>
+    <string name="no_connection">No Internet connection!</string>
+    
     <!-- Menu item on Alarm Clock screen: Add alarm -->
     <string name="add_alarm">Add alarm</string>
 
@@ -41,8 +50,8 @@
     <string name="hide_clock">Hide clock</string>
 
     <!-- Menu item on Alarm Clock screen: Recording -->
-    <string name="recording">Recording</string>
-    
+    <string name="recording">Recording</string>    
+    <string name="info" >"Infomation"</string>
     <!-- Setting label on Set alarm screen: Label -->
     <string name="label">Label</string>
 

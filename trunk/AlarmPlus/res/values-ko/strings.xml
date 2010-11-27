@@ -16,6 +16,26 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_label" msgid="6642875149600019623">"알람+"</string>
+    <string name="version">\t v1.1.0</string>
+	<string name="app_description">제작: 휴머노이드 그룹
+	\n\n그룹원: 
+	\n-신쇼
+	\n-준2아빠
+	\n-fantastic
+	\n-redmars
+	\n-사우람
+	\n\n알람이 울릴때 날씨까지 알려주는 
+	\n스마트한 알람입니다.
+	\n\n버그신고는 메일로 부탁드립니다.!
+	</string>
+    <string name="email">E-mail: humanoid.group@gmail.com</string>
+    <string name="website">홈페이지: 준비중!~</string>
+    <string name="contact">Contect: 준비중!~</string>
+    <string name="close">닫기</string>
+    <string name="ok">확인</string>
+    <string name="error">Error</string>
+    <string name="no_connection">네트워크 연결 실패!</string>
+    
     <string name="add_alarm" msgid="5976616107390962899">"알람 추가"</string>
     <string name="delete_alarm" msgid="3457780990646206817">"알람 삭제"</string>
     <string name="enable_alarm" msgid="7442658245797418741">"알람 사용"</string>
@@ -24,6 +44,7 @@
     <string name="show_clock" msgid="8358759982675616915">"시계 표시"</string>
     <string name="hide_clock" msgid="3217727306480505694">"시계 숨기기"</string>
     <string name="recording" >"녹음"</string>
+    <string name="info" >"정보"</string>
     <string name="label" msgid="162189613902857319">"라벨"</string>
     <string name="default_label" msgid="5590025289805630372">"알람"</string>
     <string name="set_alarm" msgid="9148359866152726808">"알람 설정"</string>

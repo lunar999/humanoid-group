@@ -21,13 +21,13 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,8 +47,6 @@ import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.humanoid.alarmplus.weather.GpsService;
-
 /**
  * AlarmClock application.
  */
@@ -59,6 +57,9 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     final static int SET_ALARM = 1;
     final static String PREF_CLOCK_FACE = "face";
     final static String PREF_SHOW_CLOCK = "show_clock";
+    
+    private static final int DIALOG_INFO = 0;
+	private static final int DIALOG_NO_CONNECTION = 1;
 
     /** Cap alarm count at this number */
     final static int MAX_ALARM_COUNT = 12;
@@ -418,6 +419,11 @@ public class AlarmClock extends Activity implements OnItemClickListener {
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
+                
+            case R.id.menu_info:
+                //정보표시.
+            	showDialog(DIALOG_INFO);
+               return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -435,4 +441,34 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     private void saveClockVisibility() {
         mPrefs.edit().putBoolean(PREF_SHOW_CLOCK, getClockVisibility()).commit();
     }
+    
+    @Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+    	CharSequence title = null;
+    	LayoutInflater inflater = null;
+    	View dialogLayout = null;
+    	AlertDialog.Builder builder = null;
+    	
+    	switch (id) {
+    	case DIALOG_INFO:
+    		title = getString(R.string.app_label) + getString(R.string.version);
+    		inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+    		dialogLayout = inflater.inflate(R.layout.dialog_info, null);
+    		builder = new AlertDialog.Builder(this);
+    		builder.setView(dialogLayout)
+    			.setTitle(title)
+    			.setIcon(R.drawable.ic_launcher_alarmclock2)
+    			.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+    		dialog = builder.create();
+    		break;
+        default:
+        	dialog = null;
+    	}    	
+		return dialog;		
+	}
 }
