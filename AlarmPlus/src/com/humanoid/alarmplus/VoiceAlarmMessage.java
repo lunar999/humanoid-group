@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -63,12 +64,41 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 			}
 		});
 		
+		/*
+		words.setOnKeyListener(new View.OnKeyListener(){
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				// TODO Auto-generated method stub
+				if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+					if (isEmpty(words)) {
+						speakBtn.setEnabled(false);
+						saveBtn.setEnabled(false);
+					} else {
+						speakBtn.setEnabled(true);
+						saveBtn.setEnabled(true);
+					}                  
+		            return true;
+		        }
+		        return false;
+			}
+		});
+		*/
 		
 		speakBtn  = (Button)findViewById(R.id.speak);
 		speakBtn.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View view) {
-				mTts.speak(words.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+//				mTts.speak(words.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+				if (isEmpty(words)) {
+					saveBtn.setEnabled(false);
+					Toast.makeText(getBaseContext(),
+							R.string.alarm_tts_noti_message,
+							Toast.LENGTH_SHORT).show();
+				} else {
+					mTts.speak(words.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+					saveBtn.setEnabled(true);
+				}   
 			}
 		});
 		
@@ -89,12 +119,20 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 			}
 		});
 	
+
+		
 		// TTS가 존재하는지와 사용 가능한지 검사
 		Intent checkIntent = new Intent();
 		checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
 		startActivityForResult(checkIntent, REQ_TTS_STATUS_CHECK);
+		
+		showDialog(DIALOG_LIST);
 	}
 		
+	private boolean isEmpty(EditText et) {
+		  return ((et == null) || (et.getText().toString() == null) || et .getText().toString().equals(""));
+	}
+	
 	private String getFilePath() {
 		String path = "";
 		String state = android.os.Environment.getExternalStorageState();
@@ -232,9 +270,20 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 		// TTS 엔진을 완성했으니 이제 버튼을 가용화하자.
 		if( status == TextToSpeech.SUCCESS) {
 			mTts.setLanguage(Locale.US);
-			speakBtn.setEnabled(true);
-			saveBtn.setEnabled(true);
+
+//			speakBtn.setEnabled(true);
+//			saveBtn.setEnabled(true);
+			
+			if (isEmpty(words)) {
+				saveBtn.setEnabled(false);
+			} else {
+				saveBtn.setEnabled(true);
+			}
+			
 			mTts.setOnUtteranceCompletedListener(this);
+		} else {
+			speakBtn.setEnabled(false);
+			saveBtn.setEnabled(false);
 		}
 	}
 
