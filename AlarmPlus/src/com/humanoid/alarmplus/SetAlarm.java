@@ -444,7 +444,7 @@ public class SetAlarm extends PreferenceActivity
         mDeleteAlarmItem.setIcon(android.R.drawable.ic_menu_delete);
 
         if (AlarmClock.DEBUG) {
-            mTestAlarmItem = menu.add(0, 0, 0, "test alarm");
+            mTestAlarmItem = menu.add(0, 0, 0, "TEST Alarm");
         }
 
         return true;

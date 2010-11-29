@@ -18,7 +18,8 @@
     android:id="@+id/base_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_vertical"> 
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_l" > 
 
     <FrameLayout
         android:id="@+id/clock_layout"
@@ -28,6 +29,7 @@
     <ListView
         android:id="@+id/alarms_list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+        android:cacheColorHint="#00000000" />
 
 </LinearLayout>
