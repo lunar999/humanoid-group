@@ -18,19 +18,23 @@
     <string name="app_label" msgid="6642875149600019623">"알람+"</string>
     <string name="version">\t v1.1.0</string>
 	<string name="app_description">제작: 휴머노이드 그룹
-	\n\n그룹원: 
-	\n-신쇼
+	\n-신쇼, 
 	\n-준2아빠
+	\n-redmars 
 	\n-fantastic
-	\n-redmars
 	\n-사우람
 	\n\n알람이 울릴때 날씨까지 알려주는 
 	\n스마트한 알람입니다.
+	\n\n날씨를 표시하기 위해서는 
+	\n1) 네트워크(3G/Wi-Fi)와 함께
+	\n2) 설정> 장소 및 보안(또는 위치) >
+	\n"'"무선 네트워크 사용"'" 또는 "'"GPS 위성 사용"'" 
+	\n이 먼저 체크되어 있어야 합니다.
 	\n\n버그신고는 메일로 부탁드립니다.!
 	</string>
     <string name="email">E-mail: humanoid.group@gmail.com</string>
     <string name="website">홈페이지: 준비중!~</string>
-    <string name="contact">Contect: 준비중!~</string>
+    <string name="contact">트위터: 준비중!~</string>
     <string name="close">닫기</string>
     <string name="ok">확인</string>
     <string name="error">Error</string>

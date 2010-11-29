@@ -19,17 +19,19 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="6dip"
-    android:orientation="vertical"> 
+    android:orientation="vertical"
+    android:background="@drawable/bg_p" > 
 
     <LinearLayout
         android:id="@+id/clock_layout"
         android:layout_width="fill_parent"
-        android:layout_height="192dip"/>
+        android:layout_height="192dip" />
 
     <ListView
         android:id="@+id/alarms_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1" 
+        android:cacheColorHint="#00000000" />
 
 </LinearLayout>
