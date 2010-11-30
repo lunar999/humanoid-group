@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -133,8 +134,12 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 			public void onClick(View v) {
 				//play
 				try {
+					if(mediaPlayer == null){
+						mediaPlayer = new MediaPlayer();
+					}
 					playChronometer.setVisibility(View.VISIBLE);
 					btnListen.setEnabled(false);
+					btnRec.setEnabled(false);
 					
 					runOnUiThread(new Runnable() {
 						
@@ -158,6 +163,7 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 				if(mediaPlayer.isPlaying()){
 					mediaPlayer.stop();
 					mediaPlayer.release();
+					mediaPlayer = null;
 				}
 				finish();
 			}
@@ -167,8 +173,9 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		mediaPlayer = new MediaPlayer();
+		if(mediaPlayer == null){
+			mediaPlayer = new MediaPlayer();
+		}
 		mediaPlayer.setOnErrorListener(new OnErrorListener() {
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				Log.d("","Error occurred while playing audio.");
@@ -183,10 +190,12 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 			
 			@Override
 			public void onCompletion(MediaPlayer mediaplayer) {
-				mediaplayer.stop();
-				mediaplayer.release();
+//				mediaplayer.stop();
+//				mediaplayer.release();
 				btnListen.setEnabled(true);
+				btnRec.setEnabled(true);
 				playChronometer.setVisibility(View.INVISIBLE);
+//				mediaplayer = null;
 			}
 		});
 
@@ -203,6 +212,7 @@ public class RecActivity extends Activity implements AlarmConstantIf{
 
 		try {
 			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
+				mediaPlayer.reset();
 				mediaPlayer.setDataSource(recFilePath);
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
 				mediaPlayer.setLooping(false);
