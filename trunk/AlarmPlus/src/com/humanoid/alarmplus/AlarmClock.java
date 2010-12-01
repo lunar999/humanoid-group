@@ -18,6 +18,7 @@ package com.humanoid.alarmplus;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +29,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.location.Criteria;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -81,6 +84,13 @@ public class AlarmClock extends Activity implements OnItemClickListener {
      * Which clock face to show
      */
     private int mFace = -1;
+    
+    
+    private String mLocationSetting = "[]";
+    //private String mLocationSetting_FULL = "[network, gps]";
+    //private String mLocationSetting_GPS = "[gps]";
+    //private String mLocationSetting_NETWORK = "[network]";
+    private static boolean CHECK_LOCATION_SET = false;
 
     /*
      * FIXME: it would be nice for this to live in an xml config file.
@@ -273,9 +283,21 @@ public class AlarmClock extends Activity implements OnItemClickListener {
         	alertCheckGPS();
         }
 */        
-		//Intent intent = new Intent(this, GpsService.class);
-        //Intent intent = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
-		//startService(intent);
+        
+        Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+    	startService(service);
+        
+        //shinshow: gps & 무선네트워크상태 체크 수정추가.
+        String context = Context.LOCATION_SERVICE;
+        LocationManager locationMgr = (LocationManager)getSystemService(context);
+        Criteria criteria = new Criteria();
+        List<String> list = locationMgr.getProviders(criteria, true);
+        
+        String provider = list.toString();
+        //Log.v("#################### [Location Provider List] = "+provider +"####################");
+		if (!CHECK_LOCATION_SET && mLocationSetting.equals(provider)) {
+			alertCheckGPS();
+		}
     }
     
     private void alertCheckGPS() {
@@ -291,6 +313,8 @@ public class AlarmClock extends Activity implements OnItemClickListener {
                 .setNegativeButton(R.string.gpscheckbtn2,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                            	//최초 한번만 묻고 자꾸 알림창 뜨는거 싫어하는 사람을 위해서,,^^;
+                            	CHECK_LOCATION_SET = true;                                
                                 dialog.cancel();
                             }
                     });

@@ -18,7 +18,7 @@
     <string name="app_label" msgid="6642875149600019623">"알람+"</string>
     <string name="version">\t v1.1.0</string>
 	<string name="app_description">제작: 휴머노이드 그룹
-	\n-신쇼, 
+	\n-신쇼 
 	\n-준2아빠
 	\n-redmars 
 	\n-fantastic
@@ -171,7 +171,10 @@
    <string name="chronometer_initial_format">녹음시간: <xliff:g id="initial-format">%s</xliff:g></string>
    <string name="chronometer_initial_format2">재생시간: <xliff:g id="initial-format">%s</xliff:g></string>
     
-    <string name="gpscheck">날씨 정보를 수신할려면 GPS정보가 필요 합니다. GPS정보를 켜시겠습니까?</string>
+    <string name="gpscheck">날씨정보를 수신하려면
+    \n"'"무선 네트워크"'" 또는 "'"GPS"'"
+    \n설정이 필요 합니다.
+    \n\n지금 설정하시겠습니까?</string>
     <string name="gpscheckbtn1">설정</string>
     <string name="gpscheckbtn2">취소</string>    
    

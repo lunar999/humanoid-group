@@ -42,8 +42,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-    	Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
-    	context.startService(service);
+    	//Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+    	//context.startService(service);
         // Take care of the easy intents first.
         if (Alarms.CLEAR_NOTIFICATION.equals(intent.getAction())) {
             // If this is the "Clear All Notifications" intent, stop the alarm
