@@ -32,7 +32,6 @@ public class GpsService extends Service implements LocationListener{
 	private Criteria criteria;
 	private Location curLoc = null;
 	private boolean isGpsEnabled;
-	private boolean isNetworkEnabled;
 	
 	private DongInfo dongInfo;
 	public static String currAddress;
@@ -77,7 +76,7 @@ public class GpsService extends Service implements LocationListener{
 			Log.d(WeatherView.TAG, "######## onResume tempLocation:"+tempLocation);
 			
 			if(tempLocation == null) {
-				Toast.makeText(this, "Can not find your current location !!!", Toast.LENGTH_LONG).show();
+//				Toast.makeText(this, "Can not find your current location !!!", Toast.LENGTH_LONG).show();
 				return;
 			}
 			
@@ -184,7 +183,7 @@ public class GpsService extends Service implements LocationListener{
 //				}
 			}
 			else {
-				Toast.makeText(this, "없음", Toast.LENGTH_LONG).show();
+//				Toast.makeText(this, "없음", Toast.LENGTH_LONG).show();
 				Log.d(WeatherView.TAG, "없음");
 //				handler.post( new Runnable() {
 //					public void run() {
@@ -230,14 +229,14 @@ public class GpsService extends Service implements LocationListener{
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		isNetworkEnabled = locationMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isGpsEnabled = locationMgr.isProviderEnabled(provider);
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		isNetworkEnabled = locationMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isGpsEnabled = locationMgr.isProviderEnabled(provider);
 	}
 
 	@Override
