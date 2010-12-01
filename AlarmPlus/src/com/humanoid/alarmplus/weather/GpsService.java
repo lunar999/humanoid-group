@@ -30,8 +30,9 @@ public class GpsService extends Service implements LocationListener{
 	
 	private LocationManager locationMgr;
 	private Criteria criteria;
-	Location curLoc = null;
+	private Location curLoc = null;
 	private boolean isGpsEnabled;
+	private boolean isNetworkEnabled;
 	
 	private DongInfo dongInfo;
 	public static String currAddress;
@@ -63,7 +64,6 @@ public class GpsService extends Service implements LocationListener{
 			criteria.setAccuracy(Criteria.NO_REQUIREMENT);
 			criteria.setPowerRequirement(Criteria.POWER_LOW);
 			locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//			String bestP = locationMgr.getBestProvider(criteria, false);
 			String bestP = locationMgr.getBestProvider(criteria, true);			
 			locationMgr.requestLocationUpdates(bestP, 60000,100, this);
 //			locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,1, this);
@@ -210,7 +210,8 @@ public class GpsService extends Service implements LocationListener{
 		Log.d(WeatherView.TAG, "onLocationChanged 111");
 		try {
 			//			killOnError();
-			if (LocationManager.GPS_PROVIDER.equals(location.getProvider())) {
+			//if (LocationManager.GPS_PROVIDER.equals(location.getProvider())) {
+			if (LocationManager.GPS_PROVIDER.equals(location.getProvider()) || LocationManager.NETWORK_PROVIDER.equals(location.getProvider())) {
 				Log.d(WeatherView.TAG, "onLocationChanged 222");
 				synchronized (curLoc) {
 					curLoc = location;
@@ -230,11 +231,13 @@ public class GpsService extends Service implements LocationListener{
 	@Override
 	public void onProviderDisabled(String provider) {
 		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isNetworkEnabled = locationMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
 		isGpsEnabled = locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isNetworkEnabled = locationMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 	}
 
 	@Override
