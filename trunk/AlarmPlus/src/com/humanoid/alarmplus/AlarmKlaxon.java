@@ -236,7 +236,9 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     	mMediaPlayer.setDataSource(this, alert);
                     }
                     else if(alarm_effect_code[2].equals(soundMode)) {//녹음
-                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+//                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
+                    	setDataSourceFromFile(new File(AlarmConstantIf.ALARM_REC_FILE_FULL_PATH),mMediaPlayer);
+                    	
                     }
                     else if(alarm_effect_code[3].equals(soundMode)) {//TTS
 /*
