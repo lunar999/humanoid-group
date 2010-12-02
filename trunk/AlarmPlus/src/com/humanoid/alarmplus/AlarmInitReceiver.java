@@ -39,6 +39,9 @@ public class AlarmInitReceiver extends BroadcastReceiver {
         if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
             Alarms.saveSnoozeAlert(context, -1, -1);
             Alarms.disableExpiredAlarms(context);
+            //shinshow: 부팅시 서비스 자동실행 등록
+            Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+	    	context.startService(service);
         }
         Alarms.setNextAlert(context);
     }

@@ -284,8 +284,8 @@ public class AlarmClock extends Activity implements OnItemClickListener {
         }
 */        
         
-        Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
-    	startService(service);
+//        Intent service = new Intent("com.humanoid.alarmplus.weather.GPS_SERVICE");
+//        startService(service);
         
         //shinshow: gps & 무선네트워크상태 체크 수정추가.
         String context = Context.LOCATION_SERVICE;
