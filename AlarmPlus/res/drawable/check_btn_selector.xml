@@ -3,6 +3,6 @@
  	<item android:state_pressed="true"
  		  android:drawable="@drawable/b_list_btn_on"/>    
  	<item android:state_selected="true"
- 		  android:drawable="@drawableb_list_btn_select"/> 
+ 		  android:drawable="@drawable/b_list_btn_select"/> 
 	<item android:drawable="@drawable/b_list_btn_off"/>
 </selector>
