@@ -33,7 +33,7 @@
 
     <!-- Context Menu Item on Alarm Settings screen: Delete alarm -->
     <string name="delete_alarm">Delete alarm</string>
-
+ 
     <!-- Context Menu Item on Alarm Settings screen: Enable alarm -->
     <string name="enable_alarm">Enable alarm</string>
 
