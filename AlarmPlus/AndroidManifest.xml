@@ -119,6 +119,6 @@
 				android:resource="@xml/analog_appwidget" />
 		</receiver>
 	</application>
-	<uses-sdk android:minSdkVersion="7"></uses-sdk>
+	<uses-sdk android:minSdkVersion="4"></uses-sdk>
 </manifest>
 
