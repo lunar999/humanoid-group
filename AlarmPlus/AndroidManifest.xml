@@ -17,22 +17,22 @@
 	
 	
 	<application android:label="@string/app_label"
-		android:icon="@drawable/ic_launcher_alarmclock2" android:debuggable="false">
+		android:icon="@drawable/ic_launcher_alarmclock2" android:debuggable="false" >
 
 		<provider android:name="com.humanoid.alarmplus.AlarmProvider"
 			android:authorities="com.humanoid.alarmplus" />
 
-		<activity android:name=".VoiceAlarmMessage" android:theme="@android:style/Theme">
+		<activity android:name=".VoiceAlarmMessage" android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="com.humanoid.alarmplus.TTS" />
             </intent-filter>
         </activity>
 
 		<activity
-			android:name="com.humanoid.alarmplus.RecActivity"
+			android:name="com.humanoid.alarmplus.RecActivity" android:theme="@android:style/Theme.NoTitleBar"
 			android:screenOrientation="portrait" />
 
-		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" 
+		<activity android:name="com.humanoid.alarmplus.weather.GpsSampleActivity" android:theme="@android:style/Theme.NoTitleBar" 
 		android:screenOrientation="portrait" />
 		
 		<service android:enabled = "true"
@@ -41,7 +41,7 @@
 				<action android:name="com.humanoid.alarmplus.weather.GPS_SERVICE" />
 			</intent-filter>
 		</service>
-		<activity android:name="com.humanoid.alarmplus.AlarmClock"
+		<activity android:name="com.humanoid.alarmplus.AlarmClock" android:theme="@android:style/Theme.NoTitleBar"
 			android:label="@string/app_label" android:configChanges="orientation|keyboardHidden|keyboard|navigation">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
