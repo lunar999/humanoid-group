@@ -19,7 +19,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_vertical"
-    android:background="@drawable/bg_l" > 
+    android:background="@drawable/satellite" > 
 
     <FrameLayout
         android:id="@+id/clock_layout"

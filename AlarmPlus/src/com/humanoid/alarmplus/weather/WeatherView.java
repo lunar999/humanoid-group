@@ -305,6 +305,7 @@ public class WeatherView extends View {
 			paint.setTextSize(25);
 			//canvas.drawText(wData.getWfKor(), WIDTH/2-50, HEIGHT-SMALL_HEIGHT-90, paint);
 			canvas.drawText(wData.getWfKor(), getWidth()/2, HEIGHT-SMALL_HEIGHT-90, paint);
+			canvas.drawText("<< " + wData.getHour() +"시 일기예보 >>", getWidth()/2, HEIGHT-SMALL_HEIGHT-30, paint);
 		}
 		else {			
 			String displayText1 = this.getContext().getString(R.string.alarm_weather_none1);
