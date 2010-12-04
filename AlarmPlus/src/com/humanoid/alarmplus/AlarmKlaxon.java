@@ -18,11 +18,7 @@ package com.humanoid.alarmplus;
 
 
 import java.io.File;
-import java.util.Locale;
 
-import com.humanoid.alarmplus.util.UtilFile;
-
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +36,8 @@ import android.os.Vibrator;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
+
+import com.humanoid.alarmplus.weather.WeatherView;
 /**
  * Manages alarms and vibe. Runs as a service so that it can continue to play
  * if another activity overrides the AlarmAlert dialog.
@@ -60,7 +57,7 @@ public class AlarmKlaxon extends Service implements OnInitListener {
     private TelephonyManager mTelephonyManager;
     private int mInitialCallState;    
 
-    private Activity mActivity;
+//    private Activity mActivity;
     // Internal messages
     private static final int KILLER = 1000;
     
@@ -179,8 +176,7 @@ public class AlarmKlaxon extends Service implements OnInitListener {
             // Fall back on the default alarm if the database does not have an
             // alarm stored.
             if (alert == null) {
-                alert = RingtoneManager.getDefaultUri(
-                        RingtoneManager.TYPE_ALARM);
+                alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                 if (Log.LOGV) {
                     Log.v("Using default alarm: " + alert.toString());
                 }
@@ -203,8 +199,7 @@ public class AlarmKlaxon extends Service implements OnInitListener {
             	
                 // Check if we are in a call. If we are, use the in-call alarm
                 // resource at a low volume to not disrupt the call.
-                if (mTelephonyManager.getCallState()
-                        != TelephonyManager.CALL_STATE_IDLE) {
+                if (mTelephonyManager.getCallState()!= TelephonyManager.CALL_STATE_IDLE) {
                     Log.v("Using the in-call alarm");
                     mMediaPlayer.setVolume(IN_CALL_VOLUME, IN_CALL_VOLUME);
                     setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.in_call_alarm);
@@ -223,7 +218,7 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     }
 */                 
                 } else {
-                	Log.v("666");
+//                	Log.v("666");
         			// 2010.11.22 updated by redmars, 리소스의 리스트에서 summary 설정                	
         			String[] alarm_effect_code= getResources().getStringArray(R.array.alarm_effect_values);    	        			
         				
@@ -233,7 +228,36 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     }                    
                 	else if(alarm_effect_code[1].equals(soundMode)) {//날씨 효과음
                     	//임시-구현예정!!
-                    	mMediaPlayer.setDataSource(this, alert);
+                		android.util.Log.d(WeatherView.TAG,"weather sound");
+                		
+                		String currentWeather = WeatherView.getCurrWeatherForSound();
+                		
+                		if(currentWeather == null || currentWeather.length()==0) {
+                			android.util.Log.d(WeatherView.TAG,"weather sound , Weather null");
+                			mMediaPlayer.setDataSource(this, alert);
+                		}
+                		else {
+                			if("맑음".equals(currentWeather)) {//맑음
+                				android.util.Log.d(WeatherView.TAG,"weather sound , Weather 1");
+                				setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    		}
+                    		else if("흐림".equals(currentWeather)) {//흐림
+                    			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 2");
+                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    		}
+                    		else if("눈".equals(currentWeather)) {//비
+                    			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 3");
+                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    		}
+                    		else if("비".equals(currentWeather)) {//눈
+                    			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 4");
+                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                    		}
+                    		else {
+                    			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 5");
+                    			mMediaPlayer.setDataSource(this, alert);
+                    		}
+                		}
                     }
                     else if(alarm_effect_code[2].equals(soundMode)) {//녹음
 //                    	setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_rec.mp4"),mMediaPlayer);
