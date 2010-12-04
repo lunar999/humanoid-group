@@ -234,7 +234,7 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                 		
                 		if(currentWeather == null || currentWeather.length()==0) {
                 			android.util.Log.d(WeatherView.TAG,"weather sound , Weather null");
-                			mMediaPlayer.setDataSource(this, alert);
+                			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.rooster);    
                 		}
                 		else {
                 			if("맑음".equals(currentWeather)) {//맑음
