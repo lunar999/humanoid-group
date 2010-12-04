@@ -88,7 +88,7 @@
         android:layout_width="60dip"
         android:layout_height="76dip"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/check_btn_selector"
+        android:button="@drawable/check_btn_selector"
         />
 
 </LinearLayout>
