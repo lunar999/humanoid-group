@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 import com.humanoid.alarmplus.R;
@@ -58,7 +59,7 @@ public class WeatherView extends View {
 	
 	private Bitmap mainImage;
 	
-	private WeatherInfo weatherInfo;
+	private static WeatherInfo weatherInfo;
 	
 	public WeatherView(Context context) {
 		super(context);
@@ -70,7 +71,7 @@ public class WeatherView extends View {
 	}
 
 	public void setWeatherInfo(WeatherInfo weatherInfo) {
-		this.weatherInfo = weatherInfo;
+		WeatherView.weatherInfo = weatherInfo;
 		
 		mainImage = w_01_1;
 	}
@@ -160,6 +161,52 @@ public class WeatherView extends View {
 		}
 	}
 	
+	/**
+	 * 
+	 * <pre>
+	 * 1.기능 : 현재 날씨를 반환하는 메소드. <br>
+	 * 2.처리 개요
+	 *     - 4가지 경우로만 반환한다
+	 *       맑음,흐림,눈,비
+	 *     - 
+	 * 3.주의사항 
+	 *     -
+	 *</pre>
+	 * @return
+	 */
+	public static String getCurrWeatherForSound() {
+		
+		String currWeather = null;
+		
+		if(weatherInfo != null) {
+			WeatherData wData = weatherInfo.getWeatherList().get(0);
+			currWeather = wData.getWfKor();
+			
+			if(currWeather == null || currWeather.length() == 0) {
+				return null;
+			}
+			else {
+				if("맑음".equals(currWeather) || "구름조금".equals(currWeather)) {
+					currWeather = "맑음";
+				}
+				else if("구름많음".equals(currWeather) || "흐림".equals(currWeather) || "안개".equals(currWeather)) {
+					currWeather = "흐림";
+				}
+				else if("소나기".equals(currWeather) || "비".equals(currWeather)) {
+					currWeather = "비";
+				}
+				else if("눈".equals(currWeather) || "눈/비".equals(currWeather)|| "비/눈".equals(currWeather)) {
+					currWeather = "눈";
+				}
+				else {
+					currWeather = "흐림";
+				}
+			}
+		}
+		
+		return currWeather;
+	}
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -168,7 +215,7 @@ public class WeatherView extends View {
 		
 		Paint paint = new Paint();
 		
-//		Log.d(TAG, "############# weatherInfo:"+weatherInfo);
+		Log.d(TAG, "############# weatherInfo:"+weatherInfo);
 		if(weatherInfo != null) {
 //			paint.setStyle(Paint.Style.STROKE);  
 //			paint.setStrokeWidth(1);

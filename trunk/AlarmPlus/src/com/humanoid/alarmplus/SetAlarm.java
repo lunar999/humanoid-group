@@ -100,7 +100,6 @@ public class SetAlarm extends PreferenceActivity
 //			
 //			@Override
 //			public boolean onPreferenceClick(Preference preference) {
-//				// TODO Auto-generated method stub
 //				Toast.makeText(getBaseContext(), "TTS Preference Checked!!", Toast.LENGTH_SHORT).show();
 //				return false;
 //			}
@@ -112,7 +111,6 @@ public class SetAlarm extends PreferenceActivity
 //			
 //			@Override
 //			public boolean onPreferenceClick(Preference preference) {
-//				// TODO Auto-generated method stub
 //
 ////				String ttsMessage = mTtsMessagePref.getSummary().toString();
 ////				Toast.makeText(getBaseContext(), ttsMessage, Toast.LENGTH_LONG).show();
@@ -125,7 +123,6 @@ public class SetAlarm extends PreferenceActivity
 //			
 //			@Override
 //			public boolean onPreferenceChange(Preference preference, Object newValue) {
-//				// TODO Auto-generated method stub
 //				preference.setSummary((String) newValue);
 //				saveTtsSoundFile((String)newValue);
 //				
@@ -139,7 +136,6 @@ public class SetAlarm extends PreferenceActivity
 //			
 //			@Override
 //			public boolean onPreferenceClick(Preference preference) {
-//				// TODO Auto-generated method stub
 //				String ttsMessage = mTtsMessagePref.getSummary().toString();
 //				
 ////				getSampleText();
@@ -196,11 +192,11 @@ public class SetAlarm extends PreferenceActivity
     			// 2010.11.22 updated by redmars, 리소스의 리스트에서 summary 설정
     			String[] alarm_effect_code= getResources().getStringArray(R.array.alarm_effect_values);    	
     			
-    			if (newValue.equals(alarm_effect_code[0])) {
+    			if (newValue.equals(alarm_effect_code[0])) {//default
     				
-    			} else if (newValue.equals(alarm_effect_code[1])) {
+    			} else if (newValue.equals(alarm_effect_code[1])) {//weather
     				
-    			} else if (newValue.equals(alarm_effect_code[2])) {
+    			} else if (newValue.equals(alarm_effect_code[2])) {//voice record
     				//regpath = allpath + "alarm_rec_" + mId + "_02.mp4";       // 10.11.17 add redmars    	
     				regpath = "alarm_rec_id_" + mId + "_" + newValue + ".mp4";       // 10.11.22 update redmars
     				regpath = UtilFile.getSdCardAlarmPath(regpath);
@@ -209,7 +205,7 @@ public class SetAlarm extends PreferenceActivity
         			
 //        			startVoiceRecognitionActivity();
         			
-    			} else if (newValue.equals(alarm_effect_code[3])) {
+    			} else if (newValue.equals(alarm_effect_code[3])) {//TTS
         			//ttspath = allpath + "alarm_tts_" + mId + "_03.wav";       // 10.11.17 add redmars    
     				ttspath = "alarm_tts_id_" + mId + "_" + newValue + ".wav";       // 10.11.22 update redmars
     				ttspath = UtilFile.getSdCardAlarmPath(ttspath);
