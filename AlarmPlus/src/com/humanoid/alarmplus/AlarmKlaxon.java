@@ -239,24 +239,20 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                 		else {
                 			if("맑음".equals(currentWeather)) {//맑음
                 				android.util.Log.d(WeatherView.TAG,"weather sound , Weather 1");
-                				setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
+                				setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.clear);
                     		}
                     		else if("흐림".equals(currentWeather)) {//흐림
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 2");
-                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
-                    		}
+                    			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.cloudy);                    		}
                     		else if("눈".equals(currentWeather)) {//비
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 3");
-                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
-                    		}
+                    			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.rain);                    		}
                     		else if("비".equals(currentWeather)) {//눈
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 4");
-                    			setDataSourceFromFile(new File("/sdcard/humanoid/alarm/alarm_tts.wav"),mMediaPlayer);
-                    		}
+                    			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.snow);                    		}
                     		else {
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 5");
-                    			mMediaPlayer.setDataSource(this, alert);
-                    		}
+                    			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.rooster);                    		}
                 		}
                     }
                     else if(alarm_effect_code[2].equals(soundMode)) {//녹음
