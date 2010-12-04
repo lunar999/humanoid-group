@@ -305,6 +305,10 @@ public class VoiceAlarmMessage extends Activity implements OnInitListener, OnUtt
 	public void onDestroy()
 	{
 		super.onDestroy();
-		mTts.shutdown();
+		
+		if(mTts != null) {
+			mTts.shutdown();
+		}
+		
 	}
 }
