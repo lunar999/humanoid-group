@@ -244,10 +244,10 @@ public class AlarmKlaxon extends Service implements OnInitListener {
                     		else if("흐림".equals(currentWeather)) {//흐림
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 2");
                     			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.cloudy);                    		}
-                    		else if("눈".equals(currentWeather)) {//비
+                    		else if("비".equals(currentWeather)) {//비
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 3");
                     			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.rain);                    		}
-                    		else if("비".equals(currentWeather)) {//눈
+                    		else if("눈".equals(currentWeather)) {//눈
                     			android.util.Log.d(WeatherView.TAG,"weather sound , Weather 4");
                     			setDataSourceFromResource(getResources(), mMediaPlayer,R.raw.snow);                    		}
                     		else {
