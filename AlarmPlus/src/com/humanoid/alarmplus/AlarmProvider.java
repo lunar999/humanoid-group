@@ -15,7 +15,7 @@
  */
 
 package com.humanoid.alarmplus;
-
+ 
  
 import android.content.ContentProvider;
 import android.content.ContentUris;
