@@ -1,246 +1,196 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_label" msgid="6642875149600019623">"알람+"</string>
-    <string name="version">\t v1.1.0</string>
-	<string name="app_description">제작: 휴머노이드 그룹
-	\n-신쇼 
-	\n-준2아빠
-	\n-redmars 
-	\n-fantastic
-	\n-사우람
-	\n\n알람이 울릴때 날씨까지 알려주는 
-	\n스마트한 알람입니다.
-	\n\n날씨를 표시하기 위해서는 
-	\n1) 네트워크(3G/Wi-Fi)와 함께
-	\n2) 설정> 장소 및 보안(또는 위치) >
-	\n"'"무선 네트워크 사용"'" 또는 "'"GPS 위성 사용"'" 
-	\n이 먼저 체크되어 있어야 합니다.
-	\n\n버그신고는 메일로 부탁드립니다.!
-	</string> 
-    <string name="email">E-mail: humanoid.group@gmail.com</string>
-    <string name="website">홈페이지: 준비중!~</string>
-    <string name="contact">트위터: 준비중!~</string>
-    <string name="close">닫기</string>
-    <string name="ok">확인</string>
-    <string name="error">Error</string>
-    <string name="no_connection">네트워크 연결 실패!</string>
-    
-    <string name="add_alarm" msgid="5976616107390962899">"알람 추가"</string>
-    <string name="delete_alarm" msgid="3457780990646206817">"알람 삭제"</string>
-    <string name="enable_alarm" msgid="7442658245797418741">"알람 사용"</string>
-    <string name="disable_alarm" msgid="6665528499886549648">"알람 사용 중지"</string>
-    <string name="delete_alarm_confirm" msgid="4237696873219106907">"알람이 삭제됩니다."</string>
-    <string name="show_clock" msgid="8358759982675616915">"시계 표시"</string>
-    <string name="hide_clock" msgid="3217727306480505694">"시계 숨기기"</string>
-    <string name="recording" >"녹음"</string>
-    <string name="info" >"정보"</string>
-    <string name="label" msgid="162189613902857319">"라벨"</string>
-    <string name="default_label" msgid="5590025289805630372">"알람"</string>
-    <string name="set_alarm" msgid="9148359866152726808">"알람 설정"</string>
-    <string name="alarm_vibrate" msgid="3476686921490362230">"진동"</string>
-    <string name="alarm_repeat" msgid="7242985466344233206">"반복"</string>
-    <string name="alarm_sound" >"알람 음악 종류 선택"</string>
-    <string name="alert" msgid="6539852766423700221">"벨소리"</string>
-    <!-- author : kim ju hyun  -->    
-    <string name="effect" msgid="6539852766423700222">"효과음"</string>        
-    <string name="time" msgid="8067216534232296518">"시간"</string>
-    <string name="alarm_alert_dismiss_text" msgid="4942914605480888820">"해제"</string>
-    <string name="alarm_alert_alert_silenced" msgid="7918075929961104202">"<xliff:g id="MINUTES">%d</xliff:g>분 후 알람이 중지됨"</string>
-    <string name="alarm_alert_snooze_text" msgid="1774416052207651584">"다시 울림"</string>
-    <string name="alarm_alert_snooze_set" msgid="656470966696912087">"<xliff:g id="MINUTES">%d</xliff:g>분 동안 알람 일시 중지"</string>
-  <string-array name="alarm_set">
-    <item msgid="5163476010406761625">"지금부터 1분 미만 후로 알람이 설정됩니다."</item>
-    <item msgid="7110525731259629055">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="7003982794086186185">"지금부터 <xliff:g id="HOURS">%2$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="7311021123230077742">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="8431715191823114872">"지금부터 <xliff:g id="MINUTES">%3$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="3244151088673185428">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="3663661342600168814">"지금부터 <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g> 후로 알람이 설정됩니다."</item>
-    <item msgid="7779544127785487304">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g> 후로 알람이 설정됩니다."</item>
-  </string-array>
-    <string name="day" msgid="7984755014526510295">"1일"</string>
-    <string name="days" msgid="2070509222727852210">"<xliff:g id="DAYS">%s</xliff:g>일"</string>
-    <string name="hour" msgid="2546819039651509323">"1시간"</string>
-    <string name="hours" msgid="2071487018566991613">"<xliff:g id="HOURS">%s</xliff:g>시간"</string>
-    <string name="minute" msgid="2486157997434653710">"1분"</string>
-    <string name="minutes" msgid="6115838729146292526">"<xliff:g id="MINUTES">%s</xliff:g>분"</string>
-    <string name="every_day" msgid="1058994798884544691">"매일"</string>
-    <string name="never" msgid="54104287800571769">"반복 안함"</string>
-    <string name="day_concat" msgid="971998564991636532">", "</string>
-    <string name="clock_instructions" msgid="3118560284915857690">"표시할 시계를 선택하세요."</string>
-    <string name="analog_gadget" msgid="1670505720837152766">"알람+ 시계"</string>
-    <string name="settings" msgid="5849739030579520686">"설정"</string>
-    <string name="alarm_in_silent_mode_title" msgid="3892612644543516705">"무음 모드로 알람 설정"</string>
-    <string name="alarm_in_silent_mode_summary" msgid="6042500263899922832">"무음 모드에서도 알람이 울리도록 설정"</string>
-    <string name="snooze_duration_title" msgid="1471249885139952670">"다시 울림 간격"</string>
-  <string-array name="snooze_duration_entries">
-    <item msgid="8337408933053603125">"5분"</item>
-    <item msgid="5294206441496024610">"10분"</item>
-    <item msgid="2165904039211935470">"15분"</item>
-    <item msgid="7248236967714374250">"20분"</item>
-    <item msgid="738394723625179423">"25분"</item>
-    <item msgid="1180222611308391616">"30분"</item>
-  </string-array>
-  <string-array name="snooze_duration_values">
-    <item msgid="3655014754453084122">"5"</item>
-    <item msgid="8939029597449573449">"10"</item>
-    <item msgid="3922647341176353315">"15"</item>
-    <item msgid="5821804105985044459">"20"</item>
-    <item msgid="6048861883552402852">"25"</item>
-    <item msgid="2740866721232379791">"30"</item>
-  </string-array>
-    <string name="done" msgid="6509722361933858451">"완료"</string>
-    <string name="revert" msgid="9100911171235162926">"되돌리기"</string>
-    <string name="alarm_volume_title" msgid="8506245173912428522">"알람 볼륨"</string>
-    <string name="alarm_volume_summary" msgid="8957440373896242438">"알람 볼륨 설정"</string>
-    <string name="silent_alarm_summary" msgid="8605302849408279221">"무음"</string>
-    <string name="alarm_notify_text" msgid="4146350965933990093">"알람을 일시 중지하거나 해제하려면 선택하세요."</string>
-    <string name="alarm_notify_snooze_label" msgid="5404083762646377829">"<xliff:g id="LABEL">%s</xliff:g>(알람 일시 중지됨)"</string>
-    <string name="alarm_notify_snooze_text" msgid="8004830999152609519">"<xliff:g id="TIME">%s</xliff:g> 후로 알람이 설정되었습니다. 취소하려면 선택하세요."</string>
-    <string name="volume_button_setting_title" msgid="1892885285888644234">"사이드 버튼 동작"</string>
-    <string name="volume_button_setting_summary" msgid="1594641247799573198">"알람이 울리는 동안 사이드 버튼을 눌렀을 때의 동작 설정"</string>
-    <string name="default_ringtone_setting_title" msgid="4549726190682964245">"기본 벨소리 설정"</string>
-  <string-array name="volume_button_setting_entries">
-    <item msgid="4520420953175098625">"없음"</item>
-    <item msgid="7111908302622811168">"다시 울림"</item>
-    <item msgid="8573552194573068996">"취소"</item>
-  </string-array>
-  <string-array name="volume_button_setting_values">
-    <item msgid="4851033050639608752">"0"</item>
-    <item msgid="3204893476515513084">"1"</item>
-    <item msgid="7687709558968154577">"2"</item>
-  </string-array>
-  
-  <!-- Days of week -->
-    <string-array name="days_of_week">
-        <!-- Day of week: Monday -->
-        <item>월요일</item>
-        <!-- Day of week: Tuesday -->
-        <item>화요일</item>
-        <!-- Day of week: Wednesday -->
-        <item>수요일</item>
-        <!-- Day of week: Thursday -->
-        <item>목요일</item>
-        <!-- Day of week: Friday  -->
-        <item>금요일</item>
-        <!-- Day of week: Saturday -->
-        <item>토요일</item>
-        <!-- Day of week: Sunday -->
-        <item>일요일</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, main!</string>
+    <string name="app_name">SMS Story</string>
+    <string name="app_title">SMS Story</string>
+    <string name="app_version">1.0</string>       
+    <string name="app_finish">종료 하시겠습니까?</string>   
+    <string name="app_ok">확인</string>      
+    <string name="app_cancel">취소</string>
+    <string name="app_close">닫기</string>      
+	<string name="app_description">■ Version
+	\n 1.0 
+	</string>
+	<string name="email">E-mail : subprovider@gmail.com </string>	       
+	<string name="no_title">anybody</string>
+	<string name="add_values">Add values to the chart</string>    
+	<string name="x">X</string>    
+	<string name="y">Y</string>
+	<string name="add">Add</string>
+	<string name="msg_ok">OK</string>	
+	<string name="new_series">New series</string>	
+	<string name="blur_title">수신된 sms 가 없습니다.\n 설치 후 sms가  수신되면 화면에 나타납니다.</string>
+	<string name="delete_error">삭제할 대상이 없습니다.</string>	
+	<string name="backup_error">저장할 대상이 없습니다.</string>
+	<string name="backup_success">건 의 sms 문자가 SD 카드로 저장되었습니다.</string>
+	<string name="sms_send_error">문자 메세지를 입력해 주세요.</string>
+	<string name="sms_msg_error">sms 는 80자 까지 입니다.</string>
+	<string name="sms_send_call">Call Confirm</string>
+	<string name="sms_send_ok">메세지 전송 완료</string>				
+	<string name="sms_send_fail">메세지 전송 실패</string>	
+	<string name="main_no_items">No items</string>
+	<string name="sms_delete_ok"> 건이 삭제 되었습니다. </string>
+	<string name="sms_delete_confirm">삭제 완료</string>		
+		
+	<!-- chart -->	
+	<string name="chartTitle"> 님이 전송한  문자  월별 통계(2년)</string>
+	<string name="x_title"> 월 </string>			
+	<string name="y_title"> </string>	
+	<string name="alert_dialog_ok">call</string>	
+	<string name="alert_dialog_cancel">cancel</string>
+	
+	<!-- ContentProvider -->
+	<string name="user_name_sort">히</string>	
+	
+	
+	<!-- menu   -->	   
+	<string name="refresh">새로고침 </string>	
+	<string name="delete">삭제</string>
+	<string name="backup">back up</string>	
+	<string name="setup">설정</string>
+	<string name="back">뒤로</string>
+	<string name="barchart">막대 차트</string>		
+	<string name="horbarchart">수평 막대 차트</string>
+	<string name="linechart">라인 차트</string>
+	<string name="dotchart">dot 차트</string>			
+		   
+	<!--  preference  -->	   
+	
+	<string name="orderby_pref">화면 정렬 </string>	
+	<string name="orderby_pref_title">화면 정렬  선택</string>
+	<string name="orderby_default">count desc;</string>		
+	
+    <string-array name="orderby_pref_list">
+        <item>문자건수  ↑</item>
+        <item>문자건수 ↓</item>  
+        <item>수신시간 ↑</item>
+        <item>수신시간 ↓</item>
+        <item>이름 ↑</item>
+        <item>이름 ↓</item>          
     </string-array>
-    
-    <!-- Short Day of week  -->
-    <string-array name="days_of_week_short">
-        <!-- Short Day of week: Mon -->
-        <item>월</item>
-        <!-- Short Day of week: Tue -->
-        <item>화</item>
-        <!-- Short Day of week: Wed -->
-        <item>수</item>
-        <!-- Short Day of week: Thu -->
-        <item>목</item>
-        <!-- Short Day of week: Fri  -->
-        <item>금</item>
-        <!-- Short Day of week: Sat -->
-        <item>토</item>
-        <!-- Short Day of week: Sun -->
-        <item>일</item>
-    </string-array>    
-        
-    <string-array name="sound_choice">
-        <item>기본</item>
-        <item>날씨 효과음</item>
-        <item>TTS(Text-To-Speech)</item>
-    </string-array>
-    
-   <string name="chronometer_initial_format">녹음시간: <xliff:g id="initial-format">%s</xliff:g></string>
-   <string name="chronometer_initial_format2">재생시간: <xliff:g id="initial-format">%s</xliff:g></string>
-    
-    <string name="gpscheck">날씨정보를 수신하려면
-    \n"'"무선 네트워크"'" 또는 "'"GPS"'"
-    \n설정이 필요 합니다.
-    \n\n지금 설정하시겠습니까?</string>
-    <string name="gpscheckbtn1">설정</string>
-    <string name="gpscheckbtn2">취소</string>    
-   
-    <!-- author : 김주현  -->    
-    <!-- alarm_effect lists  -->
-    <string-array name="alarm_effect_lists">
-    	<!-- alarm_effect : default -->
-        <item>기본 벨소리</item>
-        <!-- alarm_effect : weather -->
-        <item>날씨 효과음</item>
-        <!-- alarm_effect : voice -->
-        <item>음성 녹음</item>
-        <!-- alarm_effect : TTS -->
-        <item>TTS(Text-To-Speech)</item>
-    </string-array>
-        
-    <!-- alarm_effect values  -->
-    <string-array name="alarm_effect_values">
-    	<!-- alarm_effect : default -->
-        <item>0</item>
-        <!-- alarm_effect : weather -->
-        <item>1</item>
-        <!-- alarm_effect : voice -->
-        <item>2</item>
-        <!-- alarm_effect : TTS -->
-        <item>3</item>
-    </string-array>    
-    
-    <!-- TTS Setting -->
-    <string name="alarm_tts_title">Voice 알람 설정</string>
-    <string name="alarm_tts_summary">Voice 알람 설정 상태</string>
-    <string name="alarm_tts_check_title">Voice 알람 설정</string>
-    <string name="alarm_tts_check_summary">Voice 알람 설정 상태</string>
-    <string name="alarm_tts_message_title">메세지</string>
-    <string name="alarm_tts_message_summary">It\'s %t. The current temperature takes a value of %c degrees. During the day, it will reach a value of %max degrees.</string>
-    <string name="alarm_tts_dialog_message">Voice 메세지를 입력해 주세요.(%t 시간,%c 최저온도,%max 최고온도</string>
-    <string name="alarm_tts_voicetest_title">Voice 알람 테스트</string>
-    <string name="alarm_tts_voicetest_summary">현재 설정된 알람 메세지 테스트</string>
-    <string name="alarm_tts_noti_message">음성 알람 메세지를 반드시 영문으로 입력해 주세요.\n(한글 추후 지원 예정)</string>
-    <string name="alarm_tts_btn_speak">듣기</string>
-    <string name="alarm_tts_btn_save">저장</string>
-    <string name="alarm_tts_btn_close">닫기</string>
-    <!-- 
-    <string-array name="alarm_tts_sample_message_values">
-        <item>직접 입력</item>
-        <item>Today\'s temperature will %t degrees Celsius.</item>
-        <item>It\'s %time</item>
-    </string-array>  
-     -->
-    <string-array name="alarm_tts_sample_message_values">
-        <item>직접 입력</item>
-        <item>Good morning</item>
-        <item>Wake up</item>
-        <item>It\'s time to get up.</item>
-        <item>I can take my time when I get up early.</item>
-        <item>I will be an early bird.</item>
-        <item>The early bird catches the worm.</item>
-    </string-array>  
 
-    <!-- Recoder -->    
-    <string name="alarm_rec_btn_start">시작</string>
-    <string name="alarm_rec_btn_stop">종료</string>
-    <string name="alarm_rec_btn_listen">듣기</string>
-    <string name="alarm_rec_btn_close">닫기</string>
+    <string-array name="orderby_pref_values">
+        <item>count desc;</item>
+        <item>count asc;</item>  
+        <item>date desc;</item>
+        <item>date asc;</item>                
+        <item>user_name desc;</item>
+        <item>user_name asc;</item>                        
+    </string-array>
+    	
+	<string name="backgroud_pref">배경 테마 </string>	
+	<string name="backgroud_pref_title">배경 테마 선택</string>
+	
+    <string-array name="backgroud_pref_list">
+        <item>Blue</item>    
+        <item>Pink</item>  
+        <item>Gray</item>        
+        <item>Black</item>                
+    </string-array>
 
-	<!-- Weather -->
-    <string name="alarm_weather_none1">네트워크(3G/Wi-Fi)와 GPS</string>
-    <string name="alarm_weather_none2">연결상태를 확인하세요.!</string>                
+    <string-array name="backgroud_pref_values">
+        <item>10</item>    
+        <item>20</item>
+        <item>30</item>  
+        <item>40</item>                
+    </string-array>
+    			
+	<string name="dataList_font_pref">SMS 내용 설정 </string>	
+	<string name="dataList_font_pref_title">글자 크기 선택</string>
+	
+    <string-array name="dataList_font_pref_list">
+        <item>Small</item>
+        <item>Medium</item>  
+		<item>Large</item>        
+    </string-array>
+
+    <string-array name="dataList_font_pref_values">
+        <item>15</item>
+        <item>18</item>  
+		<item>21</item>        
+    </string-array>
+        			
+	<string name="dataList_line_pref_title"> 줄 간격 선택</string>
+	
+    <string-array name="dataList_line_pref_list">
+        <item>Small</item>
+        <item>Medium</item>  
+		<item>Large</item>        
+    </string-array>
+
+    <string-array name="dataList_line_pref_values">
+        <item>145</item>
+        <item>180</item>  
+		<item>220</item>        
+    </string-array>
+            			
+	<string name="dataList_expand_pref">SMS 내용 펼치기 여부</string>	 
+	
+	<string name="dataList_expand_child_pref">SMS count 구간 </string>
+	
+    <string-array name="dataList_expand_child_pref_list">
+        <item>5 개 이하</item>
+        <item>10개 이하</item>  
+		<item>20개 이하</item>
+		<item>30개 이하</item>		
+		<item>All</item>				        
+    </string-array>
+
+    <string-array name="dataList_expand_child_pref_values">
+        <item>10</item>
+        <item>20</item>  
+		<item>30</item>   
+		<item>40</item>	
+		<item>50</item>							     
+    </string-array>
+
+	<string name="chart_pref">차트 설정 </string>	
+	<string name="chart_pref_title">차트  선택</string>
+	
+    <string-array name="chart_pref_list">
+        <item>막대 차트</item>    
+        <item>라인 차트</item>  
+    </string-array>
+
+    <string-array name="chart_pref_values">
+        <item>10</item>    
+        <item>20</item>
+    </string-array>
+    	
+	<string name="info_pref">어플리케이션 정보 </string>	
+	<string name="info_pref_title">정보</string>
+	<string name="user_pref">리스트 화면 </string>	
+	<string name="user_pref_title">사용자 가이드</string>	
+
+	<string name="list_txt_title">리스트 화면 - 메뉴</string>	
+	<string name="list_txt_context">①  삭제 : 멀티로 체크하여 삭제.
+	\n② backup : 멀티로 체크하여 저장.
+	\n※ 경로 : sd 카드(smsmanager 폴더)저장	
+	</string>
+	
+	<string name="backgroud_txt_title">배경테마</string>
+	<string name="backgroud_txt_context">Blue, Pink, Gray, Black 로 배경색 선택</string>
+		
+	<string name="orderby_txt_title">화면정렬</string>	
+	<string name="orderby_txt_context">①  문자 ↑ : 많이 수신된 sms 정렬
+	\n②  문자 ↓ : 적게 수신된 sms 정렬
+	\n③  시간 ↑ : 최근 수신된 sms 정렬
+	\n④  시간 ↓ : 과거 수신된 sms 정렬
+	\n⑤  이름 ↑ : 이름 오름차순 sms 정렬
+	\n⑥  이름 ↓ : 이름 내림차순 sms 정렬
+	</string>	
+	
+	<string name="size_txt_title">SMS 이력</string>
+	<string name="size_txt_context">글자 크기, 줄 간격 설정 선택</string>	
+	
+	<string name="expan_txt_title">SMS 내용 펼치기 여부</string>
+	<string name="expan_txt_context">SMS count 구간에 따라  sms 내용이
+	\n자동으로 펼쳐짐니다.
+	</string>
+	
+	<string name="chart_txt_title">차트 설정</string>
+	<string name="chart_txt_context">막대 차트, 라인 차트 선택
+	\n※ 여러 차트로 update 계획	
+	</string>				
 </resources>
+
