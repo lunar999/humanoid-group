@@ -23,11 +23,18 @@
 		android:layout_height="wrap_content" android:layout_weight="1"
 		android:cacheColorHint="#00000000" />
 
-	<com.cauly.android.ad.AdView
-		xmlns:app="http://schemas.android.com/apk/res/com.humanoid.alarmplus"
-		android:id="@+id/ad" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-		app:appcode="eD0sXfoDLj" app:adtype="cpc" app:gender="all" app:age="all"
-		app:gps="off" app:effect="default" app:reloadInterval="30" />
+	<com.cauly.android.ad.AdView xmlns:app="http://schemas.android.com/apk/res/com.humanoid.alarmplus"
+		android:id="@+id/ad"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		app:appcode="eD0sXfoDLj"
+		app:adtype="cpc"
+		app:gender="all"
+		app:age="all"
+		app:gps="off"
+		app:effect="default"
+		app:allowcall="yes"
+		app:reloadInterval="30" />
 
 </LinearLayout>

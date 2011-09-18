@@ -18,7 +18,7 @@
     <!-- -->
     <!-- Label shown on launcher icon -->
     <string name="app_label">Alarm+</string>
-	<string name="version">\t v1.1.0</string>
+	<string name="version">\t v1.1.1</string>
 	<string name="app_description">Alarm+ for Android by Humanoid Group</string>
     <string name="email">E-mail: humanoid.group@gmail.com</string>
     <string name="website">Home : coming soon~</string>

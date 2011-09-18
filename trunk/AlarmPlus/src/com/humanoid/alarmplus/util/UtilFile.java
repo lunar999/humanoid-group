@@ -19,6 +19,9 @@ import java.util.zip.ZipInputStream;
 import com.humanoid.alarmplus.AlarmConstantIf;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -462,6 +465,16 @@ public class UtilFile {
 				tempFile.mkdirs();
 			}
 		}
+	}
+	
+	public static String getVersionName(Context context) {
+	    try {
+	    	PackageManager pm = context.getPackageManager(); 
+	        PackageInfo pi= pm.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+	        return pi.versionName;
+	    } catch (NameNotFoundException e) {
+	        return null;
+	    }
 	}
 
 
