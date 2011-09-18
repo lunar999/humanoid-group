@@ -20,6 +20,8 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.List;
 
+import com.humanoid.alarmplus.util.UtilFile;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -476,7 +478,7 @@ public class AlarmClock extends Activity implements OnItemClickListener {
     	
     	switch (id) {
     	case DIALOG_INFO:
-    		title = getString(R.string.app_label) + getString(R.string.version);
+    		title = getString(R.string.app_label) + "\tv" + UtilFile.getVersionName(this); //getString(R.string.version);
     		inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
     		dialogLayout = inflater.inflate(R.layout.dialog_info, null);
     		builder = new AlertDialog.Builder(this);
