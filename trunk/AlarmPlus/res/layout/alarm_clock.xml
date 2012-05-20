@@ -23,7 +23,8 @@
 		android:layout_height="wrap_content" android:layout_weight="1"
 		android:cacheColorHint="#00000000" />
 
-	<com.cauly.android.ad.AdView xmlns:app="http://schemas.android.com/apk/res/com.humanoid.alarmplus"
+	<com.cauly.android.ad.AdView 
+	    xmlns:app="http://schemas.android.com/apk/res/com.humanoid.alarmplus"
 		android:id="@+id/ad"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -35,6 +36,7 @@
 		app:gps="off"
 		app:effect="default"
 		app:allowcall="yes"
-		app:reloadInterval="30" />
+		app:reloadInterval="30" 
+		app:dynamicReloadInterval="true" />
 
 </LinearLayout>
