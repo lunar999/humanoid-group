@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.humanoid.alarmplus" android:versionCode="6" android:versionName="1.1.1">
+	package="com.humanoid.alarmplus" android:versionCode="7" android:versionName="1.1.2">
 
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -10,7 +10,7 @@
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<!-- Cauly SDK v1.2.5 적용(2011.9.18) by shinshow-->
+	<!-- Cauly SDK v1.4.7 적용(2012.5.20) by shinshow-->
 	<uses-permission android:name="android.permission.CALL_PHONE"/>
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
